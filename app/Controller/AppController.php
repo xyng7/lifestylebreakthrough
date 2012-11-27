@@ -143,15 +143,25 @@ class AppController extends Controller {
         return $result;
     }
     
-    function sendEmailConfirmation($first_name, $last_name, $emailaddress, $dob) {
+   function sendEmailConfirmation($first_name, $last_name, $emailaddress, $dob) {
         
             $email = new CakeEmail();
             $email->config('default');
             $email->from(array('lifestylebreakthroughtest@gmail.com' => 'Lifestyle Breakthrough'))
                     ->to($emailaddress)
                     ->subject('Welcome to Lifestyle Breakthrough!')
-                    ->send("Dear $first_name $last_name, \n\nWelcome to Lifestyle Breakthough!\nTo access your account, please follow the link: www.test.com \nUsername:  $emailaddress \nPassword:  $dob (Your date of birth in 8 digits) \n\nRegards,\nLifestyle Breakthrough team"
-                   );
+                    ->send("Dear $first_name $last_name,
+                        
+                        Welcome to Lifestyle Breakthough!
+                        To access your account, please follow the link:
+                        
+                        http://ie.infotech.monash.edu.au/project33/review/cakephp/
+                        Username:  $emailaddress
+                        Password:  $dob (Your date of birth in 8 digits)
+                        Regards,
+                        
+                        Lifestyle Breakthrough Team"
+                   ); //email
     }
     
     
