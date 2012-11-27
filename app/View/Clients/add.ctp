@@ -45,20 +45,28 @@
 </div>
 
         <script type="text/javascript">
-            function search(){
+            function search(type){
                 var postcode = $('#ClientPostal').val();
+                var locality = $('#ClientSuburb').val();
                 console.log(postcode);
-		$.get('http://ie.infotech.monash.edu.au/project33/review/cakephp/postcodes/search/'+postcode,
-                //$.get('http://localhost:8888/cakephp_github/postcodes/search/'+postcode,
+                $.get('http://localhost:8888/cakephp_github/postcodes/search/'+type+'/'+postcode,
                     function(data){
                         console.log(data);
-                        $('#ClientSuburb').val(data);
+                        if(type == 'postcode'){
+                            $('#ClientSuburb').val(data);
+                        }else{
+                           $('#ClientPostal').val(data);
+                        }
                     }
                 );
             }
             $('#ClientPostal').change(function(event){
                 console.log('key pressed');
-                search();
+                search('postcode');
+            });
+            $('#ClientSuburb').change(function(event){
+                console.log('key pressed');
+                search('locality');
             });
         </script>
 

@@ -98,11 +98,17 @@ class PostcodesController extends AppController {
 	}
         
         
-        public function search($id = null) {
+        public function search($type = null,$id = null) {
             $this->layout=null;
             if($id != null){
-                $result = $this->Postcode->find('first',array('conditions'=>array('Pcode'=>$id),'fields'=>'locality'));
-                echo ($result['Postcode']['locality']);
+                if($type == 'postcode'){
+                    $result = $this->Postcode->find('first',array('conditions'=>array('Pcode'=>$id),'fields'=>'locality'));
+                    echo ($result['Postcode']['locality']);
+                }
+                else{
+                    $result = $this->Postcode->find('first',array('conditions'=>array('locality'=>$id),'fields'=>'Pcode'));
+                    echo ($result['Postcode']['Pcode']);
+                }
             }
         }
 }
