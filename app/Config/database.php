@@ -62,10 +62,10 @@ class DATABASE_CONFIG {
 	public $default = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
-		'host' => '130.194.7.82',
-		'login' => 'IEMySQL33',
-		'password' => 'via7lejiem',
-		'database' => 'fit-ie-s33',
+		'host' => 'localhost',
+		'login' => 'root',
+		'password' => 'root',
+		'database' => 'dev',
 		'prefix' => '',
 		
            // 'encoding' => 'utf8',
