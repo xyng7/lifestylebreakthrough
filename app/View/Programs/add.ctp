@@ -1,5 +1,5 @@
 <?php
-echo $this->Html->script(array('jquery-1.8.3', 'jquery-ui', 'jquery.fastLiveFilter'));
+echo $this->Html->script(array('jquery-1.8.3', 'datepicker/jquery-ui', 'jquery.fastLiveFilter'));
 echo $this->Html->CSS(array('datepicker/jquery-ui'));
 ?>
 <!-- start -->
