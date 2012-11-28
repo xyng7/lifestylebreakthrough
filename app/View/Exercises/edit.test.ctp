@@ -15,9 +15,7 @@
     <fieldset>
         <legend><?php echo __('New Exercise'); ?></legend>
         <?php echo $this->Form->input('name'); ?>
-        <?php echo __('Start Picture'); ?>
         <?php echo $this->Form->file('start_pic', array('label' => 'Start Picture', 'size'=>'100')); ?>
-        <?php echo __('End Picture'); ?>
         <?php echo $this->Form->file('end_pic', array('label' => 'End Picture', 'size'=>'100')); ?>
         <?php echo $this->Form->input('instructions'); ?>
         <?php echo $this->Form->input('videos', array('label' => 'Video: enter Youtube embedded link below')); ?>
@@ -35,7 +33,7 @@
                         <?php
                         //for loop for body parts
                         foreach ($exercise_bodyparts as $eb) {
-                            echo $this->Form->input('BodyPart.BodyPart.', array(
+                            echo $this->Form->input('BodyPart.bodyPart.', array(
                                 'type' => 'checkbox',
                                 'label' => $eb['BodyPart']['body_part'],
                                 'value' => $eb['BodyPart']['id'],
@@ -53,7 +51,7 @@
                         <?php
                         //for loop for categories
                         foreach ($exercise_categories as $ec) {
-                            echo $this->Form->input('Category.Category.', array(
+                            echo $this->Form->input('Category.category.', array(
                                 'type' => 'checkbox',
                                 'label' => $ec['Category']['category'],
                                 'value' => $ec['Category']['id'],
@@ -69,7 +67,7 @@
                         <?php
                         //for loop for equipment
                         foreach ($exercise_equipment as $ee) {
-                            echo $this->Form->input('Equipment.Equipment.', array(
+                            echo $this->Form->input('Equipment.equipment.', array(
                                 'type' => 'checkbox',
                                 'label' => $ee['Equipment']['equipment'],
                                 'value' => $ee['Equipment']['id'],

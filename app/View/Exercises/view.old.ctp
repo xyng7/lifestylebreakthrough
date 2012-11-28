@@ -19,36 +19,66 @@
                                 }?>
                 
                 </dd>
-                <dt><?php echo __('Instructions'); ?></dt>
-                <dd><?php echo $exercise['Exercise']['instructions']; ?></dd>
-                <dt><?php echo __('Start Picture'); ?></dt>
-                <dd><?php if($exercise['Exercise']['start_pic'] != null) 
-                                { 
-                                //echo $instruction['image']."<br /><br />"; 
-                                echo $this->Html->image('files/'.$exercise['Exercise']['start_pic'], array('width' => 200, 'height' => 200)); 
-                                } 
-                                else 
-                                { 
-                                echo "no image available"; 
-                                }
-	 
-                                ?>&nbsp;</dd>
-                <dt><?php echo __('End Picture'); ?></dt>
-                <dd><?php if($exercise['Exercise']['end_pic'] != null) 
-                                { 
-                                //echo $instruction['image']."<br /><br />"; 
-                                echo $this->Html->image('files/'.$exercise['Exercise']['end_pic'], array('width' => 200, 'height' => 200)); 
-                                } 
-                                else 
-                                { 
-                                echo "no image available"; 
-                                }
-	 
-                                ?>&nbsp;</dd>
+                
                 
 	</dl>
 <br>
+<div class="related">
 
+	<?php if (!empty($exercise['Instruction'])): ?>
+	<table cellpadding = "0" cellspacing = "0">
+	<h3><?php echo __('Instructions'); ?></h3>
+        <tr>
+		<th><?php echo __('Number'); ?></th>
+                <th><?php echo __('Instruction'); ?></th>
+		<th><?php echo __('Image'); ?></th>
+		<th class="actions"><?php echo __('Actions'); ?></th>
+	</tr>
+	<?php
+		$i = 1;
+		foreach ($exercise['Instruction'] as $instruction): ?>
+		<tr>
+                        <td><?php echo $i; ?></td>
+                        <td><?php echo $instruction['instruction']; ?></td>
+			<td style="width: 100px; hight: 100px;">
+                            
+                                <?php if($instruction['image'] != null) 
+                                { 
+                                //echo $instruction['image']."<br /><br />"; 
+                                echo $this->Html->image('files/'.$instruction['image'], array('width' => 250, 'height' => 250)); 
+                                } 
+                                else 
+                                { 
+                                echo "no image available"; 
+                                }
+	 
+                                ?>
+			&nbsp;
+                            
+                        </td>
+			<td>
+				<?php echo $this->Html->link(__('Edit'), array('controller' => 'instructions', 'action' => 'edit', $instruction['id'])); ?>
+				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'instructions', 'action' => 'delete', $instruction['id']), null, __('Are you sure you want to delete instruction # %s?', $instruction['instruction'])); ?>
+			</td>
+		</tr>
+               <?php $i++; ?>
+	<?php endforeach; ?>
+	</table>
+        <?php else: ?>
+        <table cellpadding = "0" cellspacing = "0">
+	<tr>
+		<th><?php echo __('No Instructions'); ?></th>
+	</tr>
+        </table>
+        <?php endif; ?>
+    
+	<div class="actions">
+		<ul>
+			<li><?php echo $this->Html->link(__('Add Instruction'), array('controller' => 'instructions', 'action' => 'add', $exercise['Exercise']['id'])); ?> </li>
+		</ul>
+	</div>
+</div>
+<br>
 <div class="related">
 	<?php if (!empty($exercise['BodyPart'])): ?>
 	<table cellpadding = "0" cellspacing = "0">
