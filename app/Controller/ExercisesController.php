@@ -10,15 +10,9 @@ App::uses('AppController', 'Controller');
 class ExercisesController extends AppController {
 
     public function isAuthorized($user) {
-<<<<<<< HEAD
-    
-        if (in_array($this->action, array('delete', 'index_superadmin'))) {
-        
-=======
 
         if (in_array($this->action, array('delete', 'edit'))) {
 
->>>>>>> f6d68cf349844fd0574c45c99ec385a0ff555df2
             if (isset($user['role']) && ($user['role'] === 'admin')) {
                 return false;
             }
@@ -101,33 +95,6 @@ class ExercisesController extends AppController {
         //equipment
         $this->set('exercise_equipment', $this->Exercise->Equipment->find('all'));
 
-<<<<<<< HEAD
-/**
- * add method
- *
- * @return void
- */
-	public function add() {
-		if ($this->request->is('post')) {
-			$this->Exercise->create();
-
-                       // $this->request->data['bodypart']['bodypart'] = array(); 
-                       // foreach($this->data['bodypart'.'checkbox'] as $k=>$v) 
-                       // { 
-                        //    if ($v) $this->request->data['bodypart']['bodypart'][] = $k; 
-                       // } 
-			
-                        if ($this->Exercise->save($this->request->data)) {
-				$this->Session->setFlash(__('The exercise has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The exercise could not be saved. Please, try again.', true), 'failure-message');
-			}
-		}
-		$bodyParts = $this->Exercise->BodyPart->find('list');
-		$categories = $this->Exercise->Category->find('list');
-		$equipment = $this->Exercise->Equipment->find('list');
-=======
 
         $this->set(compact('bodyParts', 'categories', 'equipment'));
     }
@@ -172,7 +139,6 @@ class ExercisesController extends AppController {
                 // save the url in the form data
                 if ($results['Exercise']['start_pic'] != null){
                 $this->deleteImage($id, 'start_pic'); 
->>>>>>> f6d68cf349844fd0574c45c99ec385a0ff555df2
                 
                 }
                 $this->request->data['Exercise']['start_pic'] = $fileOK['urls'][0];
@@ -262,61 +228,6 @@ class ExercisesController extends AppController {
         $this->redirect(array('action' => 'index'));
     }
 
-<<<<<<< HEAD
-/**
- * edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function edit($id = null) {
-		$this->Exercise->id = $id;
-		if (!$this->Exercise->exists()) {
-			throw new NotFoundException(__('Invalid exercise'));
-		}
-		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Exercise->save($this->request->data)) {
-				$this->Session->setFlash(__('The exercise has been saved' , true), 'success-message');
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The exercise could not be saved. Please, try again.' , true),'failure-message');
-			}
-		} else {
-			$this->request->data = $this->Exercise->read(null, $id);
-		}   
-		$bodyParts = $this->Exercise->BodyPart->find('list');
-		$categories = $this->Exercise->Category->find('list');
-		$equipment = $this->Exercise->Equipment->find('list');
-		$programs = $this->Exercise->Program->find('list');
-                $exercise = $this->Exercise->read(null, $id);
-		$this->set(compact('bodyParts', 'categories', 'equipment', 'programs', 'exercise'));
-	}
-
-/**
- * delete method
- *
- * @throws MethodNotAllowedException
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function delete($id = null) {
-		if (!$this->request->is('post')) {
-			throw new MethodNotAllowedException();
-		}
-		$this->Exercise->id = $id;
-		if (!$this->Exercise->exists()) {
-			throw new NotFoundException(__('Invalid exercise','failure-message'));
-		}
-		if ($this->Exercise->delete()) {
-			$this->Session->setFlash(__('Exercise deleted'));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->Session->setFlash(__('Exercise was not deleted','failure-message'));
-		$this->redirect(array('action' => 'index'));
-	}
-=======
     public function deleteImage($id, $pic) {
         $conditions = array("Exercise.id" => $id);
         $results = $this->Exercise->find('first', array('conditions' => $conditions));
@@ -332,5 +243,4 @@ class ExercisesController extends AppController {
        // echo $this->Html->link(__('Edit'), array('action' => 'edit', $exercise['Exercise']['id']));
     }
 
->>>>>>> f6d68cf349844fd0574c45c99ec385a0ff555df2
 }
