@@ -13,16 +13,7 @@ class Template extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'program_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
+		
 		'template_name' => array(
 			//rule 1 - cannot be empty
 			'templateRule-1' => array(
@@ -44,13 +35,21 @@ class Template extends AppModel {
  *
  * @var array
  */
-	public $belongsTo = array(
-		'Program' => array(
-			'className' => 'Program',
-			'foreignKey' => 'program_id',
+	public $hasAndBelongsToMany = array(
+		'Exercise' => array(
+			'className' => 'Exercise',
+			'joinTable' => 'exercises_templates',
+			'foreignKey' => 'template_id',
+			'associationForeignKey' => 'template_id',
+			'unique' => 'keepExisting',
 			'conditions' => '',
 			'fields' => '',
-			'order' => ''
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+			'deleteQuery' => '',
+			'insertQuery' => ''
 		)
 	);
 }

@@ -1,5 +1,5 @@
 <div class="exercises index">
-	<h2><?php echo __('Exercises'); ?></h2>
+	<h3><?php echo __('Exercises'); ?></h3>
 	<table id="js-datatable" cellpadding="0" cellspacing="0">
 	<thead>
             <tr>

@@ -62,21 +62,6 @@ class Program extends AppModel {
  *
  * @var array
  */
-	public $hasMany = array(
-		'Template' => array(
-			'className' => 'Template',
-			'foreignKey' => 'program_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
 
 
 /**
