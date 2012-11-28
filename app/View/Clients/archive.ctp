@@ -1,16 +1,5 @@
 <div class="actions">	
-    <h4><?php echo __('Clients'); ?></h4>
-</div>
-
-<div class="actions">
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <ul>
-        <li><?php echo $this->Html->link(__('New Client'), array('action' => 'add')); ?></li>
-    </ul>
-        <!--<ul>
-        <li><?php // view page of archive clients 
-        echo $this->Html->link(__('Archive Client'), array('action' => 'archive')); ?></li>
-    </ul>-->
+    <h4><?php echo __('Archive Clients'); ?></h4>
 </div>
 
 <table id="js-datatable" cellpadding="0" cellspacing="0">
@@ -42,20 +31,19 @@
                 <td><?php echo h($client['Client']['postal']); ?>&nbsp;</td>
                 <td>
                     <?php echo $this->Html->link(__('View'), array('action' => 'view', $client['Client']['id'])); ?> <br>
-                    <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $client['Client']['id'])); ?> <br>
-                    <?php if (AuthComponent::user('role') === 'superadmin') {
-                        echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to archive # %s?', $client['Client']['first_name']));
-                    }?>
-                </td>
+                    <?php
+                    if (AuthComponent::user('role') === 'superadmin') {
+                        echo $this->Form->postlink(__('Activate'), array('action' => 'activate', $client['Client']['id'])); } ?>
+                    </td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 <p>
     <?php
-    /*echo $this->Paginator->counter(array(
-        'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-    ));*/
+    /* echo $this->Paginator->counter(array(
+      'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
+      )); */
     ?>	</p>
 
 

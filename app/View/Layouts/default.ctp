@@ -103,9 +103,9 @@ $homedir = __d('cake_dev', 'CakePHP: the rapid development php framework :D');
         <div class="row">
             <div class="twelve columns">
 
-                <?php //echo $this->Session->flash(); ?>
+                <?php echo $this->Session->flash(); ?>
                 <?php 
-                print $this->Session->flash("flash", array("element" => "alert"));
+                //print $this->Session->flash("flash", array("element" => "alert"));
                 ?>
 
                 <?php echo $this->fetch('content'); ?>

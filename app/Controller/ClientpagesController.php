@@ -84,17 +84,17 @@ class ClientpagesController extends AppController {
         if (AuthComponent::password($this->request->data('User.password')) == AuthComponent::password($this->request->data('User.new_password_confirm'))) {
 
                 if ($this->User->save($this->request->data)) {
-                    $this->Session->setFlash(__('Password change successful'));
+                    $this->Session->setFlash(__('Password change successful', true),'success-message');
                     $this->redirect(array('action' => 'index'));
                 } else {
-                    $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                    $this->Session->setFlash(__('The user could not be saved. Please, try again.', true),'failure-message');
                 }
             } else {
-                $this->Session->setFlash(__('Password do not match, please try again.'));
+                $this->Session->setFlash(__('Password do not match, please try again.', true),'failure-message');
             }
         } else {
             
-            $this->Session->setFlash(__('Incorrect old password, please try again.'));
+            $this->Session->setFlash(__('Incorrect old password, please try again.', true),'failure-message');
             
         }
         } else {
@@ -150,7 +150,7 @@ class ClientpagesController extends AppController {
                            Prefered staff: $prefstaff
                            Prefered time: $preftime"
             );
-            $this->Session->setFlash('Request for appointment has been sent!');
+            $this->Session->setFlash(__('Request for appointment has been sent!', true), 'success-message');
             $this->redirect(array('action' => 'index'));
         }
     }

@@ -41,10 +41,10 @@ class PostsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Post->create();
 			if ($this->Post->save($this->request->data)) {
-				$this->Session->setFlash(__('The post has been saved'));
+				$this->Session->setFlash(__('The post has been saved', true),'success-message');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The post could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The post could not be saved. Please, try again.', true),'failure-message');
 			}
 		}
 		$users = $this->Post->User->find('list');
@@ -65,10 +65,10 @@ class PostsController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Post->save($this->request->data)) {
-				$this->Session->setFlash(__('The post has been saved'));
+				$this->Session->setFlash(__('The post has been saved', true),'success-message');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The post could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The post could not be saved. Please, try again.', true),'failure-message');
 			}
 		} else {
 			$this->request->data = $this->Post->read(null, $id);
@@ -94,10 +94,10 @@ class PostsController extends AppController {
 			throw new NotFoundException(__('Invalid post'));
 		}
 		if ($this->Post->delete()) {
-			$this->Session->setFlash(__('Post deleted'));
+			$this->Session->setFlash(__('Post deleted', true),'success-message');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Post was not deleted'));
+		$this->Session->setFlash(__('Post was not deleted', true),'failure-message');
 		$this->redirect(array('action' => 'index'));
 	}
 }

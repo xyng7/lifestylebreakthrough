@@ -108,7 +108,9 @@
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
         <li><?php echo $this->Html->link(__('Back'), array('action' => 'view', $exercise['Exercise']['id'])); ?></li>
-        <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Exercise.id')), null, __('Are you sure you want to delete # %s? This exercise may be related to many programs', $this->Form->value('Exercise.name'))); ?></li>
+        <li><?php if (AuthComponent::user('role') === 'superadmin') {
+            echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Exercise.id')), null, __('Are you sure you want to delete # %s? This exercise may be related to many programs', $this->Form->value('Exercise.name'))); 
+        } ?></li>
 
     </ul>
 </div>

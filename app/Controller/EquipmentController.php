@@ -52,10 +52,10 @@ class EquipmentController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Equipment->create();
 			if ($this->Equipment->save($this->request->data)) {
-				$this->Session->setFlash(__('The equipment has been saved'));
+				$this->Session->setFlash(__('The equipment has been saved', true),'success-message');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The equipment could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The equipment could not be saved. Please, try again.', true),'failure-message');
 			}
 		}
 		$exercises = $this->Equipment->Exercise->find('list');
@@ -76,10 +76,10 @@ class EquipmentController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Equipment->save($this->request->data)) {
-				$this->Session->setFlash(__('The equipment has been saved'));
+				$this->Session->setFlash(__('The equipment has been saved', true),'success-message');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The equipment could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The equipment could not be saved. Please, try again.', true),'failure-message');
 			}
 		} else {
 			$this->request->data = $this->Equipment->read(null, $id);
@@ -105,10 +105,10 @@ class EquipmentController extends AppController {
 			throw new NotFoundException(__('Invalid equipment'));
 		}
 		if ($this->Equipment->delete()) {
-			$this->Session->setFlash(__('Equipment deleted'));
+			$this->Session->setFlash(__('Equipment deleted', true),'success-message');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Equipment was not deleted'));
+		$this->Session->setFlash(__('Equipment was not deleted', true),'failure-message');
 		$this->redirect(array('action' => 'index'));
 	}
 }

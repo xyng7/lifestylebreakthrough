@@ -51,10 +51,10 @@ class CategoriesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Category->create();
 			if ($this->Category->save($this->request->data)) {
-				$this->Session->setFlash(__('The category has been saved'));
+				$this->Session->setFlash(__('The category has been saved', true),'success-message');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The category could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The category could not be saved. Please, try again.', true),'failure-message');
 			}
 		}
 		$exercises = $this->Category->Exercise->find('list');
@@ -75,10 +75,10 @@ class CategoriesController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Category->save($this->request->data)) {
-				$this->Session->setFlash(__('The category has been saved'));
+				$this->Session->setFlash(__('The category has been saved', true),'success-message');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The category could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The category could not be saved. Please, try again.', true),'failure-message');
 			}
 		} else {
 			$this->request->data = $this->Category->read(null, $id);
@@ -104,10 +104,10 @@ class CategoriesController extends AppController {
 			throw new NotFoundException(__('Invalid category'));
 		}
 		if ($this->Category->delete()) {
-			$this->Session->setFlash(__('Category deleted'));
+			$this->Session->setFlash(__('Category deleted', true),'success-message');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Category was not deleted'));
+		$this->Session->setFlash(__('Category was not deleted', true),'failure-message');
 		$this->redirect(array('action' => 'index'));
 	}
 }

@@ -42,7 +42,7 @@ class InstructionsController extends AppController {
                     
                         if (isset( $this->data['Cancel'])) 
                         { 
-                              $this->Session->setFlash('Changes were not saved', true); 
+                            $this->Session->setFlash(__('Changes were not saved', true),'failure-message');
                               $this->redirect(array('controller' => 'exercises', 'action' => 'view', $exercise_id)); 
                         } 
                     
@@ -68,10 +68,10 @@ class InstructionsController extends AppController {
                 
                         {
 			
-                                $this->Session->setFlash(__('The instruction has been saved'));
+                                $this->Session->setFlash(__('The instruction has been saved', true), 'success-message');
 				$this->redirect(array('controller' => 'exercises', 'action' => 'view', $exercise_id));
 			} else {
-				$this->Session->setFlash(__('The instruction could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The instruction could not be saved. Please, try again.', true),'failure-message');
 			}
 		}
                 
@@ -116,10 +116,10 @@ class InstructionsController extends AppController {
                 
                 
 		if ($this->Instruction->save($this->request->data)) {
-				$this->Session->setFlash(__('The instruction has been saved'));
+				$this->Session->setFlash(__('The instruction has been saved', true),'success-message');
 				$this->redirect(array('controller' => 'exercises', 'action' => 'view', $temp));
 			} else {
-				$this->Session->setFlash(__('The instruction could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The instruction could not be saved. Please, try again.', true),'failure-message');
 			}
                         
                          $this->request->data = $this->Instruction->read(null, $id); 
@@ -173,10 +173,10 @@ class InstructionsController extends AppController {
                 } 
                 
                 if ($this->Instruction->delete()) {
-			$this->Session->setFlash(__('Instruction deleted'));
+			$this->Session->setFlash(__('Instruction deleted', true),'success-message');
 			$this->redirect(array('controller' => 'exercises', 'action' => 'view', $temp));
 		}
-		$this->Session->setFlash(__('Instruction was not deleted'));
+		$this->Session->setFlash(__('Instruction was not deleted', true),'failure-message');
 		$this->redirect(array('action' => 'index'));
 	}
         

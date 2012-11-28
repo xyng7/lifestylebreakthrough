@@ -38,19 +38,12 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
 
         <table cellpadding = "0" cellspacing = "0">          
             <tr>
-                <!-- start -->
-                <?php
-                //echo $this->Form->input('event_startdate', array('id' => 'datepicker', 'class' => 'datepicker', 'type' => 'text', 'empty' => false, 'label' => array('text' => '<p align="left">Event Start Date</p>', 'style' => 'align:left')));
-                echo "<br>";
-                //echo $this->Form->input('event_enddate', array('id' => 'datepicker1', 'class' => 'datepicker', 'type' => 'text', 'empty' => false, 'label' => array('text' => '<p align="left">Event End Date</p>'), 'style' => 'align:left'));
-                ?>
-                <!-- end -->
                 <th> <?php echo $this->Form->input('start_date', array('id' => 'datepicker', 'class' => 'datepicker', 'type' => 'text', 'label' => array('text' => '<p align="left">Start Date</p>', 'style' => 'align:left'))); ?>
                 <th> <?php echo $this->Form->input('end_date', array('id' => 'datepicker2', 'class' => 'datepicker2', 'type' => 'text', 'label' => array('text' => '<p align="left">End Date</p>', 'style' => 'align:left'))); ?>
 
-<!--<th> <?php echo $this->Form->input('start_date', array('dateFormat' => 'DMY', 'minYear' => date('Y'), 'maxYear' => date('Y') + 50)); ?> </th>
-<th> <?php echo $this->Form->input('end_date', array('dateFormat' => 'DMY', 'minYear' => date('Y'), 'maxYear' => date('Y') + 50)); ?> </th> -->
-            </tr>
+                <?php //echo $this->Form->input('start_date', array('dateFormat' => 'DMY', 'minYear' => date('Y'), 'maxYear' => date('Y') + 50)); ?>
+                <?php //echo $this->Form->input('end_date', array('dateFormat' => 'DMY', 'minYear' => date('Y'), 'maxYear' => date('Y') + 50)); ?> 
+
         </table>     
 
         <div class="input select">

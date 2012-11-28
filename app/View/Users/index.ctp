@@ -49,7 +49,7 @@
                         if (AuthComponent::user('role') === 'superadmin') {
                             echo __(' <br> ');
                             echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id']));
-                            echo __(' ');
+                            echo __(' <br> ');
                             echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to delete # %s?', $user['User']['username']));
                         }
                         ?>

@@ -64,7 +64,10 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit Program'), array('action' => 'edit', $program['Program']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Program'), array('action' => 'delete', $program['Program']['id']), null, __('Are you sure you want to delete # %s?', $program['Program']['id'])); ?> </li>
+		<li><?php if (AuthComponent::user('role') === 'superadmin') {
+                    echo $this->Form->postLink(__('Delete Program'), array('action' => 'delete', $program['Program']['id']), null, __('Are you sure you want to delete # %s?', $program['Program']['id'])); 
+                    
+                    } ?> </li>
 		<li><?php echo $this->Html->link(__('List Programs'), array('action' => 'index')); ?> </li>
 	</ul>
 </div>

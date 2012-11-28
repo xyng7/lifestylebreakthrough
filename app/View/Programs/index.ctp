@@ -18,9 +18,10 @@
                     <td><?php echo $this->Html->link($program['Client']['first_name'], array('controller' => 'clients', 'action' => 'view', $program['Client']['id'])); ?></td>
                     <td><?php echo $this->Time->format('d-m-Y', h($program['Program']['start_date'])); ?>&nbsp;</td>
                     <td><?php echo $this->Time->format('d-m-Y', h($program['Program']['end_date'])); ?>&nbsp;</td>
-                    <td><?php echo $this->Html->link(__('View'), array('action' => 'view', $program['Program']['id'])); ?>
-                        <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $program['Program']['id'])); ?>
-                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $program['Program']['id']), null, __('Are you sure you want to delete # %s?', $program['Program']['name'])); ?></td>
+                    <td><?php echo $this->Html->link(__('View'), array('action' => 'view', $program['Program']['id'])); ?> <br>
+                        <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $program['Program']['id'])); ?> <br>
+                        <?php if (AuthComponent::user('role') === 'superadmin') {
+                            echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $program['Program']['id']), null, __('Are you sure you want to delete # %s?', $program['Program']['name'])); } ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

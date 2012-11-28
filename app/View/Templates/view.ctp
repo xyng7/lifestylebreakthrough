@@ -22,7 +22,10 @@
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit Template'), array('action' => 'edit', $template['Template']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Template'), array('action' => 'delete', $template['Template']['id']), null, __('Are you sure you want to delete # %s?', $template['Template']['id'])); ?> </li>
+		<li><?php if (AuthComponent::user('role') === 'superadmin') {
+                    echo $this->Form->postLink(__('Delete Template'), array('action' => 'delete', $template['Template']['id']), null, __('Are you sure you want to delete # %s?', $template['Template']['id'])); 
+                    
+                    }?> </li>
 		<li><?php echo $this->Html->link(__('List Templates'), array('action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Template'), array('action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Programs'), array('controller' => 'programs', 'action' => 'index')); ?> </li>

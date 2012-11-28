@@ -16,7 +16,8 @@ class ClientsController extends AppController {
      */
     public function index() {
         $this->Client->recursive = 0;
-        $this->set('clients', $this->paginate());
+        $this->set('clients', $this->Client->find('all', array('conditions' =>
+                    array('flag_active' => 'active'))));
     }
 
     /**
@@ -46,22 +47,38 @@ class ClientsController extends AppController {
             $this->loadModel('User');
             $this->User->create();
 
-            if ($this->Client->save($this->request->data) && $this->User->save(
+            if ($this->Client->save(
+                            array(
+                                'first_name' => $this->request->data('Client.first_name'),
+                                'last_name' => $this->request->data('Client.last_name'),
+                                'dob' => $this->request->data('Client.dob'),
+                                'email' => $this->request->data('Client.email'),
+                                'phone' => $this->request->data('Client.phone'),
+                                'mobile' => $this->request->data('Client.mobile'),
+                                'suburb' => $this->request->data('Client.suburb'),
+                                'postal' => $this->request->data('Client.postal'),
+                                'address' => $this->request->data('Client.address'),
+                                'user_id' => $this->User->id,
+                                'flag_active' => 'active'
+                    ))
+                    &&
+                    $this->User->save(
                             array(
                                 'username' => $this->request->data('Client.email'),
                                 'password' => implode($this->request->data('Client.dob')),
                                 'role' => 'client',
-                                'client_id' => $this->Client->id))) {
+                                'client_id' => $this->Client->id,
+                    ))) {
 
                 //Send client email (with login details) function goes here (build 2)
                 $this->sendEmailConfirmation($this->request->data('Client.first_name'), $this->request->data('Client.last_name'), $this->request->data('Client.email'), implode($this->request->data('Client.dob')));
 
-
                 $this->Session->setFlash(__('The client has been saved'));
+                $this->Client->saveField('user_id', $this->User->id);
+                //debug($this->User->id);
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The client could not be saved. Please, try again.'));
-                //debug($this->User->data);
+                $this->Session->setFlash(__('The client could not be saved. Please, try again.', true),'failure-message');
             }
         }
     }
@@ -80,10 +97,10 @@ class ClientsController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Client->save($this->request->data)) {
-                $this->Session->setFlash(__('The client has been saved'));
+                $this->Session->setFlash(__('The client has been saved', true),'success-message');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The client could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The client could not be saved. Please, try again.' , true),'failure-message');
             }
         } else {
             $this->request->data = $this->Client->read(null, $id);
@@ -106,15 +123,43 @@ class ClientsController extends AppController {
         $this->loadModel('User');
         $this->Client->id = $id;
         $this->User->id = $this->request->data('Client.user_id');
-        $this->User->delete();
+        //$this->User->delete();
         if (!$this->Client->exists()) {
-            throw new NotFoundException(__('Invalid client'));
+            throw new NotFoundException(__('Invalid client', true),'failure-message');
         }
-        if ($this->Client->delete()) {
-            $this->Session->setFlash(__('Client deleted'));
+        if ($this->Client->saveField('flag_active', 'deactivate')) {
+            $this->Session->setFlash(__('Client archived', true),'success-message');
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('Client was not deleted'));
+        $this->Session->setFlash(__('Client was not archive', true),'failure-message');
+        $this->redirect(array('action' => 'index'));
+    }
+
+    public function archive() {
+        //print al archive clients
+        $this->Client->recursive = 0;
+        $this->set('clients', $this->Client->find('all', array('conditions' =>
+                    array('flag_active' => 'deactivate'))));
+    }
+
+    public function activate($id = null) {
+        //activate archive client
+        if (!$this->request->is('post')) {
+            throw new MethodNotAllowedException();
+        }
+
+        $this->loadModel('User');
+        $this->Client->id = $id;
+        $this->User->id = $this->request->data('Client.user_id');
+        //$this->User->delete();
+        if (!$this->Client->exists()) {
+            throw new NotFoundException(__('Invalid client', true));
+        }
+        if ($this->Client->saveField('flag_active', 'active')) {
+            $this->Session->setFlash(__('Client is now active', true),'success-message');
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->Session->setFlash(__('Client was not activated', true),'failure-message');
         $this->redirect(array('action' => 'index'));
     }
 

@@ -41,10 +41,10 @@ class TemplatesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Template->create();
 			if ($this->Template->save($this->request->data)) {
-				$this->Session->setFlash(__('The template has been saved'));
+				$this->Session->setFlash(__('The template has been saved', true),'success-message');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The template could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The template could not be saved. Please, try again.', true),'failure-message');
 			}
 		}
 		$programs = $this->Template->Program->find('list');
@@ -65,10 +65,10 @@ class TemplatesController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Template->save($this->request->data)) {
-				$this->Session->setFlash(__('The template has been saved'));
+				$this->Session->setFlash(__('The template has been saved', true),'success-message');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The template could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The template could not be saved. Please, try again.', true),'failure-message');
 			}
 		} else {
 			$this->request->data = $this->Template->read(null, $id);
@@ -94,10 +94,10 @@ class TemplatesController extends AppController {
 			throw new NotFoundException(__('Invalid template'));
 		}
 		if ($this->Template->delete()) {
-			$this->Session->setFlash(__('Template deleted'));
+			$this->Session->setFlash(__('Template deleted', true),'success-message');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Template was not deleted'));
+		$this->Session->setFlash(__('Template was not deleted', true),'failure-message');
 		$this->redirect(array('action' => 'index'));
 	}
 }

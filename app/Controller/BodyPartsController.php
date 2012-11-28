@@ -52,10 +52,10 @@ class BodyPartsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->BodyPart->create();
 			if ($this->BodyPart->save($this->request->data)) {
-				$this->Session->setFlash(__('The body part has been saved'));
+				$this->Session->setFlash(__('The body part has been saved', true),'success-message');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The body part could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The body part could not be saved. Please, try again.', true),'failure-message');
 			}
 		}
 		$exercises = $this->BodyPart->Exercise->find('list');
@@ -76,10 +76,10 @@ class BodyPartsController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->BodyPart->save($this->request->data)) {
-				$this->Session->setFlash(__('The body part has been saved'));
+				$this->Session->setFlash(__('The body part has been saved', true),'success-message');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The body part could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The body part could not be saved. Please, try again.', true),'failure-message');
 			}
 		} else {
 			$this->request->data = $this->BodyPart->read(null, $id);
@@ -105,10 +105,10 @@ class BodyPartsController extends AppController {
 			throw new NotFoundException(__('Invalid body part'));
 		}
 		if ($this->BodyPart->delete()) {
-			$this->Session->setFlash(__('Body part deleted'));
+			$this->Session->setFlash(__('Body part deleted', true),'success-message');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Body part was not deleted'));
+		$this->Session->setFlash(__('Body part was not deleted', true),'failure-message');
 		$this->redirect(array('action' => 'index'));
 	}
 }

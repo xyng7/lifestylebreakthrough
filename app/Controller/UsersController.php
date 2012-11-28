@@ -47,11 +47,11 @@ class UsersController extends AppController {
                 $this->Session->setFlash(__('The user has been saved'));
                $this->redirect(array('action' => 'index'));
            } else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The user could not be saved. Please, try again.', 'failure-message'));
             }
             }
             else{
-                $this->Session->setFlash(__('Password do not match, please try again.'));
+                $this->Session->setFlash(__('Password do not match, please try again.', 'failure-message'));
             }
         }
     }
@@ -73,7 +73,7 @@ class UsersController extends AppController {
                 $this->redirect(array('action' => 'index'));
             } 
             else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The user could not be saved. Please, try again.', 'failure-message'));
             }
         } else {
             $this->request->data = $this->User->read(null, $id);
@@ -81,7 +81,7 @@ class UsersController extends AppController {
         }
     }
     else {
-            $this->Session->setFlash(__('Password do not match, please try again.'));
+            $this->Session->setFlash(__('Password do not match, please try again.', 'failure-message'));
    }}
 
     public function delete($id = null) {
@@ -108,6 +108,11 @@ class UsersController extends AppController {
                 
                 // Check for a successful login
                 if (!empty($this->data) && $id = $this->Auth->user('id')) {
+                    
+                    $this->loadModel('Client');
+                    $activationCheck = $this->Client->find('list' , array(
+                        'conditions'=>array('email' => $this->Auth->user('username')), 
+                        'fields' => 'flag_active'));
  
                     // Set the lastlogin time
                     $fields = array('last_login' => date('Y-m-d H:i:s'), 'modified' => false);
@@ -116,9 +121,13 @@ class UsersController extends AppController {
                     }
                 
                             //Redirect user
-                            if ($this->Auth->user('role') === 'client') //if current user is client
+                            //if ($this->Auth->user('role') === 'client') //if current user is client
+                            if ($this->Auth->user('role') === 'client' && $activationCheck[$this->Auth->user('client_id')] === 'active') //if current user is client and activated
                             {
+         
+                            //debug();
                             $this->redirect(array('controller' => 'clientpages', 'action' => 'index')); //client pages index
+                           
                             }
                             else{
                                 //$this->Session->setFlash('Welcome!'); //annoying message
@@ -126,7 +135,7 @@ class UsersController extends AppController {
                             }
                     } 
                     else {
-                    $this->Session->setFlash('Invalid username or password, try again');
+                    $this->Session->setFlash('Invalid username or password, try again','failure-message');
                     }
         }
     }
@@ -152,14 +161,14 @@ class UsersController extends AppController {
                     $this->Session->setFlash(__('Details changed successfully'));
                     $this->redirect(array('action' => 'index'));
                 } else {
-                    $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+                    $this->Session->setFlash(__('The user could not be saved. Please, try again.', 'failure-message'));
                 }
             } else {
-                $this->Session->setFlash(__('Password do not match, please try again.'));
+                $this->Session->setFlash(__('Password do not match, please try again.', 'failure-message'));
             }
         } else {
             
-            $this->Session->setFlash(__('Incorrect old password, please try again.'));
+            $this->Session->setFlash(__('Incorrect old password, please try again.', 'failure-message'));
             
         }
         } else {

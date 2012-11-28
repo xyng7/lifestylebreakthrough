@@ -10,7 +10,7 @@ class ExercisesController extends AppController {
 
     public function isAuthorized($user) {
     
-        if (in_array($this->action, array('delete', 'edit', 'index_superadmin'))) {
+        if (in_array($this->action, array('delete', 'index_superadmin'))) {
         
             if (isset($user['role']) && ($user['role'] === 'admin')) {
         return false;
@@ -78,7 +78,7 @@ class ExercisesController extends AppController {
 				$this->Session->setFlash(__('The exercise has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The exercise could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The exercise could not be saved. Please, try again.', true), 'failure-message');
 			}
 		}
 		$bodyParts = $this->Exercise->BodyPart->find('list');
@@ -112,14 +112,14 @@ class ExercisesController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Exercise->save($this->request->data)) {
-				$this->Session->setFlash(__('The exercise has been saved'));
+				$this->Session->setFlash(__('The exercise has been saved' , true), 'success-message');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The exercise could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The exercise could not be saved. Please, try again.' , true),'failure-message');
 			}
 		} else {
 			$this->request->data = $this->Exercise->read(null, $id);
-		}
+		}   
 		$bodyParts = $this->Exercise->BodyPart->find('list');
 		$categories = $this->Exercise->Category->find('list');
 		$equipment = $this->Exercise->Equipment->find('list');
@@ -142,13 +142,13 @@ class ExercisesController extends AppController {
 		}
 		$this->Exercise->id = $id;
 		if (!$this->Exercise->exists()) {
-			throw new NotFoundException(__('Invalid exercise'));
+			throw new NotFoundException(__('Invalid exercise','failure-message'));
 		}
 		if ($this->Exercise->delete()) {
 			$this->Session->setFlash(__('Exercise deleted'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Exercise was not deleted'));
+		$this->Session->setFlash(__('Exercise was not deleted','failure-message'));
 		$this->redirect(array('action' => 'index'));
 	}
 }

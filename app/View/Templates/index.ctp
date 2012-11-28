@@ -14,9 +14,11 @@
                     <td><?php echo h($template['Template']['template_name']); ?>&nbsp;</td>
                     <td><?php echo $this->Html->link($template['Program']['name'], array('controller' => 'programs', 'action' => 'view', $template['Program']['id'])); ?></td>
                     <td>
-                        <?php echo $this->Html->link(__('View'), array('action' => 'view', $template['Template']['id'])); ?>
-                        <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $template['Template']['id'])); ?>
-                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $template['Template']['id']), null, __('Are you sure you want to delete # %s?', $template['Template']['template_name'])); ?>
+                        <?php echo $this->Html->link(__('View'), array('action' => 'view', $template['Template']['id'])); ?> <br>
+                        <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $template['Template']['id'])); ?> <br>
+                        <?php if (AuthComponent::user('role') === 'superadmin') {
+                            echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $template['Template']['id']), null, __('Are you sure you want to delete # %s?', $template['Template']['template_name'])); 
+                        }?>
                     </td></tr>
             <?php endforeach; ?>
         </tbody>
