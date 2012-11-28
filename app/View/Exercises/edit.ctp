@@ -18,8 +18,15 @@
         <legend><?php echo __('Edit Exercise'); ?></legend>
         <?php
         echo $this->Form->input('id');
-        echo $this->Form->input('name'); ?>
-        <h5><?php echo __('Start Picture'); ?></h5>
+        echo $this->Form->input('name'); 
+        echo $this->Form->input('instructions'); ?>
+        <table>
+            <tr>
+                <th><?php echo __('Start Picture'); ?> </th>
+                <th>    <?php echo __('End Picture'); ?> </th>
+            </tr>
+            <tr>
+                <td>
                 <?php
                 if($exercise['Exercise']['start_pic'] != null) 
                     { 
@@ -31,9 +38,11 @@
                 else 
                     { 
                             echo "no image available"; 
-                    }
-        echo $this->Form->file('start_pic', array('label' => 'Start Picture', 'size'=>'100')); ?>
-        <h5><?php echo __('End Picture'); ?></h5>
+                    } ?>
+                <br><br>    
+                <?php echo $this->Form->file('start_pic', array('label' => 'Start Picture', 'size'=>'100')); ?>
+                </td>
+                <td>
                 <?php
                 if($exercise['Exercise']['end_pic'] != null) 
                     { 
@@ -45,11 +54,14 @@
                 else 
                     { 
                             echo "no image available"; 
-                    }
-        echo $this->Form->file('end_pic', array('label' => 'End Picture', 'size'=>'100')); 
-        echo $this->Form->input('instructions'); 
-        echo $this->Form->input('videos', array('label' => 'Video: enter Youtube embedded link below'));
-        ?>
+                    }?>
+                <br><br>
+               <?php echo $this->Form->file('end_pic', array('label' => 'End Picture', 'size'=>'100')); ?>
+                
+                </td>
+            </tr>
+        </table>
+       <?php  echo $this->Form->input('videos', array('label' => 'Video: enter Youtube embedded link below')); ?>
         
                         <table cellpadding = "0" cellspacing = "0">
                 <tr>

@@ -15,11 +15,19 @@
     <fieldset>
         <legend><?php echo __('New Exercise'); ?></legend>
         <?php echo $this->Form->input('name'); ?>
-        <?php echo __('Start Picture'); ?>
-        <?php echo $this->Form->file('start_pic', array('label' => 'Start Picture', 'size'=>'100')); ?>
-        <?php echo __('End Picture'); ?>
-        <?php echo $this->Form->file('end_pic', array('label' => 'End Picture', 'size'=>'100')); ?>
         <?php echo $this->Form->input('instructions'); ?>
+        <table>
+            <tr>
+                <th><?php echo __('Start Picture'); ?> </th>
+                <th>    <?php echo __('End Picture'); ?> </th>
+            </tr>
+            <tr>
+                <td> <?php echo $this->Form->file('start_pic', array('label' => 'Start Picture', 'size' => '100')); ?> </td>
+
+                <td>  <?php echo $this->Form->file('end_pic', array('label' => 'End Picture', 'size' => '100')); ?></td>
+            </tr>
+        </table>
+
         <?php echo $this->Form->input('videos', array('label' => 'Video: enter Youtube embedded link below')); ?>
 
         <input id="search_input" placeholder="Type to filter">
@@ -43,7 +51,7 @@
                                 'after' => '</li>',
                                 'hiddenField' => false,
                                 'div' => false,
-                                //'style'=>'display:inline'
+                                    //'style'=>'display:inline'
                             ));
                         }
                         ?>
