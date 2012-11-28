@@ -38,20 +38,6 @@ class TemplatesController extends AppController {
  * @return void
  */
 	public function add() {
-<<<<<<< HEAD
-		if ($this->request->is('post')) {
-			$this->Template->create();
-			if ($this->Template->save($this->request->data)) {
-				$this->Session->setFlash(__('The template has been saved', true),'success-message');
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The template could not be saved. Please, try again.', true),'failure-message');
-			}
-		}
-		$programs = $this->Template->Program->find('list');
-		$this->set(compact('programs'));
-	}
-=======
         $this->loadModel('ExercisesTemplate');
 
         if ($this->request->is('post')) {
@@ -102,7 +88,6 @@ class TemplatesController extends AppController {
         $exercises = $this->Template->Exercise->find('all');
         $this->set(compact('clients', 'exercises'));
     }
->>>>>>> f6d68cf349844fd0574c45c99ec385a0ff555df2
 
 /**
  * edit method
@@ -118,10 +103,10 @@ class TemplatesController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Template->save($this->request->data)) {
-				$this->Session->setFlash(__('The template has been saved', true),'success-message');
+				$this->Session->setFlash(__('The template has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The template could not be saved. Please, try again.', true),'failure-message');
+				$this->Session->setFlash(__('The template could not be saved. Please, try again.'));
 			}
 		} else {
 			$this->request->data = $this->Template->read(null, $id);
@@ -147,10 +132,10 @@ class TemplatesController extends AppController {
 			throw new NotFoundException(__('Invalid template'));
 		}
 		if ($this->Template->delete()) {
-			$this->Session->setFlash(__('Template deleted', true),'success-message');
+			$this->Session->setFlash(__('Template deleted'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Template was not deleted', true),'failure-message');
+		$this->Session->setFlash(__('Template was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
 }
