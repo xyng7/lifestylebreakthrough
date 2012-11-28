@@ -1,5 +1,5 @@
 <div class="actions">
-    <h2><?php echo __('Admin'); ?></h2>
+    <h4><?php echo __('Admin'); ?></h4>
 </div>
 
     <div class="actions">

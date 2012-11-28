@@ -191,7 +191,7 @@ class InstructionsController extends AppController {
         unlink($imagePath); 
 
        $this->Instruction->query("update instructions set image = null where id =".$id); 
-      //  $this->Session->setFlash('Image deleted.'); 
+      // $this->Session->setFlash('Image deleted.'); 
        // $this->redirect(array('controller' => 'exercises', 'action'=>'index')); 
         }
 }

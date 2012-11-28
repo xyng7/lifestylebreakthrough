@@ -78,22 +78,21 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
                 ));
                     ?>
                     </td>   
-                    <?php foreach ($eb['Instruction'] as $instruction): ?>
+                    
                         <td>
-                            <?php
-                            if ($instruction['image'] != null) {
+                            <?php if($eb['Exercise']['start_pic'] != null) 
+                                { 
                                 //echo $instruction['image']."<br /><br />"; 
-                                echo $this->Html->image('files/' . $instruction['image'], array('width' => 50, 'height' => 50));
-                            } else {
-                                echo "no image available";
-                            }
-                            /// echo "no image available"; 
-                            break;
-                            ?>
-                            &nbsp;
-
+                                echo $this->Html->image('files/'.$eb['Exercise']['start_pic'], array('width' => 50, 'height' => 50)); 
+                                } 
+                                else 
+                                { 
+                                echo "no image available"; 
+                                }
+	 
+                                ?>&nbsp;
                         </td>
-                    <?php endforeach; ?>
+               
                     <td> <?php
                 echo $this->Form->input("Exercise.Exercise.$i.program.", array(
                     'type' => 'select',

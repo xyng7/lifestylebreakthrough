@@ -147,7 +147,8 @@ class ProgramsController extends AppController {
                 $this->Session->setFlash(__('The program could not be saved. Please, try again.', true),'failure-message');
             }
         } else {
-
+            
+            debug($this->Program->read(null, $id));
             $this->request->data = $this->Program->read(null, $id);
         }
         $clients = $this->Program->Client->find('list');

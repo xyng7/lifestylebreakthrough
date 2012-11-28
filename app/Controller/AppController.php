@@ -139,7 +139,7 @@ class AppController extends Controller {
 // unacceptable file type
             $result['errors'][] = $formdata['name'] . " cannot be uploaded. Acceptable file types: gif, jpg, png.";
         }
-
+        //var_dump($formdata);
         return $result;
     }
     
