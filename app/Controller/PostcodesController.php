@@ -10,7 +10,7 @@ App::uses('AppController', 'Controller');
 class PostcodesController extends AppController {
     
 
-    var $name = 'Posts';
+    #var $name = 'Posts';
     function admin_index() {
         $this->_flash(__('Normal message.', true),'message');
         $this->_flash(__('Info message.', true),'info');

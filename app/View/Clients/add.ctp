@@ -54,7 +54,7 @@
             areaval = $('#ClientSuburb').val();
         }
         $.get('http://localhost:8888/lifestylebreakthrough/postcodes/search/'+type+'/'+ areaval,
-        //$.get('http://ie.infotech.monash.edu.au/project33/review/cakephp/postcodes/search/'+postcode,
+        //$.get('http://ie.infotech.monash.edu.au/project33/review/cakephp/postcodes/search/'+type+'/'+ areaval,
         function(data){
             console.log(data);
             if(type == 'postcode'){
@@ -73,15 +73,7 @@
         console.log('key pressed');
         search('locality');
     });
-    
-    function validate(){
-      var areaval = '';
-      if(areaval != $locality){
-          return 'd';
-      } else{
-          
-      }
-    }
+
  
 </script>
 

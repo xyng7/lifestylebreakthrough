@@ -148,15 +148,8 @@
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
-<<<<<<< HEAD
-        <li><?php echo $this->Html->link(__('Back'), array('action' => 'view', $exercise['Exercise']['id'])); ?></li>
-        <li><?php if (AuthComponent::user('role') === 'superadmin') {
-            echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Exercise.id')), null, __('Are you sure you want to delete # %s? This exercise may be related to many programs', $this->Form->value('Exercise.name'))); 
-        } ?></li>
-=======
         <li><?php echo $this->Html->link(__('List Exercises'), array('action' => 'index', $exercise['Exercise']['id'])); ?></li>
         <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Exercise.id')), null, __('Are you sure you want to delete # %s? This exercise may be related to many programs', $this->Form->value('Exercise.name'))); ?></li>
->>>>>>> f6d68cf349844fd0574c45c99ec385a0ff555df2
 
     </ul>
 </div>

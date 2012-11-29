@@ -47,11 +47,11 @@ class UsersController extends AppController {
                 $this->Session->setFlash(__('The user has been saved'));
                $this->redirect(array('action' => 'index'));
            } else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.', 'failure-message'));
+                $this->Session->setFlash(__('The user could not be saved. Please, try again.', true),'failure-message');
             }
             }
             else{
-                $this->Session->setFlash(__('Password do not match, please try again.', 'failure-message'));
+                $this->Session->setFlash(__('Password do not match, please try again.', true),'failure-message');
             }
         }
     }
@@ -73,7 +73,7 @@ class UsersController extends AppController {
                 $this->redirect(array('action' => 'index'));
             } 
             else {
-                $this->Session->setFlash(__('The user could not be saved. Please, try again.', 'failure-message'));
+                $this->Session->setFlash(__('The user could not be saved. Please, try again.', true),'failure-message');
             }
         } else {
             $this->request->data = $this->User->read(null, $id);
@@ -81,7 +81,7 @@ class UsersController extends AppController {
         }
     }
     else {
-            $this->Session->setFlash(__('Password do not match, please try again.', 'failure-message'));
+            $this->Session->setFlash(__('Password do not match, please try again.', true),'failure-message');
    }}
 
     public function delete($id = null) {
@@ -135,7 +135,7 @@ class UsersController extends AppController {
                             }
                     } 
                     else {
-                    $this->Session->setFlash('Invalid username or password, try again','failure-message');
+                    $this->Session->setFlash(__('Invalid username or password, try again', true),'failure-message');
                     }
         }
     }
@@ -161,14 +161,14 @@ class UsersController extends AppController {
                     $this->Session->setFlash(__('Details changed successfully'));
                     $this->redirect(array('action' => 'index'));
                 } else {
-                    $this->Session->setFlash(__('The user could not be saved. Please, try again.', 'failure-message'));
+                    $this->Session->setFlash(__('The user could not be saved. Please, try again.',true),'failure-message');
                 }
             } else {
-                $this->Session->setFlash(__('Password do not match, please try again.', 'failure-message'));
+                $this->Session->setFlash(__('Password do not match, please try again.', true),'failure-message');
             }
         } else {
             
-            $this->Session->setFlash(__('Incorrect old password, please try again.', 'failure-message'));
+            $this->Session->setFlash(__('Incorrect old password, please try again.', true),'failure-message');
             
         }
         } else {
