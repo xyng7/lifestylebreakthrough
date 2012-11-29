@@ -44,7 +44,7 @@ class UsersController extends AppController {
                 'password' => $this->request->data('User.password'),
 		'role' => $this->request->data('User.role')))) 
                {
-                $this->Session->setFlash(__('The user has been saved'));
+                $this->Session->setFlash(__('The user has been saved', true), 'success-message');
                $this->redirect(array('action' => 'index'));
            } else {
                 $this->Session->setFlash(__('The user could not be saved. Please, try again.', true),'failure-message');
@@ -69,7 +69,7 @@ class UsersController extends AppController {
         if ($this->request->is('post') || $this->request->is('put')) {
           
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('The user has been saved'));
+                $this->Session->setFlash(__('The user has been saved', true), 'success-message');
                 $this->redirect(array('action' => 'index'));
             } 
             else {
@@ -93,10 +93,10 @@ class UsersController extends AppController {
             throw new NotFoundException(__('Invalid user'));
         }
         if ($this->User->delete()) {
-            $this->Session->setFlash(__('User deleted'));
+            $this->Session->setFlash(__('User deleted', true), 'success-message');
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('User was not deleted'));
+        $this->Session->setFlash(__('User was not deleted', true), 'failure-message');
         $this->redirect(array('action' => 'index'));
     }
     
@@ -158,7 +158,7 @@ class UsersController extends AppController {
         if (AuthComponent::password($this->request->data('User.password')) == AuthComponent::password($this->request->data('User.new_password_confirm'))) {
 
                 if ($this->User->save($this->request->data)) {
-                    $this->Session->setFlash(__('Details changed successfully'));
+                    $this->Session->setFlash(__('Details changed successfully', true), 'success-message');
                     $this->redirect(array('action' => 'index'));
                 } else {
                     $this->Session->setFlash(__('The user could not be saved. Please, try again.',true),'failure-message');

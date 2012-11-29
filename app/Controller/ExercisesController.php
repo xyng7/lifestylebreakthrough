@@ -11,9 +11,10 @@ class ExercisesController extends AppController {
 
     public function isAuthorized($user) {
 
-        if (in_array($this->action, array('delete'))) {
+        if (in_array($this->action, array('delete', 'archive'))) {
 
-            if (isset($user['role']) && ($user['role'] === 'admin' || $user['role'] === 'client' )) {
+            if (isset($user['role']) && ($user['role'] === 'admin')) {
+                
                 return false;
             }
         }

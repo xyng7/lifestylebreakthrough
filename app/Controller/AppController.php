@@ -54,7 +54,8 @@ class AppController extends Controller {
     
     else
         // Default deny
-        $this->Session->setFlash('Sorry, you don\'t have permission to access that page.');
+        //$this->Session->setFlash('Sorry, you don\'t have permission to access that page.');
+        $this->Session->setFlash(__('Sorry, you don\'t have permission to access that page.', true), 'failure-message');
         $this->redirect(array('controller' => 'users', 'action' => 'login'));
         return false;
 }

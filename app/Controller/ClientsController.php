@@ -8,6 +8,19 @@ App::uses('AppController', 'Controller');
  * @property Client $Client
  */
 class ClientsController extends AppController {
+    
+        public function isAuthorized($user) {
+
+        if (in_array($this->action, array('delete', 'archive'))) {
+
+            if (isset($user['role']) && ($user['role'] === 'admin')) {
+                
+                return false;
+            }
+        }
+
+        return parent::isAuthorized($user);
+    }
 
     /**
      * index method
