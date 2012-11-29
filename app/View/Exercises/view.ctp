@@ -18,7 +18,8 @@
                 <?php if($exercise['Exercise']['start_pic'] != null) 
                                 { 
                                 //echo $instruction['image']."<br /><br />"; 
-                                echo $this->Html->image('files/'.$exercise['Exercise']['start_pic'], array('width' => 200, 'height' => 200)); 
+                                echo $this->Html->image('../imgfiles/'.$exercise['Exercise']['start_pic'], array('width' => 200, 'height' => 200)); 
+                                
                                 } 
                                 else 
                                 { 
@@ -32,7 +33,7 @@
                 <dd><?php if($exercise['Exercise']['end_pic'] != null) 
                                 { 
                                 //echo $instruction['image']."<br /><br />"; 
-                                echo $this->Html->image('files/'.$exercise['Exercise']['end_pic'], array('width' => 200, 'height' => 200)); 
+                                echo $this->Html->image('../imgfiles/'.$exercise['Exercise']['end_pic'], array('width' => 200, 'height' => 200)); 
                                 } 
                                 else 
                                 { 
@@ -109,7 +110,8 @@
 	<ul>    
                 <li><?php echo $this->Html->link(__('List Exercises'), array('action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('Edit Exercise'), array('action' => 'edit', $exercise['Exercise']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Exercise'), array('action' => 'delete', $exercise['Exercise']['id']), null, __('Are you sure you want to delete # %s? This exercise may be related to many programs', $exercise['Exercise']['name'])); ?> </li>
+		<li><?php                     if (AuthComponent::user('role') === 'superadmin') {
+                    echo $this->Form->postLink(__('Delete Exercise'), array('action' => 'delete', $exercise['Exercise']['id']), null, __('Are you sure you want to delete # %s? This exercise may be related to many programs', $exercise['Exercise']['name'])); } ?> </li>
 		
 		
 	</ul>

@@ -11,9 +11,9 @@ class ExercisesController extends AppController {
 
     public function isAuthorized($user) {
 
-        if (in_array($this->action, array('delete', 'edit'))) {
+        if (in_array($this->action, array('delete'))) {
 
-            if (isset($user['role']) && ($user['role'] === 'admin')) {
+            if (isset($user['role']) && ($user['role'] === 'admin' || $user['role'] === 'client' )) {
                 return false;
             }
         }
@@ -27,9 +27,12 @@ class ExercisesController extends AppController {
      * @return void
      */
     public function index() {
-
+     
         $this->Exercise->recursive = 0;
-        $this->set('exercises', $this->paginate());
+        //$this->set('exercises', $this->paginate());
+        
+        $this->set('exercises', $this->Exercise->find('all', array('conditions' =>
+        array('flag_active' => 'active'))));
     }
 
     /**
@@ -55,33 +58,38 @@ class ExercisesController extends AppController {
     public function add() {
         if ($this->request->is('post')) {
             $this->Exercise->create();
-
-
-            $fileOK = $this->uploadFiles('img/files', $this->data['Exercise']['start_pic']);
-            $file2OK = $this->uploadFiles('img/files', $this->data['Exercise']['end_pic']);
-
-            if (array_key_exists('urls', $fileOK)) {
-                // save the url in the form data
-                $this->request->data['Exercise']['start_pic'] = $fileOK['urls'][0];
-               
-            } else {
-                $this->request->data['Exercise']['start_pic'] = null;
-            }
             
-            if (array_key_exists('urls', $file2OK)) {
-                 $this->request->data['Exercise']['end_pic'] = $file2OK['urls'][0];
-            } else {
-                $this->request->data['Exercise']['end_pic'] = null;
-            }
+                $fileOK = $this->uploadFiles('imgfiles', $this->data['Exercise']['start_pic']);
+                $file2OK = $this->uploadFiles('imgfiles',$this -> data['Exercise']['end_pic']);
 
-            if ($this->Exercise->save($this->request->data)) {
-                
-              
-                
-                $this->Session->setFlash(__('The exercise has been saved', true),'success-message');
-                $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash(__('The exercise could not be saved. Please, try again.', true),'failure-message');
+                if (array_key_exists('urls', $fileOK)) {
+                    // save the url in the form data
+                    $this->request->data['Exercise']['start_pic'] = $fileOK['urls'][0];
+                } else {
+                    $this->request->data['Exercise']['start_pic'] = null;
+                }
+
+                if (array_key_exists('urls', $file2OK)) {
+                    $this->request->data['Exercise']['end_pic'] = $file2OK['urls'][0];
+                } else {
+                    $this->request->data['Exercise']['end_pic'] = null;
+                }            
+
+            if ($this->Exercise->save(
+            array(
+            'name' => $this->request->data('Exercise.name'),
+            'videos' => $this->request->data('Exercise.videos'),
+            'start_pic' => $this->request->data('Exercise.start_pic'),
+            'end_pic' => $this->request->data('Exercise.end_pic'),
+            'instructions' => $this->request->data('Exercise.instructions'),
+            'flag_active' => 'active'
+            ))) {
+                if ($this->Exercise->save($this->request->data)) {
+                    $this->Session->setFlash(__('The exercise has been saved', true), 'success-message');
+                    $this->redirect(array('action' => 'index'));
+                } else {
+                    $this->Session->setFlash(__('The exercise could not be saved. Please, try again.', true), 'failure-message');
+                }
             }
         }
         $bodyParts = $this->Exercise->BodyPart->find('list');
@@ -94,7 +102,6 @@ class ExercisesController extends AppController {
         $this->set('exercise_categories', $this->Exercise->Category->find('all'));
         //equipment
         $this->set('exercise_equipment', $this->Exercise->Equipment->find('all'));
-
 
         $this->set(compact('bodyParts', 'categories', 'equipment'));
     }
@@ -111,22 +118,20 @@ class ExercisesController extends AppController {
         if (!$this->Exercise->exists()) {
             throw new NotFoundException(__('Invalid exercise'));
         }
-        
+
         if ($this->request->is('post') || $this->request->is('put')) {
-            
-            if (isset( $this->data['delimg1'])) 
-            { 
-                $this->deleteImage($id, 'start_pic'); 
+
+            if (isset($this->data['delimg1'])) {
+                $this->deleteImage($id, 'start_pic');
                 $this->redirect(array('action' => 'edit', $id));
             }
-            if (isset( $this->data['delimg2'])) 
-            { 
+            if (isset($this->data['delimg2'])) {
                 $this->deleteImage($id, 'end_pic');
                 $this->redirect(array('action' => 'edit', $id));
-                //$this->redirect( array( 'action' => 'index' )); 
+                //$this->redirect( array( 'action' => 'index' ));
             }
-         //   debug($this->request->data);
-            
+            //   debug($this->request->data);
+
             $conditions = array("Exercise.id" => $id);
             $results = $this->Exercise->find('first', array('conditions' => $conditions));
             $currentImage1 = $results['Exercise']['start_pic'];
@@ -137,31 +142,28 @@ class ExercisesController extends AppController {
 
             if (array_key_exists('urls', $fileOK)) {
                 // save the url in the form data
-                if ($results['Exercise']['start_pic'] != null){
-                $this->deleteImage($id, 'start_pic'); 
-                
+                if ($results['Exercise']['start_pic'] != null) {
+                    $this->deleteImage($id, 'start_pic');
                 }
                 $this->request->data['Exercise']['start_pic'] = $fileOK['urls'][0];
-               
             } else {
                 $this->request->data['Exercise']['start_pic'] = $currentImage1;
             }
-            
+
             if (array_key_exists('urls', $file2OK)) {
-                if ($results['Exercise']['end_pic'] != null){
-                $this->deleteImage($id, 'end_pic'); 
-                
+                if ($results['Exercise']['end_pic'] != null) {
+                    $this->deleteImage($id, 'end_pic');
                 }
-                 $this->request->data['Exercise']['end_pic'] = $file2OK['urls'][0];
+                $this->request->data['Exercise']['end_pic'] = $file2OK['urls'][0];
             } else {
                 $this->request->data['Exercise']['end_pic'] = $currentImage2;
             }
 
             if ($this->Exercise->save($this->request->data)) {
-                $this->Session->setFlash(__('The exercise has been saved', true),'success-message');
+                $this->Session->setFlash(__('The exercise has been saved', true), 'success-message');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The exercise could not be saved. Please, try again.', true),'failure-message');
+                $this->Session->setFlash(__('The exercise could not be saved. Please, try again.', true), 'failure-message');
             }
         } else {
             $this->request->data = $this->Exercise->read(null, $id);
@@ -200,47 +202,71 @@ class ExercisesController extends AppController {
         if (!$this->Exercise->exists()) {
             throw new NotFoundException(__('Invalid exercise'));
         }
-        
-                $conditions = array("Exercise.id" => $id);
-                $results = $this->Exercise->find('first', array('conditions' => $conditions));
-                $currentImage1 = $results['Exercise']['start_pic'];
-                $currentImage2 = $results['Exercise']['end_pic'];
+     
+       /* $conditions = array("Exercise.id" => $id);
+        $results = $this->Exercise->find('first', array('conditions' => $conditions));
+        $currentImage1 = $results['Exercise']['start_pic'];
+        $currentImage2 = $results['Exercise']['end_pic'];
 
-                if(($currentImage1 != null) && ($currentImage1 !='noimage.jpg')) 
-                { 
-                    $imageFolder = WWW_ROOT."img/files"; 
-                    $imagePath = $imageFolder.'/'.$currentImage1; 
-                    unlink($imagePath); 
-                }
-                
-                if(($currentImage2 != null) && ($currentImage2 !='noimage.jpg')) 
-                { 
-                    $imageFolder = WWW_ROOT."img/files"; 
-                    $imagePath = $imageFolder.'/'.$currentImage2; 
-                    unlink($imagePath); 
-                }
-        
-        if ($this->Exercise->delete()) {
-            $this->Session->setFlash(__('Exercise deleted', true),'success-message');
+        if (($currentImage1 != null) && ($currentImage1 != 'noimage.jpg')) {
+            $imageFolder = WWW_ROOT . "imgfiles";
+            $imagePath = $imageFolder . '/' . $currentImage1;
+            unlink($imagePath);
+        }
+
+        if (($currentImage2 != null) && ($currentImage2 != 'noimage.jpg')) {
+            $imageFolder = WWW_ROOT . "imgfiles";
+            $imagePath = $imageFolder . '/' . $currentImage2;
+            unlink($imagePath);
+        }*/
+
+        //if ($this->Exercise->delete()) {
+        if ($this->Exercise->saveField('flag_active', 'deactivate')) {
+            $this->Session->setFlash(__('Exercise deleted', true), 'success-message');
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('Exercise was not deleted', true),'failure-message');
-        $this->redirect(array('action' => 'index'));
+        $this->Session->setFlash(__('Exercise was not deleted', true), 'failure-message');
+        $this->redirect(array('action' => 'index' ));
     }
 
-    public function deleteImage($id, $pic) {
+   /* public function deleteImage($id, $pic) {
         $conditions = array("Exercise.id" => $id);
         $results = $this->Exercise->find('first', array('conditions' => $conditions));
         $currentImage = $results['Exercise'][$pic];
-            if(($currentImage != null) && ($currentImage !='noimage.jpg')) {
-                
-                $imageFolder = WWW_ROOT . "img/files";
-                $imagePath = $imageFolder . '/' . $currentImage;
-                unlink($imagePath);
+        if (($currentImage != null) && ($currentImage != 'noimage.jpg')) {
+
+            $imageFolder = WWW_ROOT . "imgfiles";
+            $imagePath = $imageFolder . '/' . $currentImage;
+            unlink($imagePath);
         }
         $this->Exercise->query("update exercises set $pic = null where id =" . $id);
-        // $this->Session->setFlash('Image deleted.'); 
-       // echo $this->Html->link(__('Edit'), array('action' => 'edit', $exercise['Exercise']['id']));
+        //$this->Session->setFlash('Image deleted.');
+        //echo $this->Html->link(__('Edit'), array('action' => 'edit', $exercise['Exercise']['id']));
+    }*/
+
+    public function archive() {
+        //print al archive clients
+        $this->Exercise->recursive = 0;
+        $this->set('exercises', $this->Exercise->find('all', array('conditions' =>
+                    array('flag_active' => 'deactivate'))));
+    }
+
+    public function activate($id = null) {
+        //activate archive exercises
+        if (!$this->request->is('post')) {
+            throw new MethodNotAllowedException();
+        }
+
+        $this->Exercise->id = $id;
+        if (!$this->Exercise->exists()) {
+            throw new NotFoundException(__('Invalid exercise', true));
+        }
+        if ($this->Exercise->saveField('flag_active', 'active')) {
+            $this->Session->setFlash(__('Exercise is now active', true), 'success-message');
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->Session->setFlash(__('Exercise was not activated', true), 'failure-message');
+        $this->redirect(array('action' => 'index'));
     }
 
 }

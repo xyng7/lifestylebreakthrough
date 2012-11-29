@@ -1,95 +1,68 @@
-<div class="exercises index">
-	<h3><?php echo __('Exercises'); ?></h3>
-	<table id="js-datatable" cellpadding="0" cellspacing="0">
-	<thead>
-            <tr>
-			<th><?php echo $this->Paginator->sort('name'); ?></th>
-                        <th><?php echo h('Start Picture'); ?></th>
-                        <th><?php echo h('End Picture'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
+<div class="exercise form">	
+    <h4><?php echo __('Exercise'); ?></h4>
+
+<table id="js-datatable" cellpadding="0" cellspacing="0">
+    <thead>
+        <tr>
+            <th><?php echo h('name'); ?></th>
+            <th><?php echo h('Start Picture'); ?></th>
+            <th><?php echo h('End Picture'); ?></th>
+            <th class="actions"><?php echo __('Actions'); ?></th>
+        </tr>
     </thead>
     <tbody>
-	<?php
-	foreach ($exercises as $exercise): ?>
-	<tr>
-		<td><?php echo h($exercise['Exercise']['name']); ?>&nbsp;</td>
-                <td><?php if($exercise['Exercise']['start_pic'] != null) 
-                                { 
-                                //echo $instruction['image']."<br /><br />"; 
-                                echo $this->Html->image('files/'.$exercise['Exercise']['start_pic'], array('width' => 50, 'height' => 50)); 
-                                } 
-                                else 
-                                { 
-                                echo "no image available"; 
-                                }
-	 
-                                ?>&nbsp;</td>
-                <td><?php if($exercise['Exercise']['end_pic'] != null) 
-                                { 
-                                //echo $instruction['image']."<br /><br />"; 
-                                echo $this->Html->image('files/'.$exercise['Exercise']['end_pic'], array('width' => 50, 'height' => 50)); 
-                                } 
-                                else 
-                                { 
-                                echo "no image available"; 
-                                }
-	 
-                                ?>&nbsp;</td>
-		<td style="float: left;">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $exercise['Exercise']['id'])); echo " ";
+<?php foreach ($exercises as $exercise): ?>
+            <tr>
+                <td><?php echo h($exercise['Exercise']['name']); ?>&nbsp;</td>
+                <td><?php
+    if ($exercise['Exercise']['start_pic'] != null) {
+        //echo $instruction['image']."<br /><br />"; 
+        echo $this->Html->image('../imgfiles/' . $exercise['Exercise']['start_pic'], array('width' => 50, 'height' => 50));
+    } else {
+        echo "no image available";
+    }
+    ?></td>
+                <td><?php
+    if ($exercise['Exercise']['end_pic'] != null) {
+        //echo $instruction['image']."<br /><br />"; 
+        echo $this->Html->image('../imgfiles/' . $exercise['Exercise']['end_pic'], array('width' => 50, 'height' => 50));
+    } else {
+        echo "no image available";
+    }
+    ?></td>
+                <td>
+                    <?php echo $this->Html->link(__('View'), array('action' => 'view', $exercise['Exercise']['id'])); ?> <br>
+                    <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $exercise['Exercise']['id'])); ?> <br>
+                    <?php
                     if (AuthComponent::user('role') === 'superadmin') {
-                        echo $this->Html->link(__('Edit'), array('action' => 'edit', $exercise['Exercise']['id']));echo " ";
-                        echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $exercise['Exercise']['id']), null, __('Are you sure you want to delete # %s? This exercise may be related to many programs', $exercise['Exercise']['name']));
+                        echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $exercise['Exercise']['id']), null, __('Are you sure you want to archive # %s? This exercise may be related to many programs', $exercise['Exercise']['name']));
+                        
                     }
                     ?>
-			
-		</td>
-	</tr>
-     
+                </td>
+            </tr>
+
 <?php endforeach; ?>
-        </tbody>
-	</table>
-	<p>
-	<?php
-	//echo $this->Paginator->counter(array(
-	//'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-	//));
-	?>	</p>
-
-	<div class="paging">
-	<?php
-	//	echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-	//	echo $this->Paginator->numbers(array('separator' => ''));
-	//	echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-	?>
-	</div>
-        <br>
-      
+    </tbody>
+</table>
 </div>
-             
 
-                       <div class="actions">
-	
-      <h3>Actions</h3>
-    
-              <li><?php echo $this->Html->link(__('New Exercise'), array('action' => 'add')); ?></li>
-        
-              <p><br><br></p>
-                
-       <?php 
-          if (AuthComponent::user('role') === 'superadmin') {      
-        echo "<h3>Other</h3>";
-	echo "<ul>";
-		
-		
-		echo "<li>"; echo $this->Html->link(__('Manage Body Parts'), array('controller' => 'body_parts', 'action' => 'index')); echo "</li>";
-		
-		echo "<li>"; echo $this->Html->link(__('Manage Categories'), array('controller' => 'categories', 'action' => 'index')); echo "</li>";
-		
-		echo "<li>"; echo $this->Html->link(__('Manage Equipment'), array('controller' => 'equipment', 'action' => 'index')); echo "</li>";
-		
-		
-	echo "</ul>"; 
-echo "</div>";
-} ?>
+
+    <div class="actions">
+
+
+        <h4><?php echo __('Actions'); ?></h4>
+        <ul>
+            <li><?php echo $this->Html->link(__('New Exercise'), array('action' => 'add')); ?></li>
+        </ul>
+                <?php if (AuthComponent::user('role') === 'superadmin') { ?>
+        <h4><?php echo __('Others'); ?></h4>
+            <ul>
+            <li><?php echo $this->Html->link(__('Archive Exercise'), array('action' => 'archive')); ?></li>
+            <li><?php echo $this->Html->link(__('Manage Body Parts'), array('controller' => 'body_parts', 'action' => 'index')); ?>
+            <li><?php echo $this->Html->link(__('Manage Categories'), array('controller' => 'categories', 'action' => 'index')); ?>
+            <li><?php echo $this->Html->link(__('Manage Equipment'), array('controller' => 'equipment', 'action' => 'index')); ?>
+    </ul>
+</div>
+<?php } ?>
+

@@ -30,7 +30,7 @@
                 <?php
                 if($exercise['Exercise']['start_pic'] != null) 
                     { 
-                        echo $this->Html->image('files/'.$exercise['Exercise']['start_pic'], array('width' => 200, 'height' => 200));
+                        echo $this->Html->image('../imgfiles/'.$exercise['Exercise']['start_pic'], array('width' => 200, 'height' => 200));
                         //echo $this->Html->link(__('Delete Image'), array('action' => 'deleteImage', $exercise['Exercise']['id'], 'start_pic'));
                         echo $this->Form->submit(__('Delete Image', true), array('name' => 'delimg1','div' => false)); 
                         //echo $this->Html->image('files/'.$instruction['Instruction']['image']); 
@@ -46,7 +46,7 @@
                 <?php
                 if($exercise['Exercise']['end_pic'] != null) 
                     { 
-                        echo $this->Html->image('files/'.$exercise['Exercise']['end_pic'], array('width' => 200, 'height' => 200));
+                        echo $this->Html->image('../imgfiles/'.$exercise['Exercise']['end_pic'], array('width' => 200, 'height' => 200));
                         //echo $this->Html->link(__('Delete Image'), array('action' => 'deleteImage', $exercise['Exercise']['id'], 'end_pic'));
                         echo $this->Form->submit(__('Delete Image', true), array('name' => 'delimg2','div' => false)); 
                         //echo $this->Html->image('files/'.$instruction['Instruction']['image']); 
@@ -149,7 +149,8 @@
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
         <li><?php echo $this->Html->link(__('List Exercises'), array('action' => 'index', $exercise['Exercise']['id'])); ?></li>
-        <li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Exercise.id')), null, __('Are you sure you want to delete # %s? This exercise may be related to many programs', $this->Form->value('Exercise.name'))); ?></li>
+        <li><?php                     if (AuthComponent::user('role') === 'superadmin') {
+            echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Exercise.id')), null, __('Are you sure you want to delete # %s? This exercise may be related to many programs', $this->Form->value('Exercise.name'))); } ?></li>
 
     </ul>
 </div>
