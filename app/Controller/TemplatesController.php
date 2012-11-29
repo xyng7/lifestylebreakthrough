@@ -30,7 +30,11 @@ class TemplatesController extends AppController {
 			throw new NotFoundException(__('Invalid template'));
 		}
 		$this->set('template', $this->Template->read(null, $id));
-	}
+                $exercisesProgram = $this->Template->ExercisesTemplate->query("SELECT exercises_templates.rec_sets, exercises_templates.rec_reps, exercises_templates.rec_res FROM exercises_templates WHERE exercises_templates.template_id = $id");
+                $this->set('exercisesPrograms', $exercisesProgram);
+                debug($this->Template->read(null, $id));
+        }
+        
 
 /**
  * add method

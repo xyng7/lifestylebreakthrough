@@ -1,22 +1,46 @@
 <div class="templates view">
-<h2><?php  echo __('Template'); ?></h2>
+<h3><?php  echo __('Template'); ?></h3>
 	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($template['Template']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Program'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($template['Program']['id'], array('controller' => 'programs', 'action' => 'view', $template['Program']['id'])); ?>
-			&nbsp;
-		</dd>
+		
 		<dt><?php echo __('Template Name'); ?></dt>
 		<dd>
-			<?php echo h($template['Template']['template_name']); ?>
+			<?php echo h($template['Template']['name']); ?>
 			&nbsp;
 		</dd>
 	</dl>
+
+<div class="related">
+	<h3><?php echo __('Exercises'); ?></h3>
+	<?php if (!empty($template['Exercise'])): ?>
+	<table cellpadding = "0" cellspacing = "0">
+	<tr>    
+                <th><?php echo __('Number'); ?></th>
+		<th><?php echo __('Name'); ?></th>
+                <th><?php echo __('Sets'); ?></th>
+                <th><?php echo __('Reps'); ?></th>
+                <th><?php echo __('Rest'); ?></th>
+		
+	</tr>
+	<?php
+		$i = 1;
+		foreach ($template['Exercise'] as $exercise): ?>
+		<tr>
+                        
+                        <td><?php echo $i; ?></td>
+			<td><?php echo $exercise['name']; ?></td>
+                        <td><?php echo $exercisesPrograms[$i - 1]['exercises_templates']['rec_sets']; ?></td>
+                        <td><?php echo $exercisesPrograms[$i - 1]['exercises_templates']['rec_reps']; ?></td>
+                        <td><?php echo $exercisesPrograms[$i - 1]['exercises_templates']['rec_res']; ?></td>
+                        
+		</tr>
+                <?php $i++; ?>
+	<?php endforeach; ?>
+	</table>
+            <?php endif; ?>
+
+	
+</div>
+
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
