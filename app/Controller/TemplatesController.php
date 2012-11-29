@@ -27,7 +27,7 @@ class TemplatesController extends AppController {
 	public function view($id = null) {
 		$this->Template->id = $id;
 		if (!$this->Template->exists()) {
-			throw new NotFoundException(__('Invalid template'));
+			throw new NotFoundException(__('Invalid template', true), 'failure-message');
 		}
 		$this->set('template', $this->Template->read(null, $id));
                 $exercisesProgram = $this->Template->ExercisesTemplate->query("SELECT exercises_templates.rec_sets, exercises_templates.rec_reps, exercises_templates.rec_res FROM exercises_templates WHERE exercises_templates.template_id = $id");
@@ -81,11 +81,11 @@ class TemplatesController extends AppController {
                     }
                     //$i++; 
                 }
-                $this->Session->setFlash(__('The program has been saved'));
+                $this->Session->setFlash(__('The program has been saved', true), 'success-message');
                 $this->redirect(array('action' => 'index'));
 
             } else {
-                $this->Session->setFlash(__('The program could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The program could not be saved. Please, try again.', true), 'failure-message');
             }
         }
       
@@ -107,10 +107,10 @@ class TemplatesController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Template->save($this->request->data)) {
-				$this->Session->setFlash(__('The template has been saved'));
+				$this->Session->setFlash(__('The template has been saved', true), 'success-message');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The template could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The template could not be saved. Please, try again.', true), 'failure-message');
 			}
 		} else {
 			$this->request->data = $this->Template->read(null, $id);
@@ -136,10 +136,10 @@ class TemplatesController extends AppController {
 			throw new NotFoundException(__('Invalid template'));
 		}
 		if ($this->Template->delete()) {
-			$this->Session->setFlash(__('Template deleted'));
+			$this->Session->setFlash(__('Template deleted', true), 'success-message');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Template was not deleted'));
+		$this->Session->setFlash(__('Template was not deleted', true), 'failure-message');
 		$this->redirect(array('action' => 'index'));
 	}
 }

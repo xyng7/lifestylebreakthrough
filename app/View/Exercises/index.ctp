@@ -35,7 +35,7 @@
                     <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $exercise['Exercise']['id'])); ?> <br>
                     <?php
                     if (AuthComponent::user('role') === 'superadmin') {
-                        echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $exercise['Exercise']['id']), null, __('Are you sure you want to archive # %s? This exercise may be related to many programs', $exercise['Exercise']['name']));
+                        echo $this->Form->postLink(__('Archive'), array('action' => 'delete', $exercise['Exercise']['id']), null, __('Are you sure you want to archive # %s? This exercise may be related to many programs', $exercise['Exercise']['name']));
                         
                     }
                     ?>
