@@ -78,10 +78,10 @@ class ExercisesController extends AppController {
                 $this->request->data['Exercise']['end_pic'] = null;
             }
                 
-                $this->Session->setFlash(__('The exercise has been saved'));
+                $this->Session->setFlash(__('The exercise has been saved', true),'success-message');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The exercise could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The exercise could not be saved. Please, try again.', true),'failure-message');
             }
         }
         $bodyParts = $this->Exercise->BodyPart->find('list');
@@ -158,10 +158,10 @@ class ExercisesController extends AppController {
             }
 
             if ($this->Exercise->save($this->request->data)) {
-                $this->Session->setFlash(__('The exercise has been saved'));
+                $this->Session->setFlash(__('The exercise has been saved', true),'success-message');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The exercise could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The exercise could not be saved. Please, try again.', true),'failure-message');
             }
         } else {
             $this->request->data = $this->Exercise->read(null, $id);
@@ -221,10 +221,10 @@ class ExercisesController extends AppController {
                 }
         
         if ($this->Exercise->delete()) {
-            $this->Session->setFlash(__('Exercise deleted'));
+            $this->Session->setFlash(__('Exercise deleted', true),'success-message');
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('Exercise was not deleted'));
+        $this->Session->setFlash(__('Exercise was not deleted', true),'failure-message');
         $this->redirect(array('action' => 'index'));
     }
 
