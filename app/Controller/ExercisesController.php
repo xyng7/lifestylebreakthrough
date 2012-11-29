@@ -76,19 +76,7 @@ class ExercisesController extends AppController {
 
             if ($this->Exercise->save($this->request->data)) {
                 
-                if (array_key_exists('urls', $fileOK)) {
-                // save the url in the form data
-                $this->request->data['Exercise']['start_pic'] = $fileOK['urls'][0];
-               
-            } else {
-                $this->request->data['Exercise']['start_pic'] = null;
-            }
-            
-            if (array_key_exists('urls', $file2OK)) {
-                 $this->request->data['Exercise']['end_pic'] = $file2OK['urls'][0];
-            } else {
-                $this->request->data['Exercise']['end_pic'] = null;
-            }
+              
                 
                 $this->Session->setFlash(__('The exercise has been saved', true),'success-message');
                 $this->redirect(array('action' => 'index'));
