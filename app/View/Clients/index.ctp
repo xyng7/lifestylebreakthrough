@@ -7,10 +7,10 @@
     <ul>
         <li><?php echo $this->Html->link(__('New Client'), array('action' => 'add')); ?></li>
     </ul>
-        <!--<ul>
+        <ul>
         <li><?php // view page of archive clients 
         echo $this->Html->link(__('Archive Client'), array('action' => 'archive')); ?></li>
-    </ul>-->
+    </ul>
 </div>
 
 <table id="js-datatable" cellpadding="0" cellspacing="0">

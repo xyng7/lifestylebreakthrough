@@ -60,7 +60,19 @@ class ExercisesController extends AppController {
             $fileOK = $this->uploadFiles('img/files', $this->data['Exercise']['start_pic']);
             $file2OK = $this->uploadFiles('img/files', $this->data['Exercise']['end_pic']);
 
+            if (array_key_exists('urls', $fileOK)) {
+                // save the url in the form data
+                $this->request->data['Exercise']['start_pic'] = $fileOK['urls'][0];
+               
+            } else {
+                $this->request->data['Exercise']['start_pic'] = null;
+            }
             
+            if (array_key_exists('urls', $file2OK)) {
+                 $this->request->data['Exercise']['end_pic'] = $file2OK['urls'][0];
+            } else {
+                $this->request->data['Exercise']['end_pic'] = null;
+            }
 
             if ($this->Exercise->save($this->request->data)) {
                 
