@@ -61,14 +61,35 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
                 //for loop for body parts
                 foreach ($exercises as $eb):
                     ?> 
+<td> <?php
+                            
+                           foreach ($program['Exercise'] as $existex )
+                           {
+                               if($eb['Exercise']['id'] === $existex['id'])
+                               {
+                                 // debug($existex);
+                                   $checked = true;
+                                  $setsdef = $existex['ExercisesProgram']['rec_sets'];
+                                  $repsdef = $existex['ExercisesProgram']['rec_reps'];
+                                  $resdef = $existex['ExercisesProgram']['rec_res'];
+                                  break;
+                               }
+                              else{
+                                   $checked = false;
+                                   $setsdef = 5;
+                                   $repsdef = 5;
+                                   $resdef = 5;
+                                   
+                              }
+                           }  
 
 
-                    <td> <?php
                 echo $this->Form->input("Exercise.Exercise.$i.", array(
                     'type' => 'checkbox',
                     //'multiple' => 'checkbox',
                     'label' => $eb['Exercise']['name'],
                     'value' => $eb['Exercise']['id'],
+                    'checked'=>$checked,
                     'before' => '<div class="checkbox">',
                     'after' => '</div>',
                     'hiddenField' => false,
@@ -76,66 +97,66 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
                 ));
                     ?>
                     </td>   
-                    <?php foreach ($eb['Instruction'] as $instruction): ?>
-                        <td>
-                            <?php
-                            if ($instruction['image'] != null) {
-                                //echo $instruction['image']."<br /><br />"; 
-                                echo $this->Html->image('files/' . $instruction['image'], array('width' => 50, 'height' => 50));
-                            } else {
-                                echo "no image available";
-                            }
-                            /// echo "no image available"; 
-                            break;
-                            ?>
-                            &nbsp;
+                    <td>
+                        <?php
+                        if ($eb['Exercise']['start_pic'] != null) {
+                            //echo $instruction['image']."<br /><br />"; 
+                            echo $this->Html->image('files/' . $eb['Exercise']['start_pic'], array('width' => 50, 'height' => 50));
+                        } else {
+                            echo "no image available";
+                        }
+                        ?>&nbsp;
+                    </td>
 
-                        </td>
-                    <?php endforeach; ?>
-                    <td> <?php
-                echo $this->Form->input("Exercise.Exercise.$i.program.", array(
-                    'type' => 'select',
-                    'label' => 'Sets:',
-                    'options' => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17),
-                    'default' => 5,
-                    //'before' => " ",
-                    // 'after' => '</div>',
-                    'hiddenField' => false,
-                    'div' => false
-                ));
-                    ?>
+                    <td>
+
+                    </td><td> <?php
+                    echo $this->Form->input("Exercise.Exercise.$i.program.", array(
+                        'type' => 'select',
+                        'label' => 'Sets:',
+                        'options' => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17),
+                        'default' => $setsdef,
+                        //'default' => 5,
+                        //'before' => " ",
+                        // 'after' => '</div>',
+                        'hiddenField' => false,
+                        'div' => false
+                    ));
+                        ?>
                     </td>
                     <td> <?php
                     echo $this->Form->input("Exercise.Exercise.$i.program.", array(
                         'type' => 'select',
                         'label' => 'Reps:',
                         'options' => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17),
-                        'default' => 5,
+                        //'default' => 5,
+                        'default' => $repsdef,
                         //'before' => " ",
                         // 'after' => '</div>',
                         'hiddenField' => false,
                         'div' => false
                     ));
-                    ?>
+                        ?>
                     </td>
                     <td> <?php
                     echo $this->Form->input("Exercise.Exercise.$i.program.", array(
                         'type' => 'select',
                         'label' => 'Rest:',
                         'options' => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17),
-                        'default' => 5,
+                        //'default' => 5,
+                        'default' => $resdef,
                         //'before' => " ",
                         // 'after' => '</div>',
                         'hiddenField' => false,
                         'div' => false
                     ));
-                    ?>
+                        ?>
                     </td>
                 </tr>
-                <?php $i++; ?>
-            <?php endforeach; ?>
+                        <?php $i++; ?>
+<?php endforeach; ?>
         </table>
-        <?php echo $this->Form->end(__('Submit')); ?>
+            <?php echo $this->Form->end(__('Submit')); ?>
     </fieldset>
 
 </div>
@@ -143,10 +164,10 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
         <li><?php
-        if (AuthComponent::user('role') === 'superadmin') {
-            echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Program.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Program.name')));
-        }
-        ?></li>
+            if (AuthComponent::user('role') === 'superadmin') {
+                echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Program.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Program.name')));
+            }
+            ?></li>
         <li><?php echo $this->Html->link(__('List Programs'), array('action' => 'index')); ?></li>
 
     </ul>

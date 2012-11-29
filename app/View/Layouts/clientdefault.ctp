@@ -50,7 +50,7 @@
                     echo $this->Html->image('lsbtlogo.jpeg', array('alt' => 'Lsbt logo', 'border' => '0'));
                     ?>
                     <?php
-                    print $this->Session->flash("flash", array("element" => "alert"));
+                    //print $this->Session->flash("flash", array("element" => "alert"));
                     ?>
 
                     <?php echo $this->Session->flash(); ?>

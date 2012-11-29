@@ -148,7 +148,7 @@ class ProgramsController extends AppController {
             }
         } else {
             
-            debug($this->Program->read(null, $id));
+            //debug($this->Program->read(null, $id));
             $this->request->data = $this->Program->read(null, $id);
         }
         $clients = $this->Program->Client->find('list');
