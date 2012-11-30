@@ -45,7 +45,7 @@
                     <?php echo $this->Html->link(__('View'), array('action' => 'view', $client['Client']['id'])); ?> <br>
                     <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $client['Client']['id'])); ?> <br>
                     <?php if (AuthComponent::user('role') === 'superadmin') {
-                        echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to archive # %s?', $client['Client']['first_name']));
+                        echo $this->Form->postLink(__('Archive'), array('action' => 'delete', $client['Client']['id']), null, __('Are you sure you want to archive # %s?', $client['Client']['first_name']));
                     }?>
                 </td>
             </tr>

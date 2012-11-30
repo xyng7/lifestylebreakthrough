@@ -23,10 +23,9 @@ class ClientsController extends AppController {
      *
      * @return void
      */
-    public function index() {
+       public function index() {
         $this->Client->recursive = 0;
-        $this->set('clients', $this->Client->find('all', array('conditions' =>
-                    array('flag_active' => 'active'))));
+        $this->set('clients', $this->Client->find('all', array('Client.flag_active LIKE' => '%active')));
     }
 
     /**
@@ -145,10 +144,8 @@ class ClientsController extends AppController {
     }
 
     public function archive() {
-        //print al archive clients
         $this->Client->recursive = 0;
-        $this->set('clients', $this->Client->find('all', array('conditions' =>
-                    array('flag_active' => 'deactivate'))));
+        $this->set('clients', $this->Client->find('all', array('Client.flag_active LIKE' => '%deactivate')));
     }
 
     public function activate($id = null) {

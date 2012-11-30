@@ -23,7 +23,7 @@
 	<ul>
 
 		<li><?php if (AuthComponent::user('role') === 'superadmin') {
-                    echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Client.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Client.first_name'))); 
+                    echo $this->Form->postLink(__('Archive'), array('action' => 'delete', $this->Form->value('Client.id')), null, __('Are you sure you want to archive # %s?', $this->Form->value('Client.first_name'))); 
                 } ?></li>
 		<li><?php echo $this->Html->link(__('List Clients'), array('action' => 'index')); ?></li>
 	</ul>
