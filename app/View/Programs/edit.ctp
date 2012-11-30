@@ -107,10 +107,7 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
                         }
                         ?>&nbsp;
                     </td>
-
-                    <td>
-
-                    </td><td> <?php
+                    <td> <?php
                     echo $this->Form->input("Exercise.Exercise.$i.program.", array(
                         'type' => 'select',
                         'label' => 'Sets:',
