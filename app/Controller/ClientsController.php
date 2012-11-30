@@ -8,17 +8,13 @@ App::uses('AppController', 'Controller');
  * @property Client $Client
  */
 class ClientsController extends AppController {
-    
-        public function isAuthorized($user) {
 
+    public function isAuthorized($user) {
         if (in_array($this->action, array('delete', 'archive'))) {
-
             if (isset($user['role']) && ($user['role'] === 'admin')) {
-                
                 return false;
             }
         }
-
         return parent::isAuthorized($user);
     }
 
@@ -91,7 +87,7 @@ class ClientsController extends AppController {
                 //debug($this->User->id);
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The client could not be saved. Please, try again.', true),'failure-message');
+                $this->Session->setFlash(__('The client could not be saved. Please, try again.', true), 'failure-message');
             }
         }
     }
@@ -110,10 +106,10 @@ class ClientsController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Client->save($this->request->data)) {
-                $this->Session->setFlash(__('The client has been saved', true),'success-message');
+                $this->Session->setFlash(__('The client has been saved', true), 'success-message');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The client could not be saved. Please, try again.' , true),'failure-message');
+                $this->Session->setFlash(__('The client could not be saved. Please, try again.', true), 'failure-message');
             }
         } else {
             $this->request->data = $this->Client->read(null, $id);
@@ -138,13 +134,13 @@ class ClientsController extends AppController {
         $this->User->id = $this->request->data('Client.user_id');
         //$this->User->delete();
         if (!$this->Client->exists()) {
-            throw new NotFoundException(__('Invalid client', true),'failure-message');
+            throw new NotFoundException(__('Invalid client', true), 'failure-message');
         }
         if ($this->Client->saveField('flag_active', 'deactivate')) {
-            $this->Session->setFlash(__('Client archived', true),'success-message');
+            $this->Session->setFlash(__('Client archived', true), 'success-message');
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('Client was not archive', true),'failure-message');
+        $this->Session->setFlash(__('Client was not archive', true), 'failure-message');
         $this->redirect(array('action' => 'index'));
     }
 
@@ -169,10 +165,10 @@ class ClientsController extends AppController {
             throw new NotFoundException(__('Invalid client', true));
         }
         if ($this->Client->saveField('flag_active', 'active')) {
-            $this->Session->setFlash(__('Client is now active', true),'success-message');
+            $this->Session->setFlash(__('Client is now active', true), 'success-message');
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('Client was not activated', true),'failure-message');
+        $this->Session->setFlash(__('Client was not activated', true), 'failure-message');
         $this->redirect(array('action' => 'index'));
     }
 

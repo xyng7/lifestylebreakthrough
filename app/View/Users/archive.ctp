@@ -1,20 +1,5 @@
-<div class="actions">
-    <h4><?php echo __('Admin'); ?></h4>
-</div>
-
-<div class="actions">
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <?php if (AuthComponent::user('role') === 'superadmin') { ?>
-        <ul>
-            <li>
-                <?php echo $this->Html->link(__('New Admin'), array('action' => 'add')); ?>
-            </li>
-        </ul>
-        <ul>
-            <li>
-                <?php echo $this->Html->link(__('Archive Admin'), array('action' => 'archive'));} ?> 
-            </li>
-        </ul>
+<div class="actions">	
+    <h4><?php echo __('Archive Admin'); ?></h4>
 </div>
 
 <table id="js-datatable" cellpadding="0" cellspacing="0">
@@ -45,17 +30,19 @@
                     ?>
                 </td>
                 <td>
-                    <?php echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['id'])); ?>
-                    <?php
-                    if (AuthComponent::user('role') === 'superadmin') {
-                        echo __(' <br> ');
-                        echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id']));
-                        echo __(' <br> ');
-                        echo $this->Form->postLink(__('Archive'), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to archive # %s?', $user['User']['username']));
-                    }
-                    ?>
-                </td>
+                    <?php echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['id'])); ?> <br>
+                    <?php echo $this->Form->postlink(__('Activate'), array('action' => 'activate', $user['User']['id'])); ?>
+                    </td>
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
+<p>
+    <?php
+    /* echo $this->Paginator->counter(array(
+      'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
+      )); */
+    ?>	</p>
+
+
+

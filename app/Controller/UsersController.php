@@ -8,21 +8,18 @@ class UsersController extends AppController {
         
     }
     
-     public function isAuthorized($user) {
-    
-        if (in_array($this->action, array('edit', 'add', 'delete'))) {
-        
+     public function isAuthorized($user) {   
+        if (in_array($this->action, array('edit', 'add', 'delete'))) {     
             if (isset($user['role']) && ($user['role'] === 'admin')) {
         return false;
      } } 
     return parent::isAuthorized($user);
     }
 
-
-    public function index() {
+   public function index() {
         $this->User->recursive = 0;
-        $data = $this->paginate('User', array('User.role LIKE' => '%admin'));
-        $this->set('users', $data); 
+        $this->set('users', $this->User->find('all', array('conditions' =>
+                    array('User.role LIKE' => '%admin', 'User.flag_active LIKE' => '%active%'))));
     }
 
     public function view($id = null) {
@@ -55,8 +52,7 @@ class UsersController extends AppController {
             }
         }
     }
-    
-  
+   
    public function edit($id = null) {
         $this->User->id = $id;
       
@@ -92,11 +88,11 @@ class UsersController extends AppController {
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Invalid user'));
         }
-        if ($this->User->delete()) {
-            $this->Session->setFlash(__('User deleted', true), 'success-message');
+        if ($this->User->saveField('flag_active', 'deactivate')) {
+            $this->Session->setFlash(__('User archived', true), 'success-message');
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('User was not deleted', true), 'failure-message');
+        $this->Session->setFlash(__('User was not archive', true), 'failure-message');
         $this->redirect(array('action' => 'index'));
     }
     
@@ -181,5 +177,28 @@ class UsersController extends AppController {
        $this->layout = 'forgotpassworddefault';  //dont use default layout with menu icons
    }
    
+       public function archive() {
+        //print al archive admin
+        $this->User->recursive = 0;
+        $this->set('users', $this->User->find('all', array('conditions' =>
+                    array('flag_active' => 'deactivate'))));
+    }
+    
+    public function activate($id = null) {
+        //activate archive admin
+        if (!$this->request->is('post')) {
+            throw new MethodNotAllowedException();
+        }
 
+        $this->User->id = $id;
+        if (!$this->User->exists()) {
+            throw new NotFoundException(__('Invalid admin', true));
+        }
+        if ($this->User->saveField('flag_active', 'active')) {
+            $this->Session->setFlash(__('Admin is now active', true), 'success-message');
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->Session->setFlash(__('Admin was not activated', true), 'failure-message');
+        $this->redirect(array('action' => 'index'));
+    }
 }
