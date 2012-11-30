@@ -19,7 +19,7 @@ class UsersController extends AppController {
    public function index() {
         $this->User->recursive = 0;
         $this->set('users', $this->User->find('all', array('conditions' =>
-                    array('User.role LIKE' => '%admin', 'User.flag_active LIKE' => '%active%'))));
+                    array('User.role' => 'admin', 'User.flag_active' => 'active'))));
     }
 
     public function view($id = null) {
@@ -106,9 +106,9 @@ class UsersController extends AppController {
                 if (!empty($this->data) && $id = $this->Auth->user('id')) {
                     
                     $this->loadModel('Client');
-                    $activationCheck = $this->Client->find('list' , array(
-                        'conditions'=>array('email' => $this->Auth->user('username')), 
-                        'fields' => 'flag_active'));
+                    //$activationCheck = $this->Client->find('list' , array(
+                    //    'conditions'=>array('email' => $this->Auth->user('username')), 
+                    //    'fields' => 'User.flag_active'));
  
                     // Set the lastlogin time
                     $fields = array('last_login' => date('Y-m-d H:i:s'), 'modified' => false);
@@ -118,7 +118,7 @@ class UsersController extends AppController {
                 
                             //Redirect user
                             //if ($this->Auth->user('role') === 'client') //if current user is client
-                            if ($this->Auth->user('role') === 'client' && $activationCheck[$this->Auth->user('client_id')] === 'active') //if current user is client and activated
+                            if ($this->Auth->user('role') === 'client' && $this->Auth->user('flag_active') === 'active') //if current user is client and activated
                             {
          
                             //debug();

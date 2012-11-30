@@ -165,7 +165,7 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
     <ul>
         <li><?php
             if (AuthComponent::user('role') === 'superadmin') {
-                echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Program.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Program.name')));
+                echo $this->Form->postLink(__('Archive'), array('action' => 'delete', $this->Form->value('Program.id')), null, __('Are you sure you want to archive # %s?', $this->Form->value('Program.name')));
             }
             ?></li>
         <li><?php echo $this->Html->link(__('List Programs'), array('action' => 'index')); ?></li>

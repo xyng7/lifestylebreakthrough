@@ -23,10 +23,16 @@ class ClientsController extends AppController {
      *
      * @return void
      */
-       public function index() {
+       
+    public function index() {
+        $this->loadModel('User');
         $this->Client->recursive = 0;
-        $this->set('clients', $this->Client->find('all', array('Client.flag_active LIKE' => '%active')));
+        $this->set('clients', $this->Client->find('all'));
     }
+    /*public function index() {
+        $this->Client->recursive = 0;
+        $this->set('clients', $this->Client->find('all', array('Client.flag_active LIKE' => '%active%')));
+    }*/
 
     /**
      * view method
@@ -132,10 +138,12 @@ class ClientsController extends AppController {
         $this->Client->id = $id;
         $this->User->id = $this->request->data('Client.user_id');
         //$this->User->delete();
+        
         if (!$this->Client->exists()) {
             throw new NotFoundException(__('Invalid client', true), 'failure-message');
         }
-        if ($this->Client->saveField('flag_active', 'deactivate')) {
+        
+        if ($this->User->saveField('flag_active', 'deactivate')) {
             $this->Session->setFlash(__('Client archived', true), 'success-message');
             $this->redirect(array('action' => 'index'));
         }
@@ -145,7 +153,8 @@ class ClientsController extends AppController {
 
     public function archive() {
         $this->Client->recursive = 0;
-        $this->set('clients', $this->Client->find('all', array('Client.flag_active LIKE' => '%deactivate')));
+        $this->set('clients', $this->Client->find('all', 
+             array('conditions' => array('User.flag_active' => 'deactivate' , 'User.role' => 'client'))));
     }
 
     public function activate($id = null) {

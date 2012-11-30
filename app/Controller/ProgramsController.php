@@ -14,9 +14,9 @@ class ProgramsController extends AppController {
      *
      * @return void
      */
-    public function index() {
+       public function index() {
         $this->Program->recursive = 0;
-        $this->set('programs', $this->paginate());
+        $this->set('programs', $this->Program->find('all', array('conditions' => array('Program.flag_active' => 'active'))));
     }
 
     /**
@@ -154,7 +154,8 @@ class ProgramsController extends AppController {
         $clients = $this->Program->Client->find('list');
         $exercises = $this->Program->Exercise->find('all');
         $program = $this->Program->read(null, $id);
-        $this->set(compact('clients', 'exercises', 'program'));
+        $exercisesprogram = $this->ExercisesProgram->find('all', array('conditions' => array('program_id' => $id)));
+        $this->set(compact('clients', 'exercises', 'program' , 'exercisesprogram'));
     }
 
     /**
@@ -173,11 +174,11 @@ class ProgramsController extends AppController {
         if (!$this->Program->exists()) {
             throw new NotFoundException(__('Invalid program'));
         }
-        if ($this->Program->delete()) {
-            $this->Session->setFlash(__('Program deleted', true),'success-message');
+        if ($this->Program->saveField('flag_active', 'deactivate')) {
+            $this->Session->setFlash(__('Program archived', true),'success-message');
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('Program was not deleted', true),'failure-message');
+        $this->Session->setFlash(__('Program was not archive', true),'failure-message');
         $this->redirect(array('action' => 'index'));
     }
 
@@ -200,5 +201,27 @@ class ProgramsController extends AppController {
         $exercises = $this->ExercisesProgram->Exercise->find('list');
         $this->set(compact('programs', 'exercises'));
     }
+    
+        public function archive() {
+        $this->Program->recursive = 0;
+        $this->set('programs', $this->Program->find('all', array('conditions' => array('Program.flag_active' => 'deactivate'))));
+    }
 
+        public function activate($id = null) {
+        //activate archive Program
+        if (!$this->request->is('post')) {
+            throw new MethodNotAllowedException();
+        }
+
+        $this->Program->id = $id;
+        if (!$this->Program->exists()) {
+            throw new NotFoundException(__('Invalid Program', true));
+        }
+        if ($this->Program->saveField('flag_active', 'active')) {
+            $this->Session->setFlash(__('Program is now active', true), 'success-message');
+            $this->redirect(array('action' => 'index'));
+        }
+        $this->Session->setFlash(__('Program was not activated', true), 'failure-message');
+        $this->redirect(array('action' => 'index'));
+    }
 }

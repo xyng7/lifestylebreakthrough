@@ -138,8 +138,8 @@ class ExercisesController extends AppController {
             $currentImage1 = $results['Exercise']['start_pic'];
             $currentImage2 = $results['Exercise']['end_pic'];
 
-            $fileOK = $this->uploadFiles('img/files', $this->data['Exercise']['start_pic']);
-            $file2OK = $this->uploadFiles('img/files', $this->data['Exercise']['end_pic']);
+            $fileOK = $this->uploadFiles('imgfiles', $this->data['Exercise']['start_pic']);
+            $file2OK = $this->uploadFiles('imgfiles', $this->data['Exercise']['end_pic']);
 
             if (array_key_exists('urls', $fileOK)) {
                 // save the url in the form data
