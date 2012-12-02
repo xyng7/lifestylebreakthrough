@@ -1,5 +1,5 @@
 <div class="actions">	
-    <h4><?php echo __('Archive Clients'); ?></h4>
+    <h4><?php echo __('Archived Clients'); ?></h4>
 </div>
 
 <table id="js-datatable" cellpadding="0" cellspacing="0">

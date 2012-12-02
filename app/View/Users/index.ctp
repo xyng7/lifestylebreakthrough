@@ -12,7 +12,7 @@
         </ul>
         <ul>
             <li>
-                <?php echo $this->Html->link(__('Archive Admin'), array('action' => 'archive'));} ?> 
+                <?php echo $this->Html->link(__('Archived Admin'), array('action' => 'archive'));} ?> 
             </li>
         </ul>
 </div>

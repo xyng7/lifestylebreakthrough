@@ -10,7 +10,7 @@
         <ul>
         <li><?php // view page of archive clients 
         if (AuthComponent::user('role') === 'superadmin') {
-            echo $this->Html->link(__('Archive Client'), array('action' => 'archive')); } ?></li>
+            echo $this->Html->link(__('Archived Client'), array('action' => 'archive')); } ?></li>
     </ul>
 </div>
 

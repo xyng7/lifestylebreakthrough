@@ -24,7 +24,7 @@ class ClientsController extends AppController {
      * @return void
      */
        
-    public function index() {
+   /* public function index() {
         $this->loadModel('User');
         $this->Client->recursive = 0;
         $this->set('clients', $this->Client->find('all'));
@@ -33,6 +33,11 @@ class ClientsController extends AppController {
         $this->Client->recursive = 0;
         $this->set('clients', $this->Client->find('all', array('Client.flag_active LIKE' => '%active%')));
     }*/
+       public function index() {
+        $this->Client->recursive = 0;
+        $this->set('clients', $this->Client->find('all', array('conditions' =>
+                    array('User.role' => 'client', 'User.flag_active' => 'active'))));
+    }
 
     /**
      * view method
@@ -136,8 +141,10 @@ class ClientsController extends AppController {
 
         $this->loadModel('User');
         $this->Client->id = $id;
-        $this->User->id = $this->request->data('Client.user_id');
-        //$this->User->delete();
+        //get user id from client table
+        $user_id = $this->Client->find('list', array('conditions' => array ('id'=>$id),'fields'=>'user_id'));
+        //set client.user_id into user.user_id
+        $this->User->id = $user_id[$id];
         
         if (!$this->Client->exists()) {
             throw new NotFoundException(__('Invalid client', true), 'failure-message');
@@ -165,12 +172,15 @@ class ClientsController extends AppController {
 
         $this->loadModel('User');
         $this->Client->id = $id;
-        $this->User->id = $this->request->data('Client.user_id');
-        //$this->User->delete();
+        //get user id from client table
+        $user_id = $this->Client->find('list', array('conditions' => array ('id'=>$id),'fields'=>'user_id'));
+        //set client.user_id into user.user_id
+        $this->User->id = $user_id[$id];
+
         if (!$this->Client->exists()) {
             throw new NotFoundException(__('Invalid client', true));
         }
-        if ($this->Client->saveField('flag_active', 'active')) {
+        if ($this->User->saveField('flag_active', 'active')) {
             $this->Session->setFlash(__('Client is now active', true), 'success-message');
             $this->redirect(array('action' => 'index'));
         }
