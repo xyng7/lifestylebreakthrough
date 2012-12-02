@@ -3,35 +3,22 @@ App::uses('AppModel', 'Model');
 /**
  * Template Model
  *
- * @property Program $Program
+ * @property Exercise $Exercise
  */
 class Template extends AppModel {
 
 /**
- * Validation rules
+ * Display field
  *
- * @var array
+ * @var string
  */
-	public $validate = array(
-		
-		'template_name' => array(
-			//rule 1 - cannot be empty
-			'templateRule-1' => array(
-				'rule' => array('notempty'),
-				'message' => 'Enter Template Name',
-                            ),
-                   //rule 2 - must be in alphabet
-                        'templateRule-2' => array(
-                                'rule' => '/[A-Za-z]/',
-                                'message' => 'Invalid Name',
-			),
-		),
-	);
+	public $displayField = 'name';
+
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
- * belongsTo associations
+ * hasAndBelongsToMany associations
  *
  * @var array
  */
@@ -40,7 +27,7 @@ class Template extends AppModel {
 			'className' => 'Exercise',
 			'joinTable' => 'exercises_templates',
 			'foreignKey' => 'template_id',
-			'associationForeignKey' => 'template_id',
+			'associationForeignKey' => 'exercise_id',
 			'unique' => 'keepExisting',
 			'conditions' => '',
 			'fields' => '',
@@ -52,4 +39,5 @@ class Template extends AppModel {
 			'insertQuery' => ''
 		)
 	);
+
 }

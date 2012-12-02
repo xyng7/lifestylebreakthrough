@@ -34,7 +34,7 @@ class ProgramsController extends AppController {
             throw new NotFoundException(__('Invalid program'));
         }
         $this->set('program', $this->Program->read(null, $id));
-        $exercisesProgram = $this->ExercisesProgram->query("SELECT exercises_programs.rec_sets, exercises_programs.rec_reps, exercises_programs.rec_res FROM exercises_programs WHERE exercises_programs.program_id = $id");
+        $exercisesProgram = $this->ExercisesProgram->query("SELECT exercises_programs.rec_sets, exercises_programs.rec_reps, exercises_programs.rec_res, exercises_programs.rec_load FROM exercises_programs WHERE exercises_programs.program_id = $id");
         $this->set('exercisesPrograms', $exercisesProgram);
     }
 
@@ -43,12 +43,23 @@ class ProgramsController extends AppController {
      *
      * @return void
      */
-    public function add() {
+    public function add($usetemp = false, $tempid = null) {
         $this->loadModel('ExercisesProgram');
-
+        $this->loadModel('Template');
+  
+        if (isset( $this->data['temp'])) 
+            {
+                $usetemp = true;
+                $tempid = $this->request->data('temp.tempchoice');
+                $this->redirect(array('action' => 'add', $usetemp, $tempid));
+         
+            }
+            
         if ($this->request->is('post')) {
+           
+            
             $this->Program->create();
-
+          
             if ($this->Program->save($this->request->data)) {
 
                 $prid = $this->Program->id;
@@ -56,21 +67,23 @@ class ProgramsController extends AppController {
                 foreach ($this->request->data('Exercise.Exercise') as $ex) {
                     //  debug($ex);
                     //  debug(count($ex, COUNT_RECURSIVE));
-
-                    if (count($ex, COUNT_RECURSIVE) == 5) {
+                   // debug($ex);
+                    if (count($ex, COUNT_RECURSIVE) == 6) {
                         // debug("im in the loop");
+                        
                         $exid = $ex['0'];
-                        //    debug($exid);
+                            
 
                         $rec_sets = $ex['program']['0'];
                         $rec_reps = $ex['program']['1'];
                         $rec_res = $ex['program']['2'];
-
+                        $rec_load = $ex['program']['3'];
                         $this->ExercisesProgram->save(array( 'program_id' => $prid,
                                                              'exercise_id' => $exid,
                                                              'rec_sets' => $rec_sets,
                                                              'rec_reps' => $rec_reps,
                                                              'rec_res' => $rec_res,
+                                                             'rec_load' => $rec_load,
                                                              'act_sets' => null,
                                                              'act_reps' => null,
                                                             'act_res' => null,
@@ -90,9 +103,19 @@ class ProgramsController extends AppController {
                 $this->Session->setFlash(__('The program could not be saved. Please, try again.', true),'failure-message');
             }
         }
+         
         $clients = $this->Program->Client->find('list');
         $exercises = $this->Program->Exercise->find('all');
-        $this->set(compact('clients', 'exercises'));
+         $xyz = $this->Template->find('list');
+      
+        $this->set(compact('clients', 'exercises', 'xyz', 'usetemp'));
+        
+        if ($tempid != null){
+         $this->set('template', $this->Template->read(null, $tempid));
+     //  debug($template);
+         // $this->set('template', $template);
+         
+         }
     }
 
     /**
@@ -116,7 +139,7 @@ class ProgramsController extends AppController {
 
                 foreach ($this->request->data('Exercise.Exercise') as $ex) {
 
-                    if (count($ex, COUNT_RECURSIVE) == 5) {
+                    if (count($ex, COUNT_RECURSIVE) == 6) {
 
                         $exid = $ex['0'];
 
@@ -124,12 +147,14 @@ class ProgramsController extends AppController {
                         $rec_sets = $ex['program']['0'];
                         $rec_reps = $ex['program']['1'];
                         $rec_res = $ex['program']['2'];
+                        $rec_load = $ex['program']['3'];
                         
                         $this->ExercisesProgram->save(array( 'program_id' => $id,
                                                              'exercise_id' => $exid,
                                                              'rec_sets' => $rec_sets,
                                                              'rec_reps' => $rec_reps,
                                                              'rec_res' => $rec_res,
+                                                             'rec_load' => $rec_load,
                                                              'act_sets' => null,
                                                              'act_reps' => null,
                                                             'act_res' => null,
@@ -154,8 +179,7 @@ class ProgramsController extends AppController {
         $clients = $this->Program->Client->find('list');
         $exercises = $this->Program->Exercise->find('all');
         $program = $this->Program->read(null, $id);
-        $exercisesprogram = $this->ExercisesProgram->find('all', array('conditions' => array('program_id' => $id)));
-        $this->set(compact('clients', 'exercises', 'program' , 'exercisesprogram'));
+        $this->set(compact('clients', 'exercises', 'program'));
     }
 
     /**

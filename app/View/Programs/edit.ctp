@@ -42,26 +42,33 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
                 <th> <?php echo $this->Form->input('start_date', array('id' => 'datepicker', 'class' => 'datepicker', 'type' => 'text', 'label' => array('text' => '<p align="left">Start Date</p>', 'style' => 'align:left'))); ?>
                 <th> <?php echo $this->Form->input('end_date', array('id' => 'datepicker2', 'class' => 'datepicker2', 'type' => 'text', 'label' => array('text' => '<p align="left">End Date</p>', 'style' => 'align:left'))); ?>
             </tr>
-        </table>       
+        </table>
+        
+        <table>
+            <tr>
+                <th> <?php echo $this->Form->input('notes'); ?> </th> 
+            </tr>
+        </table> 
 
-        <div class="input select">
-            <input id="search_input" placeholder="Type to filter">
-        </div>
-        <table id="search_list" cellpadding="0" cellspacing="0">
+        <table id="js-datatable" cellpadding="0" cellspacing="0">
+            <thead>
             <tr> 
                 <th>Exercise</th>
                 <th>Image</th>
                 <th>Sets</th>
                 <th>Reps</th>
-                <th>Rest</th>
+                <th>Rest(Sec)</th> 
+                <th>Load(Kg)</th>
             </tr>
+            </thead>
+            <tbody>
             <tr>
                 <?php
                 $i = 0;
                 //for loop for body parts
                 foreach ($exercises as $eb):
                     ?> 
-<td> <?php
+                    <td> <?php
                             
                            foreach ($program['Exercise'] as $existex )
                            {
@@ -72,14 +79,15 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
                                   $setsdef = $existex['ExercisesProgram']['rec_sets'];
                                   $repsdef = $existex['ExercisesProgram']['rec_reps'];
                                   $resdef = $existex['ExercisesProgram']['rec_res'];
+                                  $resload = $existex['ExercisesProgram']['rec_load'];
                                   break;
                                }
                               else{
                                    $checked = false;
-                                   $setsdef = 5;
-                                   $repsdef = 5;
-                                   $resdef = 5;
-                                   
+                                   $setsdef = '4-5';
+                                   $repsdef = '12-14';
+                                   $resdef = 30;
+                                   $resload = 5;
                               }
                            }  
 
@@ -107,11 +115,13 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
                         }
                         ?>&nbsp;
                     </td>
+
+                   
                     <td> <?php
                     echo $this->Form->input("Exercise.Exercise.$i.program.", array(
-                        'type' => 'select',
+                        'type' => 'text',
                         'label' => 'Sets:',
-                        'options' => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17),
+                        //'options' => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17),
                         'default' => $setsdef,
                         //'default' => 5,
                         //'before' => " ",
@@ -123,9 +133,9 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
                     </td>
                     <td> <?php
                     echo $this->Form->input("Exercise.Exercise.$i.program.", array(
-                        'type' => 'select',
+                        'type' => 'text',
                         'label' => 'Reps:',
-                        'options' => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17),
+                        //'options' => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17),
                         //'default' => 5,
                         'default' => $repsdef,
                         //'before' => " ",
@@ -139,7 +149,7 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
                     echo $this->Form->input("Exercise.Exercise.$i.program.", array(
                         'type' => 'select',
                         'label' => 'Rest:',
-                        'options' => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17),
+                        'options' => array('5' => '5', '10' => '10', '15' => '15', '20' => '20', '25' => '25', '30' => '30', '35' => '35', '40' => '40', '45' => '45', '50' => '50', '55' => '55', '60' => '60', '65' => '65', '70' => '70', '75' => '75', '80' => '80', '85' => '85', '90' => '90'),
                         //'default' => 5,
                         'default' => $resdef,
                         //'before' => " ",
@@ -149,8 +159,22 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
                     ));
                         ?>
                     </td>
+                     <td> <?php
+                    echo $this->Form->input("Exercise.Exercise.$i.program.", array(
+                        'type' => 'select',
+                        'label' => 'Load:',
+                        'options' => array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25'),
+                        'default' => 5,
+                        //'before' => " ",
+                        // 'after' => '</div>',
+                        'hiddenField' => false,
+                        'div' => false
+                    ));
+                    ?>
+                    </td>
                 </tr>
                         <?php $i++; ?>
+            </tbody>
 <?php endforeach; ?>
         </table>
             <?php echo $this->Form->end(__('Submit')); ?>
