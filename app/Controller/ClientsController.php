@@ -187,5 +187,17 @@ class ClientsController extends AppController {
         $this->Session->setFlash(__('Client was not activated', true), 'failure-message');
         $this->redirect(array('action' => 'index'));
     }
+    
+    public function resendwelcome($id) {
+        
+        $client = $this->Client->read(null, $id);
+        $time = date('d-m-Y', strtotime($client['Client']['dob']));
+        $explode = explode('-', $time);
+        $implode = implode($explode);
+        $this->sendEmailConfirmation($client['Client']['first_name'], $client['Client']['last_name'], $client['Client']['email'], $implode); 
+        $this->Session->setFlash(__('Email sent!', true), 'success-message');
+        $this->redirect(array('action' => 'index')); 
+       
+    }
 
 }

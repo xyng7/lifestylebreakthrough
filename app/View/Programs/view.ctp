@@ -70,7 +70,10 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		
+		            <li><?php echo $this->Html->link(__('PDF - Descriptions'), array('action' => 'view_pdf', 'ext' => 'pdf', $program['Program']['id'])); ?>
+</li>
+<li><?php echo $this->Html->link(__('PDF - 4 weeks'), array('action' => 'view2_pdf', 'ext' => 'pdf', $program['Program']['id'])); ?>
+</li>
 		<li><?php echo $this->Html->link(__('List Programs'), array('action' => 'index')); ?> </li>
 	</ul>
 </div>
