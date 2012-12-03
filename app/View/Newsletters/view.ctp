@@ -1,11 +1,6 @@
 <div class="newsletters view">
 <h2><?php  echo __('Newsletter'); ?></h2>
 	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($newsletter['Newsletter']['id']); ?>
-			&nbsp;
-		</dd>
 		<dt><?php echo __('Title'); ?></dt>
 		<dd>
 			<?php echo h($newsletter['Newsletter']['title']); ?>
@@ -13,7 +8,7 @@
 		</dd>
 		<dt><?php echo __('Content'); ?></dt>
 		<dd>
-			<?php echo h($newsletter['Newsletter']['content']); ?>
+			<?php echo ($newsletter['Newsletter']['content']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>
@@ -23,7 +18,7 @@
 		</dd>
 		<dt><?php echo __('User'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($newsletter['User']['id'], array('controller' => 'users', 'action' => 'view', $newsletter['User']['id'])); ?>
+			<?php echo $this->Html->link($newsletter['User']['username'], array('controller' => 'users', 'action' => 'view', $newsletter['User']['id'])); ?>
 			&nbsp;
 		</dd>
 	</dl>

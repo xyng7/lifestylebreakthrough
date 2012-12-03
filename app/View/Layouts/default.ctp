@@ -20,6 +20,13 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 $homedir = __d('cake_dev', 'CakePHP: the rapid development php framework :D');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+  <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+  <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+  <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <!-- IE Fix for HTML5 Tags -->
+  <!--[if lt IE 9] -->
+  
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <?php echo $this->Html->charset(); ?>

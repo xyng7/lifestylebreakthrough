@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppController', 'Controller');
+App::uses('CakeEmail', 'Network/Email');
 
 /**
  * Newsletters Controller
@@ -15,8 +16,9 @@ class NewslettersController extends AppController {
      * @return void
      */
     public function index() {
+            
         $this->Newsletter->recursive = 0;
-        $this->set('newsletters', $this->paginate());
+        $this->set('newsletters', $this->Newsletter->find('all'));
     }
 
     /**
@@ -52,11 +54,11 @@ class NewslettersController extends AppController {
                                 'content' => $this->request->data('Newsletter.content'),
                                 'user_id' => $user_id
                     ))) {
-                $this->Session->setFlash(__('The newsletter has been saved'));
+                $this->Session->setFlash(__('The newsletter has been saved', true), 'success-message');
                 //$this->Newsletter->saveField('user_id', $this->User->id);
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The newsletter could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The newsletter could not be saved. Please, try again.', true), 'failure-message');
             }
         }
         $users = $this->Newsletter->User->find('list');
@@ -70,17 +72,19 @@ class NewslettersController extends AppController {
      * @param string $id
      * @return void
      */
-    public function edit($id = null) {
+    public function edit($id = null ) {
         $this->Newsletter->id = $id;
         if (!$this->Newsletter->exists()) {
             throw new NotFoundException(__('Invalid newsletter'));
         }
+        $this->set('newsinfo', $this->Newsletter->find('all', array('conditions' => array('Newsletter.id' => $id))) );
+
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Newsletter->save($this->request->data)) {
-                $this->Session->setFlash(__('The newsletter has been saved'));
+                $this->Session->setFlash(__('The newsletter has been saved', true), 'success-message');
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The newsletter could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The newsletter could not be saved. Please, try again.', true), 'failure-message');
             }
         } else {
             $this->request->data = $this->Newsletter->read(null, $id);
@@ -106,10 +110,38 @@ class NewslettersController extends AppController {
             throw new NotFoundException(__('Invalid newsletter'));
         }
         if ($this->Newsletter->delete()) {
-            $this->Session->setFlash(__('Newsletter deleted'));
+            $this->Session->setFlash(__('Newsletter deleted', true), 'success-message');
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('Newsletter was not deleted'));
+        $this->Session->setFlash(__('Newsletter was not deleted', true), 'failure-message');
+        $this->redirect(array('action' => 'index'));
+    }
+
+    public function send($id = null) {
+        if (!$this->request->is('post')) {
+            throw new MethodNotAllowedException();
+        }
+
+        $this->loadModel('User');
+        $this->Newsletter->id = $id;
+        $news = $this->Newsletter->read(null, $id);
+        $r = $this->User->find('all', array('conditions' => array('User.role' => 'client', 'User.flag_active' => 'active')));
+
+        foreach ($r as $s) {
+            //debug($s);
+            $email = new CakeEmail();
+            $email->config('default');
+            $email->emailFormat('html');
+            $email->from(array('lifestylebreakthroughtest@gmail.com' => 'Lifestyle Breakthrough'));
+            $client_email = $s['User']['username'];
+
+            $email->subject('Monthly Newsletter');
+            $email->to("$client_email");
+            $newsletter_title = $news['Newsletter']['title'];
+            $newsletter_content = $news['Newsletter']['content'];
+            $email->subject($newsletter_title);
+            $email->send($newsletter_content);
+        }
         $this->redirect(array('action' => 'index'));
     }
 

@@ -1,19 +1,10 @@
-<?php echo $this->Html->script('ckeditor/ckeditor'); ?>
-
-
-<script type="text/javascript">
-    var ck_newsContent = CKEDITOR.replace( 'content',{
-        filebrowserWindowWidth : '100',
-        filebrowserWindowHeight : '900'
-    } ); 
-</script>
-
 <div class="row">
     <div class="twelve mobile-twelve columns">
 <div class="form">
 
     <?php echo $this->Form->create('Newsletter'); ?>
     <fieldset>
+        <?php echo $this->Html->script('ckeditor/ckeditor'); ?>
         <legend><?php echo __('Add Newsletter'); ?></legend>
         <?php echo $this->Form->input('title'); ?>
         <?php //echo $this->Form->input('content', array('id' => 'content', 'class' => 'ckeditor')); ?> 
