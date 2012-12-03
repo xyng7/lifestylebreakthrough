@@ -230,7 +230,7 @@ class ExercisesController extends AppController {
         $this->redirect(array('action' => 'index' ));
     }
 
-   /* public function deleteImage($id, $pic) {
+    public function deleteImage($id, $pic) {
         $conditions = array("Exercise.id" => $id);
         $results = $this->Exercise->find('first', array('conditions' => $conditions));
         $currentImage = $results['Exercise'][$pic];
@@ -243,7 +243,7 @@ class ExercisesController extends AppController {
         $this->Exercise->query("update exercises set $pic = null where id =" . $id);
         //$this->Session->setFlash('Image deleted.');
         //echo $this->Html->link(__('Edit'), array('action' => 'edit', $exercise['Exercise']['id']));
-    }*/
+    }
 
     public function archive() {
         //print al archive clients
