@@ -47,6 +47,8 @@ class ClientpagesController extends AppController {
 
     public function index() {
         $this->clientdetails();
+        $programs = $this->Client->find('all'); //, array('conditions' => array('Client.Program.flag_active' => 'active')));
+     
     }
 
     public function viewProgram($id) {
@@ -65,7 +67,7 @@ class ClientpagesController extends AppController {
         }
         $this->set('program', $prog);
 
-        $exercisesProgram = $this->ExercisesProgram->query("SELECT exercises_programs.rec_sets, exercises_programs.rec_reps, exercises_programs.rec_res FROM exercises_programs WHERE exercises_programs.program_id = $id");
+        $exercisesProgram = $this->ExercisesProgram->query("SELECT exercises_programs.rec_sets, exercises_programs.rec_reps, exercises_programs.rec_res, exercises_programs.rec_load FROM exercises_programs WHERE exercises_programs.program_id = $id");
         $this->set('exercisesPrograms', $exercisesProgram);
     }
 
@@ -157,6 +159,27 @@ class ClientpagesController extends AppController {
 
     public function belongsTo($id) {
         
+    }
+    
+    public function progress($id) {
+        
+        $this->clientdetails();
+        $this->loadModel('Program');
+        $this->loadModel('ExercisesProgram');
+        $this->Program->id = $id;
+        $prog = $this->Program->read(null, $id);
+        if (AuthComponent::user('client_id') != $prog['Program']['client_id']) {
+            $this->Session->setFlash(__('Unauthorised'));
+            // $this->redirect(array('action' => 'index'));
+        }
+        //$this->Program->id = $id;
+        if (!$this->Program->exists()) {
+            throw new NotFoundException(__('Invalid program'));
+        }
+        $this->set('program', $prog);
+
+        $exercisesProgram = $this->ExercisesProgram->query("SELECT exercises_programs.rec_sets, exercises_programs.rec_reps, exercises_programs.rec_res, exercises_programs.rec_load FROM exercises_programs WHERE exercises_programs.program_id = $id");
+        $this->set('exercisesPrograms', $exercisesProgram);
     }
 
 }

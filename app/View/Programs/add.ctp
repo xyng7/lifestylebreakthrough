@@ -33,7 +33,7 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
         
         <table cellpadding = "0" cellspacing = "0">          
             <tr>
-                <th> <?php echo $this->Form->input('client_id'); ?> </th>
+                <th> <?php echo $this->Form->input('client_id', array('type' => 'select', 'options' => $clients)); ?> </th>
                 <th> <?php echo $this->Form->input('name'); ?> </th> 
             </tr>
         </table>
@@ -47,7 +47,7 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
                 <?php //echo $this->Form->input('end_date', array('dateFormat' => 'DMY', 'minYear' => date('Y'), 'maxYear' => date('Y') + 50)); ?> 
         </table>
                 <?php
-                    if ($usetemp == true) {
+                if ($usetemp == true) {
                         $notes = $template['Template']['notes'];
                     } else {
                         $notes = null;

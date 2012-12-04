@@ -1,5 +1,5 @@
 <div class="programs view">
-<h3><?php  echo __('Program'); ?></h3>
+<h3><?php  echo __('hihi Program'); ?></h3>
 	<dl>
 		<dt><?php echo __('Program Name'); ?></dt>
 		<dd>
@@ -37,12 +37,14 @@
                 <th><?php echo __('Load'); ?></th>
 		<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
+        <?php $this->From->create('actual');?>
 	<?php
 		$i = 1;
 		foreach ($program['Exercise'] as $exercise): ?>
 		<tr>
                         
-                        <td><?php echo $i; ?></td>
+                        <td style="text-align: right;"><b><?php echo __('Recommended'); ?></b></td>
+                       
 			<td><?php echo $exercise['name']; ?></td>
                         <td><?php echo $exercisesPrograms[$i - 1]['exercises_programs']['rec_sets']; ?></td>
                         <td><?php echo $exercisesPrograms[$i - 1]['exercises_programs']['rec_reps']; ?></td>
@@ -52,11 +54,22 @@
 				<?php echo $this->Html->link(__('Exercise Instruction'), array('action' => 'viewExercise', $exercise['id'])); ?>
 				
 			</td>
+                     
                         
 		</tr>
+                <tr>
+                    <td></td>
+                    <td style="text-align: right;"><b><?php echo __('Progress'); ?></b></td>
+                    <td><?php echo $this->Form->input('actual_sets', array('type' => 'select'));?></td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td></td>
+                </tr>
                 <?php $i++; ?>
 	<?php endforeach; ?>
 	</table>
+        <?php echo $this->From->submit(__('actual'));?>
 <?php endif; ?>
 </div>
 </div>

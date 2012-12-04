@@ -57,16 +57,16 @@
 
                     <?php echo $this->fetch('content'); ?>
 
-                    
-
-                </div>
-                <div class="actions">
+                    <div class="actions">
                         <h4><?php echo __('Actions'); ?></h4>
                         <ul>    
                             <li><?php echo $this->Html->link(__('Home'), array('action' => 'index')); ?> </li>
                             <li><?php echo $this->Html->link(__('Appointment Request'), array('action' => 'reqappointment')); ?> </li>
                         </ul>
                     </div>
+
+                </div>
+                
 
             </div>
 
