@@ -30,7 +30,7 @@
                     <?php echo $this->Html->link(__('View'), array('action' => 'view', $newsletter['Newsletter']['id'])); ?> <br>
                     <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $newsletter['Newsletter']['id'])); ?> <br>
                     <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $newsletter['Newsletter']['id']), null, __('Are you sure you want to delete # %s?', $newsletter['Newsletter']['title'])); ?> <br>
-                    <?php echo $this->Form->postLink(__('Send'), array('action' => 'send', $newsletter['Newsletter']['id']), null, __('Sent?', $newsletter['Newsletter']['title'])); ?>
+                    <?php echo $this->Form->postLink(__('Send'), array('action' => 'send', $newsletter['Newsletter']['id']), null, __('Newsletter has been send', $newsletter['Newsletter']['title'])); ?>
                 
                 </td>
             </tr>
