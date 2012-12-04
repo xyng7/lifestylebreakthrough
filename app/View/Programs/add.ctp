@@ -28,7 +28,6 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
 <div class="programs form">
     <?php echo $this->Form->create('Program'); ?>
     <fieldset>
-        
         <legend><?php echo __('Add Program'); ?></legend>
         
         <table cellpadding = "0" cellspacing = "0">          
@@ -214,14 +213,14 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
         <li><?php echo $this->Html->link(__('List Programs'), array('action' => 'index')); ?></li>
-        <?php echo $this->Form->create('temp'); ?>
-        <div style="width: 30%;">
-            <fieldset>
+        <?php echo $this->Form->create('temp', array('style' => 'width: 30%')); ?>
+    
+        <fieldset>
                 <legend>Template</legend>
-        <?php echo $this->Form->input('tempchoice', array('type' => 'input', 'label' => '', 'options' => $xyz)); ?>
+        <?php echo $this->Form->input('tempchoice', array('type' => 'input', 'label' => '', 'options' => $xyz )); ?>
         <?php echo $this->Form->submit(__('Use template', true), array('name' => 'delimg2','div' => false)); ?>
         <br>
         </fieldset>
-    </div>
+  
     </ul>
 </div>
