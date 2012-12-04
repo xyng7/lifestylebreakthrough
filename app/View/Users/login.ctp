@@ -1,6 +1,7 @@
 
     <div style="float: right; width: 60%; margin-right: 100px;">   
-    
+    <div style="width:300px;">
+<?php echo $this->Session->flash(); ?></div>
      <?php echo $this->Session->flash('auth'); ?>
     <?php echo $this->Form->create('User'); ?>	
     <h4><?php echo __('Welcome! Please login to continue'); ?></h4>

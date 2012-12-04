@@ -163,6 +163,7 @@ class ClientpagesController extends AppController {
     
     public function progress($id) {
         
+        
         $this->clientdetails();
         $this->loadModel('Program');
         $this->loadModel('ExercisesProgram');
@@ -171,6 +172,38 @@ class ClientpagesController extends AppController {
         if (AuthComponent::user('client_id') != $prog['Program']['client_id']) {
             $this->Session->setFlash(__('Unauthorised'));
             // $this->redirect(array('action' => 'index'));
+        } if ($this->request->is('post') || $this->request->is('put')) {
+           
+           $this->ExercisesProgram->deleteAll(array('ExercisesProgram.program_id' => $id), false);
+            foreach ($this->request->data("Exercise") as $ex) {
+             
+                
+                            
+                       $exid = $ex['id'];
+                       $rec_sets = $ex['rec_sets'];
+                       $rec_reps = $ex['rec_reps'];
+                       $rec_res = $ex['rec_res'];
+                       $rec_load = $ex['rec_load'];
+                        $act_sets = $ex['actual_sets'];
+                        $act_reps = $ex['actual_reps'];
+                        $act_res = $ex['actual_res'];
+                        $act_load = $ex['actual_load'];
+                        $date = $ex['actual_date']; 
+                       $this->ExercisesProgram->save(array( 'program_id' => $id,
+                                                             'exercise_id' => $exid,
+                                                             'rec_sets' => $rec_sets,
+                                                             'rec_reps' => $rec_reps,
+                                                             'rec_res' => $rec_res,
+                                                             'rec_load' => $rec_load,
+                                                             'act_sets' => $act_sets,
+                                                             'act_reps' => $act_reps,
+                                                            'act_res' => $act_res,
+                                                            'act_load' => $act_load,
+                                                            'date' => $date,
+                                                             'id' => null
+                            ));  
+            }
+             $this->Session->setFlash(__('Progress updated!', true), 'success-message');
         }
         //$this->Program->id = $id;
         if (!$this->Program->exists()) {

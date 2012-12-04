@@ -4,6 +4,8 @@
 
     <br>
     <div class="related">
+        <div style="width:500px;">
+<?php echo $this->Session->flash(); ?></div>
         <h3><?php echo __('Programs'); ?></h3>
         <?php
                 $i = 0;?>

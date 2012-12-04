@@ -10,13 +10,22 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
 
 <script>
     $(document).ready(function() {
-        $("#datepicker").datepicker({
-            dateFormat : 'yy-mm-dd', altFormat : 'yy-mm-dd'
+     $('.datepicker').each(function(){
+    $(this).datepicker({
+            dateFormat : 'dd-mm-yy', altFormat : 'yy-mm-dd'
         });
+});
+    });
+</script>
+<!-- end -->
+<script>
+    $(function() {
+        $('#search_input').fastLiveFilter('#search_list');
+    });
 </script>
 
 <div class="programs view">
-<h3><?php  echo __('hihi Program'); ?></h3>
+<h3><?php  echo __('Program Progress'); ?></h3>
 	<dl>
 		<dt><?php echo __('Program Name'); ?></dt>
 		<dd>
@@ -41,28 +50,54 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
 	</dl>
 
 <br>
+<div style="width:650px;">
+<?php echo $this->Session->flash(); ?></div>
 <div class="related">
 	<h4><?php //echo __('Exercises'); ?></h4>
 	<?php if (!empty($program['Exercise'])): ?>
 	<table cellpadding = "0" cellspacing = "0" style="width:650px;">
 	<tr>    
-                <th></th>
-		<th><?php echo __('Name'); ?></th>
+                <th><?php echo __('Name'); ?></th>
+		<th></th>
                 <th><?php echo __('Sets'); ?></th>
                 <th><?php echo __('Reps'); ?></th>
                 <th><?php echo __('Rest'); ?></th>
                 <th><?php echo __('Load'); ?></th>
 		<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
-        <?php $this->Form->create('actual');?>
+        <?php echo $this->Form->create('actual');?>
 	<?php
 		$i = 1;
 		foreach ($program['Exercise'] as $exercise): ?>
-		<tr>
+                <?php 
+                    $setsdef = null;
+                    $act_reps = null;
+                    $act_res = null;
+                    $act_load = null;
+                    $date = null;
+                    if ($exercise['ExercisesProgram']['act_sets'] != null) {
+                        $setsdef = $exercise['ExercisesProgram']['act_sets'];
+                    }
+                    if ($exercise['ExercisesProgram']['act_reps'] != null) {
+                        $act_reps = $exercise['ExercisesProgram']['act_reps'];
+                    }
+                    if ($exercise['ExercisesProgram']['act_res'] != null) {
+                        $act_res = $exercise['ExercisesProgram']['act_res'];
+                    }
+                    if ($exercise['ExercisesProgram']['act_load'] != null) {
+                        $act_load = $exercise['ExercisesProgram']['act_load'];
+                    }
+                    if ($exercise['ExercisesProgram']['date'] != null) {
+                        $date = $exercise['ExercisesProgram']['date'];
+                    }
                         
+                ?>
+              
+		<tr>
+                        <td><b><?php echo $exercise['name']; ?></b></td>
                         <td style="text-align: right;"><b><?php echo __('Recommended'); ?></b></td>
                        
-			<td><?php echo $exercise['name']; ?></td>
+			
                         <td><?php echo $exercisesPrograms[$i - 1]['exercises_programs']['rec_sets']; ?></td>
                         <td><?php echo $exercisesPrograms[$i - 1]['exercises_programs']['rec_reps']; ?></td>
                         <td><?php echo $exercisesPrograms[$i - 1]['exercises_programs']['rec_res']; ?></td>
@@ -74,20 +109,30 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
                      
                         
 		</tr>
-                <tr style="background: red;">
-                    <td style="text-align: right;"><b><?php echo __('Progress'); ?></b></td>
+                <tr style="background: activeborder;">
+                    <?php 
+                   echo $this->Form->input("Exercise.$i.id", array('type' => 'hidden', 'default' => $exercise['id']));
+                   echo $this->Form->input("Exercise.$i.rec_sets", array('type' => 'hidden', 'default' => $exercisesPrograms[$i - 1]['exercises_programs']['rec_sets']));
+                   echo $this->Form->input("Exercise.$i.rec_reps", array('type' => 'hidden', 'default' => $exercisesPrograms[$i - 1]['exercises_programs']['rec_reps']));
+                   echo $this->Form->input("Exercise.$i.rec_res", array('type' => 'hidden', 'default' => $exercisesPrograms[$i - 1]['exercises_programs']['rec_res']));
+                   echo $this->Form->input("Exercise.$i.rec_load", array('type' => 'hidden', 'default' => $exercisesPrograms[$i - 1]['exercises_programs']['rec_load']));
+                    ?>
                     <td></td>
-                    <td><?php echo $this->Form->input('actual_sets', array('type' => 'select', 'label' => '', 'options' => array(1,2,3,4,5,6,7,8,9,10)));?></td>
-                    <td><?php echo $this->Form->input('actual_reps', array('type' => 'select', 'label' => '', 'options' => array(1,2,3,4,5,6,7,8,9,10)));?></td>
-                    <td><?php echo $this->Form->input('actual_res', array('type' => 'select', 'label' => '', 'options' => array(1,2,3,4,5,6,7,8,9,10)));?></td>
-                    <td><?php echo $this->Form->input('actual_load', array('type' => 'select', 'label' => '', 'options' => array(1,2,3,4,5,6,7,8,9,10)));?></td>
-                    <td></td>
+                    <td style="text-align: center; color: white;"><b><?php echo __('Progress'); ?></b></td>
+                    
+                    <td><?php echo $this->Form->input("Exercise.$i.actual_sets", array('type' => 'select', 'default' => $setsdef, 'label' => 'Sets', 'options' => array(null,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)));?></td>
+                    <td><?php echo $this->Form->input("Exercise.$i.actual_reps", array('type' => 'select', 'default' => $act_reps, 'label' => 'Reps', 'options' => array(null,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)));?></td>
+                    <td><?php echo $this->Form->input("Exercise.$i.actual_res", array('type' => 'select', 'default' => $act_res, 'label' => 'Rest(sec)', 'options' => array(null,'5' => '5', '10' => '10', '15' => '15', '20' => '20', '25' => '25', '30' => '30', '35' => '35', '40' => '40', '45' => '45', '50' => '50', '55' => '55', '60' => '60', '65' => '65', '70' => '70', '75' => '75', '80' => '80', '85' => '85', '90' => '90')));?></td>
+                    <td><?php echo $this->Form->input("Exercise.$i.actual_load", array('type' => 'select', 'default' => $act_load, 'label' => 'Load(kg)', 'options' => array(null,'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25')));?></td>
+                    <td><?php echo $this->Form->input("Exercise.$i.actual_date", array('type' => 'text', 'default' => $date, 'label' => 'Date Completed', 'class' => 'datepicker')); ?></td>
+                    
                 </tr>
                 <?php $i++; ?>
 	<?php endforeach; ?>
 	</table>
-        <?php echo $this->Form->submit(__('actual'));?>
-        <?php echo $this->Form->input('date', array('id' => 'datepicker', 'class' => 'datepicker', 'type' => 'text', 'label' => array('text' => '<p align="left">Date</p>', 'style' => 'align:left'))); ?>
+        <?php echo $this->Form->submit(__('Submit Progress'));?>
+   
+         
 <?php endif; ?>
 </div>
 </div>
