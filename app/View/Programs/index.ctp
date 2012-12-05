@@ -20,6 +20,7 @@
                     <td><?php echo $this->Time->format('d-m-Y', h($program['Program']['end_date'])); ?>&nbsp;</td>
                     <td><?php echo $this->Html->link(__('View'), array('action' => 'view', $program['Program']['id'])); ?> <br>
                         <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $program['Program']['id'])); ?> <br>
+                        <?php echo $this->Html->link(__('Progress'), array('action' => 'view_progress', $program['Program']['id'])); ?> <br>
                         <?php if (AuthComponent::user('role') === 'superadmin') {
                             echo $this->Form->postLink(__('Archive'), array('action' => 'delete', $program['Program']['id']), null, __('Are you sure you want to archive # %s?', $program['Program']['name'])); } ?></td>
                 </tr>

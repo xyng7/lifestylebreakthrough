@@ -37,6 +37,18 @@ class ProgramsController extends AppController {
         $exercisesProgram = $this->ExercisesProgram->query("SELECT exercises_programs.rec_sets, exercises_programs.rec_reps, exercises_programs.rec_res, exercises_programs.rec_load FROM exercises_programs WHERE exercises_programs.program_id = $id");
         $this->set('exercisesPrograms', $exercisesProgram);
     }
+    
+    public function view_progress($id = null) {
+        $this->Program->id = $id;
+        $this->loadModel('ExercisesProgram');
+
+        if (!$this->Program->exists()) {
+            throw new NotFoundException(__('Invalid program'));
+        }
+        $this->set('program', $this->Program->read(null, $id));
+        $exercisesProgram = $this->ExercisesProgram->query("SELECT exercises_programs.rec_sets, exercises_programs.rec_reps, exercises_programs.rec_res, exercises_programs.rec_load FROM exercises_programs WHERE exercises_programs.program_id = $id");
+        $this->set('exercisesPrograms', $exercisesProgram);
+    }
 
     /**
      * add method
