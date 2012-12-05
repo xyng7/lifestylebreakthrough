@@ -1,3 +1,7 @@
+<?php
+echo $this->Html->script(array('jquery-1.8.3', 'datepicker/jquery-ui', 'jquery.fastLiveFilter'));
+echo $this->Html->CSS(array('datepicker/jquery-ui'));
+?>
 <div class="users form"> 
 
     <?php echo $this->Form->create('reqappointment'); ?>	
@@ -11,7 +15,8 @@
            // $lastname = $client['Client']["last_name"];
             echo __("Name: $firstname $lastname");
             echo $this->Form->input('prefcontact', array('type' => 'select', 'label' => 'Prefered Contact', 'options' => array('Home' => 'Home', 'Mobile' => 'Mobile', 'Email' => 'Email')));
-            echo $this->Form->input('prefdate', array('type' => 'date', 'label' => 'Prefered Date', 'dateFormat' => 'DMY', 'minYear' => date('Y'), 'maxYear' => date('Y') + 5));
+            //echo $this->Form->input('prefdate', array('type' => 'date', 'label' => 'Prefered Date', 'dateFormat' => 'DMY', 'minYear' => date('Y'), 'maxYear' => date('Y') + 5));
+            echo $this->Form->input('prefdate', array('id' => 'datepicker', 'class' => 'datepicker', 'type' => 'text', 'label' => array('text' => '<p align="left">Prefered Date</p>', 'style' => 'align:left')));         
             echo $this->Form->input('prefvenue', array('type' => 'select', 'label' => 'Prefered Venue', 
                  'options' => array("Brighton Family and Women's Clinic" => "Brighton Family and Women's Clinic", 
                                      'North Road Medical' => 'North Road Medical',
@@ -29,3 +34,14 @@
         </fieldset>
     </ul>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $("#datepicker").datepicker({
+            dateFormat : 'yy-mm-dd', altFormat : 'yy-mm-dd'
+        });
+        $("#datepicker2").datepicker({
+            dateFormat : 'yy-mm-dd', altFormat : 'yy-mm-dd'
+        });
+    });
+</script>

@@ -2,11 +2,7 @@
 echo $this->Html->script(array('jquery-1.8.3', 'datepicker/jquery-ui', 'jquery.fastLiveFilter'));
 echo $this->Html->CSS(array('datepicker/jquery-ui'));
 ?>
-<!-- start -->
-<?php
-echo $this->Html->script('DatePicker');
-echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
-?>
+
 
 <script>
     $(document).ready(function() {
