@@ -147,7 +147,7 @@ class UsersController extends AppController {
                         $this->Session->setFlash(__('Details changed successfully', true), 'success-message');
                         $this->redirect(array('action' => 'index'));
                     } else {
-                        $this->Session->setFlash(__('The user could not be saved. Please, try again.', true), 'failure-message');
+                        $this->Session->setFlash(__('Change password failed. Please, try again.', true), 'failure-message');
                     }
                 } else {
                     $this->Session->setFlash(__('Password do not match, please try again.', true), 'failure-message');

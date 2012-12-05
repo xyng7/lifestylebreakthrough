@@ -83,11 +83,11 @@ class TemplatesController extends AppController {
                     }
                     //$i++; 
                 }
-                $this->Session->setFlash(__('The program has been saved'));
+                $this->Session->setFlash(__('The template has been saved', true), 'success-message');
                 $this->redirect(array('action' => 'index'));
 
             } else {
-                $this->Session->setFlash(__('The program could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The template could not be saved. Please, try again.', true), 'failure-message');
             }
         }
       

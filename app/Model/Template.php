@@ -13,8 +13,19 @@ class Template extends AppModel {
  * @var string
  */
 	public $displayField = 'name';
+        
+        public $validate = array(
+       
+        'name' => array(
+            //rule 1 - cannot be empty
+            'Rule-1' => array(
+                'rule' => array('notempty'),
+                'message' => 'Enter Template Name'),
+        
+            ),
+        );
 
-
+       
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**

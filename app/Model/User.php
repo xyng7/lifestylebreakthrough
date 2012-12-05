@@ -41,7 +41,27 @@ class User extends AppModel {
                 'rule' => array('notEmpty'),
                 'message' => 'A password is required'
             )
-            ));
+            ),
+        'old_password' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'Old password is required'
+            )
+            ),
+        'new_password' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'New password is required'
+            )
+            ),
+        'new_password_confirm' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'Password confirm is required'
+            )
+            )
+        
+        );
 
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['password'])) {

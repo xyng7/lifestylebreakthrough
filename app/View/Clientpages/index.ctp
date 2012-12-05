@@ -29,7 +29,7 @@
                         <td><?php echo $programs['name']; ?></td>
                         <td>
                         <?php echo $this->Html->link(__('View'), array('action' => 'viewProgram', $programs['id'])); ?>
-                            <?php echo $this->Html->link(__('Update Progress'), array('action' => 'progress', $programs['id'])); ?>
+                        <?php echo $this->Html->link(__('Update Progress'), array('action' => 'progress', $programs['id'])); ?>
 
                         </td>
                     </tr>
