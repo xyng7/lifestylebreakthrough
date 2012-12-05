@@ -8,7 +8,7 @@
         <legend><?php echo __('Add Newsletter'); ?></legend>
         <?php echo $this->Form->input('title'); ?>
         <?php //echo $this->Form->input('content', array('id' => 'content', 'class' => 'ckeditor')); ?> 
-        <?php echo $this->Form->input('content', array('id' => 'content', 'escape' => false,'rows' => '500', 'cols' => '900', 'label'=>'','class'=>'ckeditor')); ?>       
+        <?php echo $this->Form->input('content', array('id' => 'content', 'escape' => false,'rows' => '500', 'cols' => '900', 'label'=>'Content','class'=>'ckeditor')); ?>       
     </fieldset>
     <?php echo $this->Form->end(__('Submit')); ?>
 </div>
