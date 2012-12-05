@@ -49,6 +49,9 @@ $homedir = __d('cake_dev', 'CakePHP: the rapid development php framework :D');
 
         echo $this->Html->css(array('webwidget_menu_glide'));
         echo $this->Html->css(array('/css/foundation/foundation.min', '/css/foundation/foundation'));
+        
+        echo $this->Html->script('datatables/jquery.dataTables.min');
+        echo $this->Html->css('jquery.dataTables');
         ?>
         <script language="javascript" type="text/javascript">
             $(function() {
@@ -57,8 +60,7 @@ $homedir = __d('cake_dev', 'CakePHP: the rapid development php framework :D');
         </script>
 
         <?php
-        echo $this->Html->script('datatables/jquery.dataTables.min');
-        echo $this->Html->css('jquery.dataTables');
+
         ?>
         <script>
                $(document).ready(function(){

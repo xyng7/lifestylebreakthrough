@@ -1,10 +1,8 @@
 <?php
-echo $this->Html->script(array('jquery-1.8.3', 'datepicker/jquery-ui', 'jquery.fastLiveFilter'));
-echo $this->Html->CSS(array('datepicker/jquery-ui'));
+echo $this->Html->script(array('jquery-1.8.3', 'datepicker/jquery-ui', 'jquery.fastLiveFilter', 'DatePicker'));
+echo $this->Html->CSS(array('datepicker/jquery-ui','datepicker/jquery-ui-1.8.23.custom'));
 ?>
-
-
-<script>
+    <script>
     $(document).ready(function() {
         $("#datepicker").datepicker({
             dateFormat : 'yy-mm-dd', altFormat : 'yy-mm-dd'
@@ -13,15 +11,11 @@ echo $this->Html->CSS(array('datepicker/jquery-ui'));
             dateFormat : 'yy-mm-dd', altFormat : 'yy-mm-dd'
         });
     });
-</script>
-<!-- end -->
-<script>
-    $(function() {
-        $('#search_input').fastLiveFilter('#search_list');
-    });
+    
 </script>
 
-<div class="programs form">
+
+<div class="programs index">
     <?php echo $this->Form->create('Program'); ?>
     <fieldset>
         <legend><?php echo __('Add Program'); ?></legend>
@@ -38,9 +32,8 @@ echo $this->Html->CSS(array('datepicker/jquery-ui'));
                 <th> <?php echo $this->Form->input('start_date', array('id' => 'datepicker', 'class' => 'datepicker', 'type' => 'text', 'label' => array('text' => '<p align="left">Start Date</p>', 'style' => 'align:left'))); ?>
                 <th> <?php echo $this->Form->input('end_date', array('id' => 'datepicker2', 'class' => 'datepicker2', 'type' => 'text', 'label' => array('text' => '<p align="left">End Date</p>', 'style' => 'align:left'))); ?>
             </tr>
-            <?php //echo $this->Form->input('start_date', array('dateFormat' => 'DMY', 'minYear' => date('Y'), 'maxYear' => date('Y') + 50)); ?>
-            <?php //echo $this->Form->input('end_date', array('dateFormat' => 'DMY', 'minYear' => date('Y'), 'maxYear' => date('Y') + 50)); ?> 
         </table>
+
         <?php
         if ($usetemp == true) {
             $notes = $template['Template']['notes'];
@@ -48,29 +41,41 @@ echo $this->Html->CSS(array('datepicker/jquery-ui'));
             $notes = null;
         }
         ?>
+
         <table>
             <tr>
                 <th> <?php echo $this->Form->input('notes', array('default' => $notes)); ?> </th> 
             </tr>
-        </table>  
-
-
-        <input id="search_input" placeholder="Type to filter">
-        <ul id="search_list" style="list-style-type: none">
-            <table border="0" cellpadding = "0" > 
+        </table> 
+        <?php
+        echo $this->Html->script('datatables/jquery.dataTables.min');
+        echo $this->Html->css('jquery.dataTables');
+        ?>
+        <script>
+               $(document).ready(function(){
+                       $('#js-datatable').dataTable({
+                    "bPaginate": false,
+                    "bInfo": false
+                });
+               });
+        </script>        
+        <table id="js-datatable" cellpadding="0" cellspacing="0">
+            <thead>
                 <tr> 
-                    <th>Exercise</th>
-                    <th>Image</th>
-                    <th>Sets</th>
-                    <th>Reps</th>
-                    <th>Rest(Sec)</th> 
-                    <th>Load(Kg)</th>
+                    <th><?php echo h('Exercise'); ?></th>
+                    <th><?php echo h('Image'); ?></th>
+                    <th><?php echo h('Sets'); ?></th>
+                    <th><?php echo h('Reps'); ?></th>
+                    <th><?php echo h('Rest(Sec)'); ?></th>
+                    <th><?php echo h('Load(Kg)'); ?></th>
                 </tr>
-                <tr>
+            </thead>
+            <tbody>
+               <tr>
                     <?php
                     $i = 0;
                     //for loop for body parts
-                    foreach ($exercises as $eb):
+                    foreach ($exercises as $eb){
                         if ($usetemp == true) {
                             //  debug($template);                          
                             foreach ($template['Exercise'] as $templates) {
@@ -102,12 +107,9 @@ echo $this->Html->CSS(array('datepicker/jquery-ui'));
                         <td> <?php
                     echo $this->Form->input("Exercise.Exercise.$i.", array(
                         'type' => 'checkbox',
-                        //'multiple' => 'checkbox',
                         'default' => $checked,
                         'label' => $eb['Exercise']['name'],
                         'value' => $eb['Exercise']['id'],
-                        'before' => '<li>',
-                        //'after' => '</li>',
                         'hiddenField' => false,
                         'div' => false
                     ));
@@ -122,7 +124,7 @@ echo $this->Html->CSS(array('datepicker/jquery-ui'));
                             } else {
                                 echo "no image available";
                             }
-                            ?>&nbsp;
+                            ?>
                         </td>
 
                         <td> <?php
@@ -179,25 +181,27 @@ echo $this->Html->CSS(array('datepicker/jquery-ui'));
                         </td>
                     </tr>
                     <?php $i++; ?>
-                <?php endforeach; ?>
-            </table>
-            <?php echo $this->Form->end(__('Submit')); ?>
-
+                <?php } ?>
+            </tbody>
+        </table>
+<?php echo $this->Form->end(__('Submit')); ?>
     </fieldset>
+</div>
 
 </div>
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
         <li><?php echo $this->Html->link(__('List Programs'), array('action' => 'index')); ?></li>
-        <?php echo $this->Form->create('temp', array('style' => 'width: 30%')); ?>
+<?php echo $this->Form->create('temp', array('style' => 'width: 30%')); ?>
 
         <fieldset>
             <legend>Template</legend>
-            <?php echo $this->Form->input('tempchoice', array('type' => 'input', 'label' => '', 'options' => $xyz)); ?>
-            <?php echo $this->Form->submit(__('Use template', true), array('name' => 'delimg2', 'div' => false)); ?>
+<?php echo $this->Form->input('tempchoice', array('type' => 'input', 'label' => '', 'options' => $xyz)); ?>
+<?php echo $this->Form->submit(__('Use template', true), array('name' => 'delimg2', 'div' => false)); ?>
             <br>
         </fieldset>
 
     </ul>
 </div>
+
