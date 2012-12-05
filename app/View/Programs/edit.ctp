@@ -109,7 +109,7 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
                         <?php
                         if ($eb['Exercise']['start_pic'] != null) {
                             //echo $instruction['image']."<br /><br />"; 
-                            echo $this->Html->image('files/' . $eb['Exercise']['start_pic'], array('width' => 50, 'height' => 50));
+                            echo $this->Html->image('../imgfiles/' . $eb['Exercise']['start_pic'], array('width' => 50, 'height' => 50));
                         } else {
                             echo "no image available";
                         }
