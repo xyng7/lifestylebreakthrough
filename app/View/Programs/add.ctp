@@ -68,6 +68,9 @@ echo $this->Html->CSS(array('datepicker/jquery-ui','datepicker/jquery-ui-1.8.23.
                     <th><?php echo h('Reps'); ?></th>
                     <th><?php echo h('Rest(Sec)'); ?></th>
                     <th><?php echo h('Load(Kg)'); ?></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -179,6 +182,33 @@ echo $this->Html->CSS(array('datepicker/jquery-ui','datepicker/jquery-ui-1.8.23.
                         ));
                             ?>
                         </td>
+                        <td><?php foreach ($eb['BodyPart'] as $bodyparts) {
+                           
+                            //debug("\n\n".$bodyparts['body_part']);
+                           
+                        echo $this->Form->input("Bodyparts", array('type' => 'hidden', 'default' => $bodyparts['body_part']));
+                           
+                        }
+                        
+                        ?></td>
+                        <td><?php foreach ($eb['Category'] as $categories) {
+                           
+                  
+                           
+                        echo $this->Form->input("Bodyparts", array('type' => 'hidden', 'default' => $categories['category']));
+                           
+                        }
+                        
+                        ?></td>
+                        <td><?php foreach ($eb['Equipment'] as $equipments) {
+                           
+                           // debug($eb);
+                           
+                        echo $this->Form->input("Bodyparts", array('type' => 'hidden', 'default' => $equipments['equipment']));
+                           
+                        }
+                        
+                        ?></td>
                     </tr>
                     <?php $i++; ?>
                 <?php } ?>
@@ -188,7 +218,7 @@ echo $this->Html->CSS(array('datepicker/jquery-ui','datepicker/jquery-ui-1.8.23.
     </fieldset>
 </div>
 
-</div>
+
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>

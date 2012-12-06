@@ -1,14 +1,8 @@
 <?php
-echo $this->Html->script(array('jquery-1.8.3', 'datepicker/jquery-ui', 'jquery.fastLiveFilter'));
-echo $this->Html->CSS(array('datepicker/jquery-ui'));
+echo $this->Html->script(array('jquery-1.8.3', 'datepicker/jquery-ui', 'jquery.fastLiveFilter', 'DatePicker'));
+echo $this->Html->CSS(array('datepicker/jquery-ui','datepicker/jquery-ui-1.8.23.custom'));
 ?>
-<!-- start -->
-<?php
-echo $this->Html->script('DatePicker');
-echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
-?>
-
-<script>
+    <script>
     $(document).ready(function() {
         $("#datepicker").datepicker({
             dateFormat : 'yy-mm-dd', altFormat : 'yy-mm-dd'
@@ -17,22 +11,18 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
             dateFormat : 'yy-mm-dd', altFormat : 'yy-mm-dd'
         });
     });
-</script>
-<!-- end -->
-<script>
-    $(function() {
-        $('#search_input').fastLiveFilter('#search_list');
-    });
+    
 </script>
 
-<div class="programs form">
+
+<div class="programs index">
     <?php echo $this->Form->create('Program'); ?>
     <fieldset>
-        <legend><?php echo __('Edit Program'); ?></legend>
-        <?php echo $this->Form->input('id'); ?>
+        <legend><?php echo __('Add Program'); ?></legend>
+
         <table cellpadding = "0" cellspacing = "0">          
             <tr>
-                <th> <?php echo $this->Form->input('client_id'); ?> </th>
+                <th> <?php echo $this->Form->input('client_id', array('type' => 'select', 'options' => $clients)); ?> </th>
                 <th> <?php echo $this->Form->input('name'); ?> </th> 
             </tr>
         </table>
@@ -43,34 +33,45 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
                 <th> <?php echo $this->Form->input('end_date', array('id' => 'datepicker2', 'class' => 'datepicker2', 'type' => 'text', 'label' => array('text' => '<p align="left">End Date</p>', 'style' => 'align:left'))); ?>
             </tr>
         </table>
-        
         <table>
             <tr>
                 <th> <?php echo $this->Form->input('notes'); ?> </th> 
             </tr>
         </table> 
-
+        <?php
+        echo $this->Html->script('datatables/jquery.dataTables.min');
+        echo $this->Html->css('jquery.dataTables');
+        ?>
+        <script>
+               $(document).ready(function(){
+                       $('#js-datatable').dataTable({
+                    "bPaginate": false,
+                    "bInfo": false
+                });
+               });
+        </script>        
         <table id="js-datatable" cellpadding="0" cellspacing="0">
             <thead>
-            <tr> 
-                <th>Exercise</th>
-                <th>Image</th>
-                <th>Sets</th>
-                <th>Reps</th>
-                <th>Rest(Sec)</th> 
-                <th>Load(Kg)</th>
-            </tr>
+                <tr> 
+                    <th><?php echo h('Exercise'); ?></th>
+                    <th><?php echo h('Image'); ?></th>
+                    <th><?php echo h('Sets'); ?></th>
+                    <th><?php echo h('Reps'); ?></th>
+                    <th><?php echo h('Rest(Sec)'); ?></th>
+                    <th><?php echo h('Load(Kg)'); ?></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
-            <tr>
-                <?php
-                $i = 0;
-                //for loop for body parts
-                foreach ($exercises as $eb):
-                    ?> 
-                    <td> <?php
-                            
-                           foreach ($program['Exercise'] as $existex )
+               <tr>
+                    <?php
+                    $i = 0;
+                    //for loop for body parts
+                    foreach ($exercises as $eb){
+                        
+                        foreach ($program['Exercise'] as $existex )
                            {
                                if($eb['Exercise']['id'] === $existex['id'])
                                {
@@ -89,98 +90,121 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
                                    $resdef = 30;
                                    $resload = 5;
                               }
-                           }  
+                           }
+                        ?> 
 
+                        <td> <?php
+                    echo $this->Form->input("Exercise.Exercise.$i.", array(
+                        'type' => 'checkbox',
+                        'default' => $checked,
+                        'label' => $eb['Exercise']['name'],
+                        'value' => $eb['Exercise']['id'],
+                        'hiddenField' => false,
+                        'div' => false
+                    ));
+                        ?>
+                        </td>
 
-                echo $this->Form->input("Exercise.Exercise.$i.", array(
-                    'type' => 'checkbox',
-                    //'multiple' => 'checkbox',
-                    'label' => $eb['Exercise']['name'],
-                    'value' => $eb['Exercise']['id'],
-                    'checked'=>$checked,
-                    'before' => '<div class="checkbox">',
-                    'after' => '</div>',
-                    'hiddenField' => false,
-                    'div' => false
-                ));
-                    ?>
-                    </td>   
-                    <td>
-                        <?php
-                        if ($eb['Exercise']['start_pic'] != null) {
-                            //echo $instruction['image']."<br /><br />"; 
-                            echo $this->Html->image('../imgfiles/' . $eb['Exercise']['start_pic'], array('width' => 50, 'height' => 50));
-                        } else {
-                            echo "no image available";
+                        <td>
+                            <?php
+                            if ($eb['Exercise']['start_pic'] != null) {
+                                //echo $instruction['image']."<br /><br />"; 
+                                echo $this->Html->image('../imgfiles/' . $eb['Exercise']['start_pic'], array('width' => 50, 'height' => 50));
+                            } else {
+                                echo "no image available";
+                            }
+                            ?>
+                        </td>
+
+                        <td> <?php
+                        echo $this->Form->input("Exercise.Exercise.$i.program.", array(
+                            'type' => 'text',
+                            'label' => 'Sets:',
+                            //'options' => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17),
+                            'default' => $setsdef,
+                            //'before' => '<li>',
+                            //'after' => '</li>',
+                            'hiddenField' => false,
+                            'div' => false
+                        ));
+                            ?>
+                        </td>
+                        <td> <?php
+                        echo $this->Form->input("Exercise.Exercise.$i.program.", array(
+                            'type' => 'text',
+                            'label' => 'Reps:',
+                            //'options' => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17),
+                            'default' => $repsdef,
+                            //'before' => '<li>',
+                            //'after' => '</li>',
+                            'hiddenField' => false,
+                            'div' => false
+                        ));
+                            ?>
+                        </td>
+                        <td> <?php
+                        echo $this->Form->input("Exercise.Exercise.$i.program.", array(
+                            'type' => 'select',
+                            'label' => 'Rest:',
+                            'options' => array('5' => '5', '10' => '10', '15' => '15', '20' => '20', '25' => '25', '30' => '30', '35' => '35', '40' => '40', '45' => '45', '50' => '50', '55' => '55', '60' => '60', '65' => '65', '70' => '70', '75' => '75', '80' => '80', '85' => '85', '90' => '90'),
+                            'default' => $resdef,
+                            //'before' => '<li>',
+                            //'after' => '</li>',
+                            'hiddenField' => false,
+                            'div' => false
+                        ));
+                            ?>
+                        </td>
+                        <td> <?php
+                        echo $this->Form->input("Exercise.Exercise.$i.program.", array(
+                            'type' => 'select',
+                            'label' => 'Load:',
+                            'options' => array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25'),
+                            'default' => $resload,
+                            //'before' => '<li>',
+                            //'after' => '</li>',
+                            'hiddenField' => false,
+                            'div' => false
+                        ));
+                            ?>
+                        </td>
+                        <td><?php foreach ($eb['BodyPart'] as $bodyparts) {
+                           
+                            //debug("\n\n".$bodyparts['body_part']);
+                           
+                        echo $this->Form->input("Bodyparts", array('type' => 'hidden', 'default' => $bodyparts['body_part']));
+                           
                         }
-                        ?>&nbsp;
-                    </td>
-
-                   
-                    <td> <?php
-                    echo $this->Form->input("Exercise.Exercise.$i.program.", array(
-                        'type' => 'text',
-                        'label' => 'Sets:',
-                        //'options' => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17),
-                        'default' => $setsdef,
-                        //'default' => 5,
-                        //'before' => " ",
-                        // 'after' => '</div>',
-                        'hiddenField' => false,
-                        'div' => false
-                    ));
-                        ?>
-                    </td>
-                    <td> <?php
-                    echo $this->Form->input("Exercise.Exercise.$i.program.", array(
-                        'type' => 'text',
-                        'label' => 'Reps:',
-                        //'options' => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17),
-                        //'default' => 5,
-                        'default' => $repsdef,
-                        //'before' => " ",
-                        // 'after' => '</div>',
-                        'hiddenField' => false,
-                        'div' => false
-                    ));
-                        ?>
-                    </td>
-                    <td> <?php
-                    echo $this->Form->input("Exercise.Exercise.$i.program.", array(
-                        'type' => 'select',
-                        'label' => 'Rest:',
-                        'options' => array('5' => '5', '10' => '10', '15' => '15', '20' => '20', '25' => '25', '30' => '30', '35' => '35', '40' => '40', '45' => '45', '50' => '50', '55' => '55', '60' => '60', '65' => '65', '70' => '70', '75' => '75', '80' => '80', '85' => '85', '90' => '90'),
-                        //'default' => 5,
-                        'default' => $resdef,
-                        //'before' => " ",
-                        // 'after' => '</div>',
-                        'hiddenField' => false,
-                        'div' => false
-                    ));
-                        ?>
-                    </td>
-                     <td> <?php
-                    echo $this->Form->input("Exercise.Exercise.$i.program.", array(
-                        'type' => 'select',
-                        'label' => 'Load:',
-                        'options' => array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25'),
-                        'default' => 5,
-                        //'before' => " ",
-                        // 'after' => '</div>',
-                        'hiddenField' => false,
-                        'div' => false
-                    ));
-                    ?>
-                    </td>
-                </tr>
-                        <?php $i++; ?>
+                        
+                        ?></td>
+                        <td><?php foreach ($eb['Category'] as $categories) {
+                           
+                  
+                           
+                        echo $this->Form->input("Bodyparts", array('type' => 'hidden', 'default' => $categories['category']));
+                           
+                        }
+                        
+                        ?></td>
+                        <td><?php foreach ($eb['Equipment'] as $equipments) {
+                           
+                           // debug($eb);
+                           
+                        echo $this->Form->input("Bodyparts", array('type' => 'hidden', 'default' => $equipments['equipment']));
+                           
+                        }
+                        
+                        ?></td>
+                    </tr>
+                    <?php $i++; ?>
+                <?php } ?>
             </tbody>
-<?php endforeach; ?>
         </table>
-            <?php echo $this->Form->end(__('Submit')); ?>
+<?php echo $this->Form->end(__('Submit')); ?>
     </fieldset>
-
 </div>
+
+
 <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>

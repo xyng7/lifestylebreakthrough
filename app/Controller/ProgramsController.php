@@ -99,6 +99,7 @@ class ProgramsController extends AppController {
                                                              'act_sets' => null,
                                                              'act_reps' => null,
                                                             'act_res' => null,
+                                                            'act_load' => null,
                                                             'date' => null,
                                                              'id' => null
                         ));
@@ -147,10 +148,18 @@ class ProgramsController extends AppController {
             throw new NotFoundException(__('Invalid program'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
-            if ($this->Program->save($this->request->data)) {
-
+          if ($this->Program->save(//array(  'client_id' => $this->request->data('Program.client_id'),
+                                     //                           'name' => $this->request->data('Program.name'),
+                                       //                         'start_date' => $this->request->data('Program.start_date'),
+                                         //                       'end_date' =>  $this->request->data('Program.end_date'),
+                                           //                     'notes' =>  $this->request->data('Program.notes')
+                                                                
+        $this->request->data))//) 
+              {
+                
+              //  debug($this->request->data);
                 foreach ($this->request->data('Exercise.Exercise') as $ex) {
-
+                   
                     if (count($ex, COUNT_RECURSIVE) == 6) {
 
                         $exid = $ex['0'];
@@ -161,7 +170,17 @@ class ProgramsController extends AppController {
                         $rec_res = $ex['program']['2'];
                         $rec_load = $ex['program']['3'];
                         
-                        $this->ExercisesProgram->save(array( 'program_id' => $id,
+                        if($exprog = $this->ExercisesProgram->find('first', array('conditions' => array ('program_id' => $id, 
+                                                                    'exercise_id' => $exid)))){
+                        $this->ExercisesProgram->id = $exprog['ExercisesProgram']['id'];
+                        $this->ExercisesProgram->saveField('rec_sets', $rec_sets);
+                        $this->ExercisesProgram->saveField('rec_reps', $rec_reps);
+                        $this->ExercisesProgram->saveField('rec_res', $rec_res);
+                        $this->ExercisesProgram->saveField('rec_load',$rec_load);
+                         }
+                          else {
+                               $this->ExercisesProgram->deleteAll(array('ExercisesProgram.program_id' => $id, 'ExercisesProgram.exercise_id' => $exid), false);
+                                  $this->ExercisesProgram->save(array( 'program_id' => $id,
                                                              'exercise_id' => $exid,
                                                              'rec_sets' => $rec_sets,
                                                              'rec_reps' => $rec_reps,
@@ -170,13 +189,29 @@ class ProgramsController extends AppController {
                                                              'act_sets' => null,
                                                              'act_reps' => null,
                                                             'act_res' => null,
+                                                            'act_load' => null,
                                                             'date' => null,
                                                              'id' => null
                             ));
+                          } 
+                       // debug($exprog);
+                        
+                     /*   $this->ExercisesProgram->updateAll(array(   'program_id' => $id, 
+                                                                    'exercise_id' => $exid,
+                                                                    'rec_sets' => $rec_sets,
+                                                                    'rec_reps' => $rec_reps,
+                                                                    'rec_res' => $rec_res,
+                                                                    'rec_load' => $rec_load,
+                                                                    'id' => null
+                                                                    ), 
+                                                           array(   'program_id' => $id, 
+                                                                    'exercise_id' => $exid));
+                            */
                         
                         //$this->ExercisesProgram->query("INSERT INTO `dev`.`exercises_programs` (`program_id`, `exercise_id`, `rec_sets`, `rec_reps`, `rec_res`, `act_sets`, `act_reps`, `act_res`, `date`, `id`) VALUES ($id, $exid, $rec_sets, $rec_reps, $rec_res, NULL, NULL, NULL, NULL, NULL)");
                         //  $this->ExercisesProgram->query("UPDATE  `dev`.`exercises_programs` SET  `rec_sets` = $rec_sets, `rec_reps` = $rec_reps, `rec_res` =  $rec_res WHERE  `exercises_programs`.`exercise_id` =$exid AND  `exercises_programs`.`program_id` =$id");
                     }
+                   // $this->ExercisesProgram->deleteAll(array('ExercisesProgram.program_id' => $id, 'ExercisesProgram.exercise_id' => $exid), false);
                 }
                 $this->Session->setFlash(__('The program has been saved', true),'success-message');
                 $this->redirect(array('action' => 'index'));
