@@ -59,7 +59,7 @@
 			</td>
                         
 		</tr>
-                <tr style="background-color: #2ba6cb;">
+                <tr style="background-color: #0F67A1;">
                     <td></td>
                     <td>Progress</td>
                     <td><?php echo $exercise['ExercisesProgram']['act_sets']; ?></td>
