@@ -51,7 +51,10 @@
                         echo __(' <br> ');
                         echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id']));
                         echo __(' <br> ');
+                        if(($id=$this->Session->read('Auth.User.id')) !== ($user['User']['id'])){
+                            //if login user does not show delete button
                         echo $this->Form->postLink(__('Archive'), array('action' => 'delete', $user['User']['id']), null, __('Are you sure you want to archive # %s?', $user['User']['username']));
+                        }
                     }
                     ?>
                 </td>
