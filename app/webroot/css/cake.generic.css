@@ -809,6 +809,7 @@ ul#navmenu ul li {
 } 
 /* Root Menu */ 
 ul#navmenu a { 
+    width:100px;
     border: 1px solid #FFF; 
     border-right-color: #CCC; 
     border-bottom-color: #CCC; 
@@ -821,11 +822,12 @@ ul#navmenu a {
     /*background: #f46666;*/
     /*background: #1f84b7;*/
     color: #666; 
-    font: bold 10px/22px Verdana, Arial, Helvetica, sans-serif; 
+    /*font: bold 10px/22px Verdana, Arial, Helvetica, sans-serif;*/ 
     text-decoration: none; 
     height: auto !important; 
     height: 1%; /*For IE*/ 
     -moz-border-radius: 8px;
+    font-size: 12px;
     -webkit-border-radius: 8px;
 } 
 /* Root Menu Hover Persistence */ 
