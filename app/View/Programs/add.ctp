@@ -1,20 +1,3 @@
-<?php
-echo $this->Html->script(array('jquery-1.8.3', 'datepicker/jquery-ui', 'jquery.fastLiveFilter', 'DatePicker'));
-echo $this->Html->CSS(array('datepicker/jquery-ui','datepicker/jquery-ui-1.8.23.custom'));
-?>
-    <script>
-    $(document).ready(function() {
-        $("#datepicker").datepicker({
-            dateFormat : 'yy-mm-dd', altFormat : 'yy-mm-dd'
-        });
-        $("#datepicker2").datepicker({
-            dateFormat : 'yy-mm-dd', altFormat : 'yy-mm-dd'
-        });
-    });
-    
-</script>
-
-
 <div class="programs index">
     <?php echo $this->Form->create('Program'); ?>
     <fieldset>
@@ -29,6 +12,21 @@ echo $this->Html->CSS(array('datepicker/jquery-ui','datepicker/jquery-ui-1.8.23.
 
         <table cellpadding = "0" cellspacing = "0">          
             <tr>
+<?php
+echo $this->Html->script(array('jquery-1.8.3', 'datepicker/jquery-ui', 'jquery.fastLiveFilter', 'DatePicker'));
+echo $this->Html->CSS(array('datepicker/jquery-ui','datepicker/jquery-ui-1.8.23.custom'));
+?>
+    <script>
+    $(document).ready(function() {
+        $("#datepicker").datepicker({
+            dateFormat : 'yy-mm-dd', altFormat : 'yy-mm-dd'
+        });
+        $("#datepicker2").datepicker({
+            dateFormat : 'yy-mm-dd', altFormat : 'yy-mm-dd'
+        });
+    });
+    
+</script>                
                 <th> <?php echo $this->Form->input('start_date', array('id' => 'datepicker', 'class' => 'datepicker', 'type' => 'text', 'label' => array('text' => '<p align="left">Start Date</p>', 'style' => 'align:left'))); ?>
                 <th> <?php echo $this->Form->input('end_date', array('id' => 'datepicker2', 'class' => 'datepicker2', 'type' => 'text', 'label' => array('text' => '<p align="left">End Date</p>', 'style' => 'align:left'))); ?>
             </tr>

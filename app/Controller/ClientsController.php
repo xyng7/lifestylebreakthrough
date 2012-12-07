@@ -92,7 +92,7 @@ class ClientsController extends AppController {
                 //Send client email (with login details) function goes here (build 2)
                 $this->sendEmailConfirmation($this->request->data('Client.first_name'), $this->request->data('Client.last_name'), $this->request->data('Client.email'), implode($this->request->data('Client.dob')));
 
-                $this->Session->setFlash(__('The client has been added'));
+                $this->Session->setFlash(__('The client has been added', true), 'success-message');
                 $this->Client->saveField('user_id', $this->User->id);
                 //debug($this->User->id);
                 $this->redirect(array('action' => 'index'));

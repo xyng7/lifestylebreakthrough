@@ -34,7 +34,7 @@
     <div class="actions">
     <h3><?php echo __('Actions'); ?></h3>
     <ul>
-<!--        <li><?php echo $this->Html->link(__('New Template'), array('action' => 'add')); ?></li>-->
+        <li><?php echo $this->Html->link(__('New Template'), array('action' => 'add')); ?></li>
         <li><?php echo $this->Html->link(__('Back'), array('controller' => 'programs', 'action' => 'index')); ?> </li>
 
     </ul>

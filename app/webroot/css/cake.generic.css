@@ -297,6 +297,7 @@ dl {
 dl dd:nth-child(4n+2),
 dl dt:nth-child(4n+1) {
     background: #f4f4f4;
+    width:100%;
 }
 
 dt {
@@ -582,7 +583,7 @@ p.error em {
     white-space: nowrap;
     padding: 0;
     height: 32px;
-    font: 16px Verdana;
+    font: 14px Verdana;
     font-weight: bold;
     voice-family: inherit;
     height: 24px;
@@ -605,7 +606,7 @@ p.error em {
     background: #0F67A1;
     width: 170px;
     margin-left: -29px;
-    height: 30px;
+    height: 27px;
 }
 
 /* Buttons and button links */
@@ -787,8 +788,11 @@ ul#navmenu li {
     list-style: none; 
     position: relative; */
     height: 24px; 
-    width:80px;
+    /*width:80px;*/
 } 
+ul#navmenu li ul li a{
+    color: white;
+}
 ul#navmenu ul { 
     margin: 0; 
     margin-top: -24px;
@@ -821,28 +825,31 @@ ul#navmenu a {
     /*background: #f6b3b3;*/
     /*background: #f46666;*/
     /*background: #1f84b7;*/
-    color: #666; 
+    color: white; 
+    
     /*font: bold 10px/22px Verdana, Arial, Helvetica, sans-serif;*/ 
     text-decoration: none; 
     height: auto !important; 
     height: 1%; /*For IE*/ 
     -moz-border-radius: 8px;
-    font-size: 12px;
+    font-size: 14px;
     -webkit-border-radius: 8px;
 } 
 /* Root Menu Hover Persistence */ 
 ul#navmenu a:hover, 
 ul#navmenu li:hover a, 
 ul#navmenu li.iehover a { 
-    background: #82c9ed; 
-    color: #FFF; 
+    background: #82c9ed;
+    color:white;
+    /*color: #FFF;*/ 
 } 
 /* 2nd Menu */ 
 ul#navmenu li:hover li a, 
 ul#navmenu li.iehover li a { 
     float: none; 
-    background: #82c9ed; 
-    color: #666; 
+    /*background: #82c9ed;*/ 
+        background: #3299d1;
+    color: white; 
     width: 150px;
     /*line-height: 125px;*/
     -moz-border-radius: 4px;
@@ -1394,4 +1401,8 @@ pre {
 }
 #coolMenu ul li:hover a {
     background: #ffc97c;
+}
+.navigation{
+    font-size: 16px;
+    color: #FFF;
 }

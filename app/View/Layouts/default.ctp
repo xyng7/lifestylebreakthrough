@@ -52,7 +52,7 @@ $homedir = __d('cake_dev', 'CakePHP: the rapid development php framework :D');
             ?>
             <script language="javascript" type="text/javascript">
                 $(function() {
-                    $("#webwidget_menu_glide").webwidget_menu_glide({menu_width:"100", menu_height:"23", menu_text_size:"12", menu_text_color:"#FFF", menu_sprite_color:"#86C7EF", menu_background_color:"#0F67A1", menu_margin:"2", sprite_speed:"normal", container:"webwidget_menu_glide" });
+                    $("#webwidget_menu_glide").webwidget_menu_glide({menu_width:"100", menu_height:"23", menu_text_size:"14", menu_text_color:"#FFF", menu_sprite_color:"#86C7EF", menu_background_color:"#0F67A1", menu_margin:"2", sprite_speed:"normal", container:"webwidget_menu_glide" });
                 });
             </script>
 
@@ -101,74 +101,74 @@ $homedir = __d('cake_dev', 'CakePHP: the rapid development php framework :D');
                         <div id="webwidget_menu_glide" class="webwidget_menu_glide" style="background-color: rgb(15, 103, 161);">
                             <!--<div class="webwidget_menu_glide_sprite"></div>-->
                             <ul id="navmenu">
-                                <li class="current"><?php echo $this->Html->link(__('Home'), array('controller' => 'users', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px')); ?>
+                                <li class="current"><?php echo $this->Html->link(__('Home'), array('controller' => 'users', 'action' => 'index'), array('class'=>'navigation')); ?>
                                     <ul>
                                         <li><?php
                             if (AuthComponent::user('role') === 'superadmin') {
-                                echo $this->Html->link(__('New Admin'), array('controller' => 'Users', 'action' => 'add'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px'));
+                                echo $this->Html->link(__('New Admin'), array('controller' => 'Users', 'action' => 'add'), array('class'=>'navigation'));
                             }
                             ?>
                                         </li>
                                         <li><?php
                                             if (AuthComponent::user('role') === 'superadmin') {
-                                                echo $this->Html->link(__('Archived Admin'), array('controller' => 'Users', 'action' => 'archive'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px'));
+                                                echo $this->Html->link(__('Archived Admin'), array('controller' => 'Users', 'action' => 'archive'), array('class'=>'navigation'));
                                             }
                             ?>
                                         </li>
                                     </ul>
                                 </li>
 
-                                <li><?php echo $this->Html->link(__('Clients'), array('controller' => 'Clients', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px')); ?> 
+                                <li><?php echo $this->Html->link(__('Clients'), array('controller' => 'Clients', 'action' => 'index'), array('class'=>'navigation')); ?> 
                                     <ul>
                                         <li><?php
-                                            echo $this->Html->link(__('New Client'), array('controller' => 'Clients', 'action' => 'add'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px'));
+                                            echo $this->Html->link(__('New Client'), array('controller' => 'Clients', 'action' => 'add'), array('class'=>'navigation'));
                             ?>
                                         </li>
                                         <li><?php
                                             if (AuthComponent::user('role') === 'superadmin') {
-                                                echo $this->Html->link(__('Archived Client'), array('controller' => 'Clients', 'action' => 'archive'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px'));
+                                                echo $this->Html->link(__('Archived Client'), array('controller' => 'Clients', 'action' => 'archive'), array('class'=>'navigation'));
                                             }
                             ?>
                                         </li>
                                     </ul>
                                 </li>
 
-                                <li><?php echo $this->Html->link(__('Exercises'), array('controller' => 'exercises', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px')); ?>
+                                <li><?php echo $this->Html->link(__('Exercises'), array('controller' => 'exercises', 'action' => 'index'), array('class'=>'navigation')); ?>
                                     <ul>
                                         <li><?php
-                                            echo $this->Html->link(__('New Exercise'), array('controller' => 'Exercises', 'action' => 'add'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px'));
+                                            echo $this->Html->link(__('New Exercise'), array('controller' => 'Exercises', 'action' => 'add'), array('class'=>'navigation'));
                             ?>
                                         </li>
                                     </ul>
                                 </li>
 
-                                <li><?php echo $this->Html->link(__('Programs'), array('controller' => 'programs', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px')); ?>
+                                <li><?php echo $this->Html->link(__('Programs'), array('controller' => 'programs', 'action' => 'index'), array('class'=>'navigation')); ?>
                                     <ul>
                                         <li><?php
-                                            echo $this->Html->link(__('New Program'), array('controller' => 'programs', 'action' => 'add'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px'));
+                                            echo $this->Html->link(__('New Program'), array('controller' => 'programs', 'action' => 'add'), array('class'=>'navigation'));
                             ?>
                                         </li>                                
                                         <li><?php
-                                            echo $this->Html->link(__('Manage Template'), array('controller' => 'templates', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px'));
+                                            echo $this->Html->link(__('Manage Template'), array('controller' => 'templates', 'action' => 'index'), array('class'=>'navigation'));
                             ?>
                                         </li>
                                         <li><?php
                                             if (AuthComponent::user('role') === 'superadmin') {
-                                                echo $this->Html->link(__('Archived Program'), array('controller' => 'programs', 'action' => 'archive'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px'));
+                                                echo $this->Html->link(__('Archived Program'), array('controller' => 'programs', 'action' => 'archive'), array('class'=>'navigation'));
                                             }
                             ?>
                                         </li>
                                     </ul>
                                 </li>
 
-                                <!--                            <li><?php echo $this->Html->link(__('Reports'), array('controller' => 'reports', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px')); ?> 
+                                <!--                            <li><?php echo $this->Html->link(__('Reports'), array('controller' => 'reports', 'action' => 'index'), array('class'=>'navigation')); ?> 
                                                             
                                                             </li>-->
 
-                                <li><?php echo $this->Html->link(__('Newsletters'), array('controller' => 'newsletters', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px')); ?>
+                                <li><?php echo $this->Html->link(__('Newsletters'), array('controller' => 'newsletters', 'action' => 'index'), array('class'=>'navigation')); ?>
                                     <ul>
                                         <li><?php
-                                            echo $this->Html->link(__('New Newsletter'), array('controller' => 'newsletters', 'action' => 'add'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px'));
+                                            echo $this->Html->link(__('New Newsletter'), array('controller' => 'newsletters', 'action' => 'add'), array('class'=>'navigation'));
                             ?>
                                         </li>
                                     </ul>
