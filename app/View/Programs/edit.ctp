@@ -1,8 +1,8 @@
 <?php
 echo $this->Html->script(array('jquery-1.8.3', 'datepicker/jquery-ui', 'jquery.fastLiveFilter', 'DatePicker'));
-echo $this->Html->CSS(array('datepicker/jquery-ui','datepicker/jquery-ui-1.8.23.custom'));
+echo $this->Html->CSS(array('datepicker/jquery-ui', 'datepicker/jquery-ui-1.8.23.custom'));
 ?>
-    <script>
+<script>
     $(document).ready(function() {
         $("#datepicker").datepicker({
             dateFormat : 'yy-mm-dd', altFormat : 'yy-mm-dd'
@@ -65,32 +65,29 @@ echo $this->Html->CSS(array('datepicker/jquery-ui','datepicker/jquery-ui-1.8.23.
                 </tr>
             </thead>
             <tbody>
-               <tr>
+                <tr>
                     <?php
                     $i = 0;
                     //for loop for body parts
-                    foreach ($exercises as $eb){
-                        
-                        foreach ($program['Exercise'] as $existex )
-                           {
-                               if($eb['Exercise']['id'] === $existex['id'])
-                               {
-                                 // debug($existex);
-                                   $checked = true;
-                                  $setsdef = $existex['ExercisesProgram']['rec_sets'];
-                                  $repsdef = $existex['ExercisesProgram']['rec_reps'];
-                                  $resdef = $existex['ExercisesProgram']['rec_res'];
-                                  $resload = $existex['ExercisesProgram']['rec_load'];
-                                  break;
-                               }
-                              else{
-                                   $checked = false;
-                                   $setsdef = '4-5';
-                                   $repsdef = '12-14';
-                                   $resdef = 30;
-                                   $resload = 5;
-                              }
-                           }
+                    foreach ($exercises as $eb) {
+
+                        foreach ($program['Exercise'] as $existex) {
+                            if ($eb['Exercise']['id'] === $existex['id']) {
+                                // debug($existex);
+                                $checked = true;
+                                $setsdef = $existex['ExercisesProgram']['rec_sets'];
+                                $repsdef = $existex['ExercisesProgram']['rec_reps'];
+                                $resdef = $existex['ExercisesProgram']['rec_res'];
+                                $resload = $existex['ExercisesProgram']['rec_load'];
+                                break;
+                            } else {
+                                $checked = false;
+                                $setsdef = '4-5';
+                                $repsdef = '12-14';
+                                $resdef = 30;
+                                $resload = 5;
+                            }
+                        }
                         ?> 
 
                         <td> <?php
@@ -106,14 +103,14 @@ echo $this->Html->CSS(array('datepicker/jquery-ui','datepicker/jquery-ui-1.8.23.
                         </td>
 
                         <td>
-                            <?php
-                            if ($eb['Exercise']['start_pic'] != null) {
-                                //echo $instruction['image']."<br /><br />"; 
-                                echo $this->Html->image('../imgfiles/' . $eb['Exercise']['start_pic'], array('width' => 50, 'height' => 50));
-                            } else {
-                                echo "no image available";
-                            }
-                            ?>
+    <?php
+    if ($eb['Exercise']['start_pic'] != null) {
+        //echo $instruction['image']."<br /><br />"; 
+        echo $this->Html->image('../imgfiles/' . $eb['Exercise']['start_pic'], array('width' => 50, 'height' => 50));
+    } else {
+        echo "no image available";
+    }
+    ?>
                         </td>
 
                         <td> <?php
@@ -127,7 +124,7 @@ echo $this->Html->CSS(array('datepicker/jquery-ui','datepicker/jquery-ui-1.8.23.
                             'hiddenField' => false,
                             'div' => false
                         ));
-                            ?>
+    ?>
                         </td>
                         <td> <?php
                         echo $this->Form->input("Exercise.Exercise.$i.program.", array(
@@ -140,7 +137,7 @@ echo $this->Html->CSS(array('datepicker/jquery-ui','datepicker/jquery-ui-1.8.23.
                             'hiddenField' => false,
                             'div' => false
                         ));
-                            ?>
+    ?>
                         </td>
                         <td> <?php
                         echo $this->Form->input("Exercise.Exercise.$i.program.", array(
@@ -153,7 +150,7 @@ echo $this->Html->CSS(array('datepicker/jquery-ui','datepicker/jquery-ui-1.8.23.
                             'hiddenField' => false,
                             'div' => false
                         ));
-                            ?>
+    ?>
                         </td>
                         <td> <?php
                         echo $this->Form->input("Exercise.Exercise.$i.program.", array(
@@ -166,161 +163,51 @@ echo $this->Html->CSS(array('datepicker/jquery-ui','datepicker/jquery-ui-1.8.23.
                             'hiddenField' => false,
                             'div' => false
                         ));
-                            ?>
+    ?>
                         </td>
-                        <td><?php foreach ($eb['BodyPart'] as $bodyparts) {
-                           
+                        <td><?php
+                        foreach ($eb['BodyPart'] as $bodyparts) {
+
                             //debug("\n\n".$bodyparts['body_part']);
-                           
-                        echo $this->Form->input("Bodyparts", array('type' => 'hidden', 'default' => $bodyparts['body_part']));
-                           
+
+                            echo $this->Form->input("Bodyparts", array('type' => 'hidden', 'default' => $bodyparts['body_part']));
                         }
-                        
-                        ?></td>
-                        <td><?php foreach ($eb['Category'] as $categories) {
-                           
-                  
-                           
-                        echo $this->Form->input("Bodyparts", array('type' => 'hidden', 'default' => $categories['category']));
-                           
+    ?></td>
+                        <td><?php
+                        foreach ($eb['Category'] as $categories) {
+
+
+
+                            echo $this->Form->input("Bodyparts", array('type' => 'hidden', 'default' => $categories['category']));
                         }
-                        
-                        ?></td>
-                        <td><?php foreach ($eb['Equipment'] as $equipments) {
-                           
-                           // debug($eb);
-                           
-                        echo $this->Form->input("Bodyparts", array('type' => 'hidden', 'default' => $equipments['equipment']));
-                           
+    ?></td>
+                        <td><?php
+                        foreach ($eb['Equipment'] as $equipments) {
+
+                            // debug($eb);
+
+                            echo $this->Form->input("Bodyparts", array('type' => 'hidden', 'default' => $equipments['equipment']));
                         }
-                        
-                        ?></td>
+    ?></td>
                     </tr>
-                    <?php $i++; ?>
-                <?php } ?>
+                            <?php $i++; ?>
+                        <?php } ?>
             </tbody>
         </table>
-<?php echo $this->Form->end(__('Submit')); ?>
+                        <?php echo $this->Form->end(__('Submit')); ?>
     </fieldset>
 </div>
 
-<script type=text/javascript src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-<script type="text/javascript">
-    var $j = jQuery.noConflict(); 
-(function($){
-    $j.fn.dynamicNav=function(options){
-     
-     var defaults = {
-      direction:"up", 
-      duration:100  
-      };   
-      
-    var opts = $j.extend(defaults, options);
-       
-    this.each(function(){
-     var navList=$j(this).find("li"),
-      navLink=navList.find("a");
-            
-      navList.wrapInner("<span></span>");
-         
-      var span=navLink.parent();
 
-      if(opts.direction=="up" || opts.direction=="down"){
-       var v=true;
-          }
+<div class="actions">
+        <h3><?php echo __('Actions'); ?></h3>
+        <ul>
+            <li><?php echo $this->Html->link(__('List Programs'), array('action' => 'index')); ?></li>
+            <li><?php
+                        if (AuthComponent::user('role') === 'superadmin') {
+                            echo $this->Form->postLink(__('Archive Program'), array('action' => 'delete', $this->Form->value('Program.id')), null, __('Are you sure you want to archive # %s?', $this->Form->value('Program.name')));
+                        }
+                        ?></li>
 
-      if(opts.direction=="right" || opts.direction=="down"){
-       var restSpan=true;
-         }
-         
-       navLink.each(function(){
-
-       var w=$j(this).outerWidth(),
-        p=$j(this).parent();
-
-       $j(this).clone().appendTo(p).addClass("over");
-
-        if(v){    
-          p.css("width",w);          
-              }else{
-          p.css("width",2*w).parent().css("width",w); 
-          }
-               
-          });
-
-      if(restSpan){
-      span.each(function(){
-             
-         if(opts.direction=="right"){
-         $j(this).css({"margin-left":-$j(this).outerWidth()/2});
-         }
-              
-        if(opts.direction=="down"){
-         $j(this).css({"margin-top" : -$j(this).outerHeight()/2});
-         }
-              
-        $j(this)
-        .find('a')
-        .last()
-        .removeClass("over")
-        .prev()
-        .addClass("over");
-       });
-         }
-
-      function over(o){
-         o.animate(v?{"margin-top": -o.outerHeight()/2}:{"margin-left": -o.outerWidth()/2}, opts.duration);
-          }
-
-      function out(o){
-       o.animate(v?{"margin-top":0}:{"margin-left": 0}, opts.duration);
-         }
-
-      span.hover(function(){
-          restSpan ? out($j(this)) : over($j(this));
-           },function(){
-            restSpan ? over($j(this)) : out($j(this));
-           });
-         
-     });
-   };
-     
- })(jQuery);
-
-    $j(function(){
-
-     $j("#nav1").dynamicNav({
-        direction:"left", 
-        duration:300  
-        });
-
-     $j("#nav2").dynamicNav({
-        direction:"right", 
-        duration:200  
-        });
-
-     $j("#nav3").dynamicNav({
-        direction:"up", 
-        duration:100 
-        });
-
-     $j("#nav4").dynamicNav({
-        direction:"down",
-        duration:400
-        });
-     });
-
-</script>
-    <div class="actions">
-        <div class="navx" id="nav3">
-    <h3><?php echo __('Actions'); ?></h3>
-    <ul>
-        <li><?php echo $this->Html->link(__('List Programs'), array('action' => 'index')); ?></li>
-        <li><?php
-            if (AuthComponent::user('role') === 'superadmin') {
-                echo $this->Form->postLink(__('Archive Program'), array('action' => 'delete', $this->Form->value('Program.id')), null, __('Are you sure you want to archive # %s?', $this->Form->value('Program.name')));
-            }
-            ?></li>
-        
-    </ul>
-</div>
+        </ul>
+    </div>
