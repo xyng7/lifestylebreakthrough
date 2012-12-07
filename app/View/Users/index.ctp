@@ -1,8 +1,8 @@
-<div class="actions">
+<!--<div class="actions">-->
     <h4><?php echo __('Admin'); ?></h4>
-</div>
+<!--</div>-->
 
-<div class="actions">
+<!--<div class="actions">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <?php if (AuthComponent::user('role') === 'superadmin') { ?>
         <ul>
@@ -15,7 +15,7 @@
                 <?php echo $this->Html->link(__('Archived Admin'), array('action' => 'archive'));} ?> 
             </li>
         </ul>
-</div>
+</div>-->
 
 <table id="js-datatable" cellpadding="0" cellspacing="0">
     <thead>

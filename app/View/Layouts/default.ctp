@@ -68,7 +68,20 @@ $homedir = __d('cake_dev', 'CakePHP: the rapid development php framework :D');
                        document.getElementById('showTable').style.display = 'block';
                });
         </script>
-
+        <script type="text/JavaScript"> 
+        navHover = function() { 
+        var lis = document.getElementById("navmenu").getElementsByTagName("LI"); 
+        for (var i=0; i<lis.length; i++) { 
+        lis[i].onmouseover=function() { 
+        this.className+=" iehover"; 
+        } 
+        lis[i].onmouseout=function() { 
+        this.className=this.className.replace(new RegExp(" iehover\\b"), ""); 
+        } 
+        } 
+        } 
+        if (window.attachEvent) window.attachEvent("onload", navHover); 
+        </script> 
     </head>
     <body>
 
@@ -91,13 +104,71 @@ $homedir = __d('cake_dev', 'CakePHP: the rapid development php framework :D');
 
                     <div id="webwidget_menu_glide" class="webwidget_menu_glide" style="background-color: rgb(15, 103, 161);">
                         <!--<div class="webwidget_menu_glide_sprite"></div>-->
-                        <ul>
-                            <li class="current"><?php echo $this->Html->link(__('Home'), array('controller' => 'users', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px')); ?></li>
-                            <li><?php echo $this->Html->link(__('Clients'), array('controller' => 'Clients', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px')); ?> </li>
-                            <li><?php echo $this->Html->link(__('Exercises'), array('controller' => 'exercises', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px')); ?></li>
-                            <li><?php echo $this->Html->link(__('Programs'), array('controller' => 'programs', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px')); ?></li>
-                            <li><?php echo $this->Html->link(__('Reports'), array('controller' => 'reports', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px')); ?> </li>
-                            <li><?php echo $this->Html->link(__('Newsletters'), array('controller' => 'newsletters', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px')); ?></li>
+                        <ul id="navmenu">
+                            <li class="current"><?php echo $this->Html->link(__('Home'), array('controller' => 'users', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px')); ?>
+                            <ul>
+                                <li><?php if (AuthComponent::user('role') === 'superadmin') {
+                                echo $this->Html->link(__('New Admin'), array('controller' => 'Users', 'action' => 'add'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px'));
+                            }?>
+                                </li>
+                                <li><?php if (AuthComponent::user('role') === 'superadmin') {
+                                echo $this->Html->link(__('Archived Admin'), array('controller' => 'Users', 'action' => 'archive'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px'));
+                            }?>
+                                </li>
+                            </ul>
+                            </li>
+                            
+                            <li><?php echo $this->Html->link(__('Clients'), array('controller' => 'Clients', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px')); ?> 
+                            <ul>
+                                <li><?php  
+                                echo $this->Html->link(__('New Client'), array('controller' => 'Clients', 'action' => 'add'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px'));
+                            ?>
+                                </li>
+                                <li><?php if (AuthComponent::user('role') === 'superadmin') {
+                                echo $this->Html->link(__('Archived Client'), array('controller' => 'Clients', 'action' => 'archive'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px'));
+                                }?>
+                                </li>
+                            </ul>
+                            </li>
+                            
+                            <li><?php echo $this->Html->link(__('Exercises'), array('controller' => 'exercises', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px')); ?>
+                            <ul>
+                                <li><?php  
+                                echo $this->Html->link(__('New Exercise'), array('controller' => 'Exercises', 'action' => 'add'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px'));
+                            ?>
+                                </li>
+                            </ul>
+                            </li>
+                            
+                            <li><?php echo $this->Html->link(__('Programs'), array('controller' => 'programs', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px')); ?>
+                            <ul>
+                                <li><?php  
+                                echo $this->Html->link(__('New Program'), array('controller' => 'programs', 'action' => 'add'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px'));
+                            ?>
+                                </li>                                
+                                <li><?php  
+                                echo $this->Html->link(__('Manage Template'), array('controller' => 'templates', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px'));
+                                ?>
+                                </li>
+                                <li><?php if (AuthComponent::user('role') === 'superadmin') {
+                                echo $this->Html->link(__('Archived Program'), array('controller' => 'programs', 'action' => 'archive'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px'));
+                                }?>
+                                </li>
+                            </ul>
+                            </li>
+                            
+<!--                            <li><?php echo $this->Html->link(__('Reports'), array('controller' => 'reports', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px')); ?> 
+                            
+                            </li>-->
+                            
+                            <li><?php echo $this->Html->link(__('Newsletters'), array('controller' => 'newsletters', 'action' => 'index'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px')); ?>
+                            <ul>
+                                <li><?php  
+                                echo $this->Html->link(__('New Newsletter'), array('controller' => 'newsletter', 'action' => 'add'), array('style' => 'color: rgb(255, 255, 255)', 'line-height' => '23px', 'font-size' => '12px'));
+                            ?>
+                                </li>
+                            </ul>
+                            </li>
                         </ul>
                         <div style="clear: both"></div>
 

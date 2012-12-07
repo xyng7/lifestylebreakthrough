@@ -46,19 +46,17 @@
     </tbody>
 </table>
 </div>
-
-
     <div class="actions">
 
 
-        <h4><?php echo __('Actions'); ?></h4>
+<!--        <h4><?php echo __('Actions'); ?></h4>
         <ul>
             <li><?php echo $this->Html->link(__('New Exercise'), array('action' => 'add')); ?></li>
-        </ul>
+        </ul>-->
                 <?php if (AuthComponent::user('role') === 'superadmin') { ?>
-        <h4><?php echo __('Others'); ?></h4>
+        <h4><?php echo __('Actions'); ?></h4>
             <ul>
-            <li><?php echo $this->Html->link(__('Archived Exercise'), array('action' => 'archive')); ?></li>
+<!--            <li><?php echo $this->Html->link(__('Archived Exercise'), array('action' => 'archive')); ?></li>-->
             <li><?php echo $this->Html->link(__('Manage Body Parts'), array('controller' => 'body_parts', 'action' => 'index')); ?>
             <li><?php echo $this->Html->link(__('Manage Categories'), array('controller' => 'categories', 'action' => 'index')); ?>
             <li><?php echo $this->Html->link(__('Manage Equipment'), array('controller' => 'equipment', 'action' => 'index')); ?>

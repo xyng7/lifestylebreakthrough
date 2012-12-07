@@ -1,8 +1,8 @@
-<div class="actions">	
+<!--<div class="actions">	-->
     <h4><?php echo __('Clients'); ?></h4>
-</div>
+<!--</div>-->
 
-<div class="actions">
+<!--<div class="actions">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <ul>
         <li><?php echo $this->Html->link(__('New Client'), array('action' => 'add')); ?></li>
@@ -15,7 +15,7 @@ if (AuthComponent::user('role') === 'superadmin') {
 }
 ?></li>
     </ul>
-</div>
+</div>-->
 
 <table id="js-datatable" cellpadding="0" cellspacing="0">
     <thead>

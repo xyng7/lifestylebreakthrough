@@ -1,13 +1,13 @@
-<div class="actions">	
+<!--<div class="actions">	-->
     <h4><?php echo __('Newsletter'); ?></h4>
-</div>
+<!--</div>-->
 
-<div class="actions">
+<!--<div class="actions">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <ul>
         <li><?php echo $this->Html->link(__('New Newsletter'), array('action' => 'add')); ?></li>
     </ul>
-</div>
+</div>-->
 
 <table id="js-datatable" cellpadding="0" cellspacing="0">
     <thead>

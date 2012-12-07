@@ -72,6 +72,9 @@ ul, li {
 p {
 	margin: 0 0 1em 0;
 }
+img {
+    border: none;
+}
 
 /** Layout **/
 #container {
@@ -124,7 +127,6 @@ div.view {
 	border-left:1px solid #666;
 	padding:10px 2%;
 }
-
 div.actions {
 	float:left;
 	width:15%;
@@ -189,6 +191,45 @@ table td.actions a {
 	margin: 0px 6px;
 	padding:2px 5px;
 }
+
+#gradient-style
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 12px;
+	margin: 45px;
+	width: 480px;
+	text-align: left;
+	border-collapse: collapse;
+}
+#gradient-style th
+{
+	font-size: 13px;
+	font-weight: normal;
+	padding: 8px;
+	background: #b9c9fe url('img/gradhead.png') repeat-x;
+	border-top: 2px solid #d3ddff;
+	border-bottom: 1px solid #fff;
+	color: #039;
+}
+#gradient-style td
+{
+	padding: 8px; 
+	border-bottom: 1px solid #fff;
+	color: #669;
+	border-top: 1px solid #fff;
+	background: #e8edff url('img/gradback.png') repeat-x;
+}
+#gradient-style tfoot tr td
+{
+	background: #e8edff;
+	font-size: 12px;
+	color: #99c;
+}
+#gradient-style tbody tr:hover td
+{
+	background: #d0dafd url('img/gradhover.png') repeat-x;
+	color: #339;
+}        
 
 /* SQL log */
 .cake-sql-log {
@@ -430,7 +471,6 @@ form .error-message {
 .notice,
 p.error,
 .error-message {
-    /*yellow*/
 	background: #ffcc00;
 	background-repeat: repeat-x;
 	background-image: -moz-linear-gradient(top, #ffcc00, #E6B800);
@@ -452,10 +492,11 @@ p.error,
 	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
 	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
+.success,
+.message,
 .cake-error,
 p.error,
 .error-message {
-    /*red*/
 	clear: both;
 	color: #fff;
 	background: #c43c35;
@@ -469,9 +510,7 @@ p.error,
 	background-image: linear-gradient(top, #ee5f5b, #c43c35);
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
-.message,
-success {
-    /*green*/
+.success {
 	clear: both;
 	color: #fff;
 	border: 1px solid rgba(0, 0, 0, 0.5);
@@ -508,24 +547,60 @@ p.error em {
 
 /**  Actions  **/
 .actions ul {
-    width:135px;
-	margin: 0;
+              width:170px;
+	margin: 25px;
 	padding: 0;
-        overflow:visible;
+/*              overflow:visible;
+              border-style: solid solid none solid;
+	border-color: #BCD2E6;
+	border: 10px;
+	border-width: 1px;*/
+        margin-bottom: 15px;
+/*        margin:0 0 5em 0;*/
+	list-style-type: none;
+	white-space: nowrap;
+/*	padding: 0;
+        text-align: left;*/
+        
 }
-.actions li {
+/*.actions li {
 	margin:0 0 0.5em 0;
 	list-style-type: none;
 	white-space: nowrap;
 	padding: 0;
         overflow:visible;
 }
-.actions ul li a {
+.actions ul li a{
 	font-weight: normal;
 	display: block;
 	clear: both;
         overflow:visible;
-}
+}*/
+.actions li a {
+    margin:0 0 0.5em 0;
+	list-style-type: none;
+	white-space: nowrap;
+	padding: 0;
+	height: 32px;
+  	font: 16px Verdana;
+        font-weight: bold;
+  	voice-family: inherit;
+  	height: 24px;
+	text-decoration: none;
+        border: #fff;
+        margin-bottom: 15px;
+        text-align: left;
+        line-height: 10px;
+	}	
+	
+.actions li a:link, .actions li a:visited {
+	color: #4D4D4D;
+	display: block;
+	background:  url('../img/menu10x.jpg');
+	padding: 8px 0 0 10px;
+        border: #fff;
+        margin-bottom: 15px;
+	}
 
 /* Buttons and button links */
 input[type=submit],
@@ -541,7 +616,7 @@ input[type=submit],
 	background-image: -o-linear-gradient(top, #fefefe, #dcdcdc);
 	background-image: linear-gradient(top, #fefefe, #dcdcdc);
 	color:#333;
-	border:1px solid #bbb;
+	border:0px solid #bbb;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
@@ -554,13 +629,17 @@ input[type=submit],
 	-webkit-user-select: none;
 	user-select: none;
         overflow:visible;
+        margin-bottom: 15px;
 }
 .actions ul li a:hover,
 .actions a:hover {
-	background: #ededed;
+/*	background: #ededed;
 	border-color: #acacac;
 	text-decoration: none;
-        overflow:visible;
+        overflow:visible;*/
+        color: #fff;
+	background:  url('../img/menu14x.jpg') 0 -40px;
+	padding: 8px 0 0 10px;
 }
 input[type=submit]:active,
 .actions ul li a:active,
@@ -579,6 +658,482 @@ input[type=submit]:active,
 	border-color: #aaa;
 	text-decoration: none;
         overflow:visible;
+}
+
+/** Menu **/
+.menu_glide ul{
+    padding: 20px;
+    margin-left: 30px;
+    font-family:Arial;
+    width:70%;
+    background:  url('../img/menu.png') no-repeat left;
+}
+.menu_glide ul li{
+    display: inline;
+    float: left;
+    list-style: none;
+    position: relative;
+    text-align: center;
+    margin-left: 50px;
+    width: 100px;
+    /*padding-left: 190px;*/
+    
+}
+.menu_glide ul li a{
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+.menu_glide ul li ul{
+/*    -moz-border-radius-bottomright: 7px;
+    -moz-border-radius-bottomleft: 7px;
+    -webkit-border-bottom-left-radius: 7px;
+    -webkit-border-bottom-right-radius: 7px;
+    -khtml-border-radius-bottomright: 7px;
+    -khtml-border-radius-bottomleft: 7px;
+    border-radius-bottomright: 7px;
+    border-radius-bottomleft: 7px;
+    border-radius:7px;*/
+
+    padding-bottom: 5px;
+    position: absolute;
+    z-index: 999999;
+    display: none;
+}
+.menu_glide ul li ul li{
+/*    -moz-border-radius-topright: 0px;
+    -moz-border-radius-topleft: 0px;
+    -webkit-border-top-left-radius: 0px;
+    -webkit-border-top-right-radius: 0px;
+    -khtml-border-radius-topright: 0px;
+    -khtml-border-radius-topleft: 0px;
+    border-radius-topright: 0px;
+    border-radius-topleft: 0px;
+    border-radius:0px;*/
+    margin: 0px;
+    float: none;
+    border:none;
+/*    word-wrap:break-word;*/
+}
+.menu_glide ul li ul li a{
+    padding-left: 5px;
+    padding-right: 5px;
+    font-weight: normal;
+}
+
+
+.exNav{
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+   width: 180px; /* width of menu (don't forget to add border with below!) */
+   border-left: 8px solid #ffa1a3; /* thick left border of menu */
+ }
+.exNav li{
+   border-bottom: 1px solid #885b5c; /* Gray border beneath each menu item */
+   }
+.exNav li a{
+   background: white url('../img/menu.png') repeat-y left top;
+ /* Background image positioned to the left(v) top(h) corner initially */
+   font: bold 15px "Lucida Grande", "Trebuchet MS", Verdana;
+   display: block;
+   color: black;
+   width: auto;
+   border-bottom: 1px solid white; 
+/* White border beneath each menu item link, to add depth */
+   line-height:2.5em;
+   height:2.5em;
+   text-indent: 8px;
+   text-decoration: none;
+   }
+.exNav li a:visited, #exNav li a:active{
+   color: black;
+   }
+.exNav li a:hover{
+   background-position: -15px 0; 
+/* Shift background image horizontally 15px,
+ or the start of the 2nd background image */
+   color: black;
+   }
+.exNav li.last, #exNav li.last a{
+   border-bottom-width: 0; /* For last menu item within menu,
+ remove bottom border */
+   }
+
+   
+   
+ul#navmenu { 
+margin-left: 65px; 
+/*border: 0 none; 
+padding: 0; 
+width: 1600px; For KHTML 
+list-style: none; */
+list-style-type: none;
+height: 24px; 
+} 
+ul#navmenu li { 
+/*margin: 0; 
+border: 0 none; 
+padding: 0; */
+float: left; /*For Gecko*/ 
+/*display: inline; 
+list-style: none; 
+position: relative; */
+height: 24px; 
+width:80px;
+} 
+ul#navmenu ul { 
+margin: 0; 
+margin-top: -24px;
+border: 0 none; 
+padding: 0; 
+width: 360px; 
+list-style: none; 
+display: none; 
+position: relative; 
+top: 24px; 
+left: 0; 
+} 
+ul#navmenu ul li { 
+float: none; /*For Gecko*/ 
+display: block !important; 
+display: inline; /*For IE*/ 
+margin-right: 50px;
+} 
+/* Root Menu */ 
+ul#navmenu a { 
+border: 1px solid #FFF; 
+border-right-color: #CCC; 
+border-bottom-color: #CCC; 
+padding: 0 6px; 
+float: none !important; /*For Opera*/ 
+float: left; /*For IE*/ 
+display: block; 
+/*background: #d24242;*/
+/*background: #f6b3b3;*/
+/*background: #f46666;*/
+/*background: #1f84b7;*/
+color: #666; 
+font: bold 10px/22px Verdana, Arial, Helvetica, sans-serif; 
+text-decoration: none; 
+height: auto !important; 
+height: 1%; /*For IE*/ 
+-moz-border-radius: 8px;
+-webkit-border-radius: 8px;
+} 
+/* Root Menu Hover Persistence */ 
+ul#navmenu a:hover, 
+ul#navmenu li:hover a, 
+ul#navmenu li.iehover a { 
+background: #82c9ed; 
+color: #FFF; 
+} 
+/* 2nd Menu */ 
+ul#navmenu li:hover li a, 
+ul#navmenu li.iehover li a { 
+float: none; 
+background: #82c9ed; 
+color: #666; 
+width: 150px;
+line-height: 125px;
+-moz-border-radius: 4px;
+-webkit-border-radius: 4px;
+} 
+/* 2nd Menu Hover Persistence */ 
+ul#navmenu li:hover li a:hover, 
+ul#navmenu li:hover li:hover a, 
+ul#navmenu li.iehover li a:hover, 
+ul#navmenu li.iehover li.iehover a { 
+background: #CCC; 
+color: #FFF; 
+} 
+/* 3rd Menu */ 
+ul#navmenu li:hover li:hover li a, 
+ul#navmenu li.iehover li.iehover li a { 
+background: #EEE; 
+color: #666; 
+} 
+/* 3rd Menu Hover Persistence */ 
+ul#navmenu li:hover li:hover li a:hover, 
+ul#navmenu li:hover li:hover li:hover a, 
+ul#navmenu li.iehover li.iehover li a:hover, 
+ul#navmenu li.iehover li.iehover li.iehover a { 
+background: #CCC; 
+color: #FFF; 
+} 
+/* 4th Menu */ 
+ul#navmenu li:hover li:hover li:hover li a, 
+ul#navmenu li.iehover li.iehover li.iehover li a { 
+background: #EEE; 
+color: #666; 
+} 
+/* 4th Menu Hover */ 
+ul#navmenu li:hover li:hover li:hover li a:hover, 
+ul#navmenu li.iehover li.iehover li.iehover li a:hover { 
+background: #CCC; 
+color: #FFF; 
+} 
+ul#navmenu ul ul, 
+ul#navmenu ul ul ul { 
+display: none; 
+position: absolute; 
+top: 0; 
+left: 160px; 
+} 
+/* Do Not Move - Must Come Before display:block for Gecko */ 
+ul#navmenu li:hover ul ul, 
+ul#navmenu li:hover ul ul ul, 
+ul#navmenu li.iehover ul ul, 
+ul#navmenu li.iehover ul ul ul { 
+display: none; 
+} 
+ul#navmenu li:hover ul, 
+ul#navmenu ul li:hover ul, 
+ul#navmenu ul ul li:hover ul, 
+ul#navmenu li.iehover ul, 
+ul#navmenu ul li.iehover ul, 
+ul#navmenu ul ul li.iehover ul { 
+display: block; 
+}    
+
+.navx {
+    width: 170px;
+/* width:980px;
+ height:30px;
+ left:50%;*/
+/* margin-left:150px;*/
+ list-style:none;
+ position:relative;
+}
+.navx li {
+ display:inline-block;
+ margin:0 3px;
+ position:relative;
+ overflow:hidden;
+ height:30px; /*建议此高度大于等于里面的a标签高度*/
+ float:left;
+ margin-bottom: 15px;
+}
+.navx li span {
+ display:inline-block;
+ overflow:hidden
+}
+.navx li a {
+ text-decoration:none;
+ outline:none;
+/* color:#666;*/
+ display:inline-block;
+ padding:0 10px;  
+ text-align:center;
+/* background-color: #E1E1E1;*/
+ font-weight:bold;
+ height:30px;
+ line-height:10px;
+}
+
+/*鼠标经过时样式*/
+.navx li a.over {
+ background-color:#666;
+ color:#FFF
+}
+/* 2nd Menu */ 
+ul#navx li:hover li a, 
+ul#navx li.iehover li a { 
+float: none; 
+background: #82c9ed; 
+color: #666; 
+width: 150px;
+line-height: 125px;
+-moz-border-radius: 4px;
+-webkit-border-radius: 4px;
+} 
+/* 2nd Menu Hover Persistence */ 
+ul#navx li:hover li a:hover, 
+ul#navx li:hover li:hover a, 
+ul#navx li.iehover li a:hover, 
+ul#navx li.iehover li.iehover a { 
+background: #CCC; 
+color: #FFF; 
+}
+/* 3rd Menu */ 
+ul#navx li:hover li:hover li a, 
+ul#navx li.iehover li.iehover li a { 
+background: #EEE; 
+color: #666; 
+} 
+/* 3rd Menu Hover Persistence */ 
+ul#navx li:hover li:hover li a:hover, 
+ul#navx li:hover li:hover li:hover a, 
+ul#navx li.iehover li.iehover li a:hover, 
+ul#navx li.iehover li.iehover li.iehover a { 
+background: #CCC; 
+color: #FFF; 
+} 
+/* 4th Menu */ 
+ul#navx li:hover li:hover li:hover li a, 
+ul#navx li.iehover li.iehover li.iehover li a { 
+background: #EEE; 
+color: #666; 
+} 
+/* 4th Menu Hover */ 
+ul#navx li:hover li:hover li:hover li a:hover, 
+ul#navx li.iehover li.iehover li.iehover li a:hover { 
+background: #CCC; 
+color: #FFF; 
+} 
+ul#navx ul ul, 
+ul#navx ul ul ul { 
+display: none; 
+position: absolute; 
+top: 0; 
+left: 160px; 
+} 
+/* Do Not Move - Must Come Before display:block for Gecko */ 
+ul#navx li:hover ul ul, 
+ul#navx li:hover ul ul ul, 
+ul#navx li.iehover ul ul, 
+ul#navx li.iehover ul ul ul { 
+display: none; 
+} 
+ul#navx li:hover ul, 
+ul#navx ul li:hover ul, 
+ul#navx ul ul li:hover ul, 
+ul#navx li.iehover ul, 
+ul#navx ul li.iehover ul, 
+ul#navx ul ul li.iehover ul { 
+display: block; 
+}
+
+#nav { 
+line-height: 24px; list-style-type: none; background:#666; 
+} 
+#nav a { 
+display: block; width: 80px; text-align:center; 
+} 
+#nav a:link { 
+color:#666; text-decoration:none; 
+} 
+#nav a:visited { 
+color:#666;text-decoration:none; 
+} 
+#nav a:hover { 
+color:#FFF;text-decoration:none;font-weight:bold; 
+} 
+#nav li { 
+float: left; width: 80px; background:#CCC; 
+} 
+#nav li a:hover{ 
+background:#999; 
+} 
+#nav li ul { 
+line-height: 27px; list-style-type: none;text-align:left; 
+left: -999em; width: 180px; position: absolute; 
+} 
+#nav li ul li{ 
+float: left; width: 180px; 
+background: #F6F6F6; 
+} 
+#nav li ul a{ wedisplay: block; width: 156px;text-align:left;padding-left:24px; 
+} 
+#nav li ul a:link { 
+color:#666; text-decoration:none; 
+} 
+#nav li ul a:visited { 
+color:#666;text-decoration:none; 
+} 
+#nav li ul a:hover { 
+color:#F3F3F3;text-decoration:none;font-weight:normal; 
+background:#C00; 
+} 
+#nav li:hover ul { 
+left: auto; 
+} 
+#nav li.sfhover ul { 
+left: auto; 
+} 
+#content { 
+clear: left; 
+} 
+
+
+/*
+.nav{ height:40px; line-height:40px; top:0; width:100%; position:relative;}
+.nav li{ float:left; width:120px; text-align:center;}
+.nav li a{ color:#FFF; font-size:9pt; display:block;}
+.nav li a:hover{ text-decoration:underline; font-weight:bold;}
+.nav li ul{ display:none; width:830px;position:absolute; left:120px;}
+.nav li ul li{ margin:0 0 0 30px; width:auto;line-height:25px;}
+.nav li ul li a{ color:#666;}
+.nav li ul li a:hover{ font-weight:normal;}
+.nav li ul.index_show{ display:block;}*/
+
+.customSelect
+{
+padding:0 4px;
+}
+.selectedCategoryDiv
+{
+background-color:#FFFFFF;
+
+padding:4px 5px;
+font-weight:bold;
+font-size:16px;
+width:215px;
+cursor:pointer;
+}
+.selectLeft
+{
+float:left;
+border-top:1px solid #93a8ad;
+
+border-bottom:1px solid #FFFFFF;
+
+border-left:1px solid #bac8cb;
+
+border-right:1px dotted #93a8ad;
+
+position:relative;
+}
+.selectOptions
+{
+position:absolute;
+top:29px;
+left:0px;
+background-color:#FFFFFF;
+
+width:225px;
+padding:0;
+}
+.selectOptions div
+{
+padding:2px 7px;
+cursor:pointer;
+font-size:16px;
+}
+.selectRight
+{
+float:left;
+background-color:#FFFFFF;
+
+border-top:1px solid #93a8ad;
+
+border-bottom:1px solid #FFFFFF;
+
+border-left:none;
+border-right:1px solid #FFFFFF;
+
+}
+.selectDropDownArrow
+{
+padding:7px 8px 6px 8px;
+cursor:pointer;
+border:none;
+margin:0;
+}
+.hoverItem
+{
+color:#ef3e36;
+
 }
 
 /** Related **/
@@ -830,14 +1385,4 @@ z-index: 999;
 }
 #coolMenu ul li:hover a {
     background: #ffc97c;
-}
-
-div.failure-message{
-    /*red*/
-    background: #c43c35;
-}
-
-div.success-message{
-    /*green*/
-    background: #76BF6B;
 }
