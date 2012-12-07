@@ -3,7 +3,7 @@
     <div class="twelve mobile-twelve columns">
 <div class="form">
 
-    <?php echo $this->Form->create('Edit Newsletter'); ?>
+    <?php echo $this->Form->create('Newsletter'); ?>
     <fieldset>
         <?php echo $this->Html->script('ckeditor/ckeditor'); ?>
         <legend><?php echo __('Edit Newsletter'); ?></legend>
