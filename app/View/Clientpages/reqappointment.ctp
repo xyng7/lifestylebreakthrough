@@ -38,7 +38,7 @@ echo $this->Html->CSS(array('datepicker/jquery-ui'));
 <script>
     $(document).ready(function() {
         $("#datepicker").datepicker({
-            dateFormat : 'yy-mm-dd', altFormat : 'yy-mm-dd'
+            dateFormat : 'dd-mm-yy', altFormat : 'yy-mm-dd'
         });
         $("#datepicker2").datepicker({
             dateFormat : 'yy-mm-dd', altFormat : 'yy-mm-dd'

@@ -120,16 +120,17 @@ class ClientpagesController extends AppController {
     public function reqappointment() {
         $this->clientdetails();
         $client = $this->Client->read(null, AuthComponent::user('client_id'));
-
+        
         $firstname = $client['Client']["first_name"];
         $lastname = $client['Client']["last_name"];
         $this->set(compact('firstname', 'lastname'));
 
         if ($this->request->is('post')) {
 
-            $postdata = $this->request->data;
+           $postdata = $this->request->data;
+
             $prefcontact = $postdata['reqappointment']['prefcontact'];
-            $prefdate = implode("-", $postdata['reqappointment']['prefdate']);
+            $prefdate = $postdata['reqappointment']['prefdate'];
             $prefvenue = $postdata['reqappointment']['prefvenue'];
             $prefstaff = $postdata['reqappointment']['prefstaff'];
 
@@ -150,8 +151,8 @@ class ClientpagesController extends AppController {
                            Prefered date: $prefdate
                            Prefered venue: $prefvenue
                            Prefered staff: $prefstaff
-                           Prefered time: $preftime"
-            );
+                          Prefered time: $preftime"
+            ); 
             $this->Session->setFlash(__('Request for appointment has been sent!', true), 'success-message');
             $this->redirect(array('action' => 'index'));
         }
