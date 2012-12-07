@@ -644,7 +644,8 @@ input[type=submit],
             text-decoration: none;
             overflow:visible;*/
     color: #fff;
-    background:  url('../img/menu14x.jpg') 0 -40px;
+    /*background:  url('../img/menu14x.jpg') 0 -40px;*/
+    background: #82C9ED;
     padding: 8px 0 0 10px;
 }
 input[type=submit]:active,
