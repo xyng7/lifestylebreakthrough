@@ -77,7 +77,7 @@ class ClientsController extends AppController {
                                 'suburb' => $this->request->data('Client.suburb'),
                                 'postal' => $this->request->data('Client.postal'),
                                 'address' => $this->request->data('Client.address'),
-                                'user_id' => $this->User->id,
+                                'user_id' => intval($this->User->id),
                                 'flag_active' => 'active'
                     ))
                     &&
