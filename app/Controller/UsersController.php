@@ -2,10 +2,13 @@
 
 // Users Controller
 class UsersController extends AppController {
+    
+    var $components=array("Email","Session");
+    var $helpers=array("Html","Form","Session");
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('logout', 'forgotpassword'); //logout??
+        $this->Auth->allow('logout', 'forgotpassword', 'reset'); //logout??
     }
 
     public function isAuthorized($user) {
@@ -127,7 +130,7 @@ class UsersController extends AppController {
     }
 
     public function logout() {
-        $this->Session->setFlash('Logout successful');
+        $this->Session->setFlash(__('Logout successful', true), 'success-message');
         $this->redirect($this->Auth->logout());
     }
 
@@ -162,9 +165,9 @@ class UsersController extends AppController {
         }
     }
 
-    public function forgotpassword() {
+   /* public function forgotpassword() {
         $this->layout = 'forgotpassworddefault';  //dont use default layout with menu icons
-    }
+    } */
 
     public function archive() {
         //print al archive admin
@@ -189,6 +192,149 @@ class UsersController extends AppController {
         }
         $this->Session->setFlash(__('Admin was not activated', true), 'failure-message');
         $this->redirect(array('action' => 'index'));
+    }
+    
+    //reset pw function
+    
+    function forgotpassword(){
+        //$this->layout="signup";
+        $this->layout = 'forgotpassworddefault'; 
+        $this->User->recursive=-1;
+        if(!empty($this->data))
+        {
+            if(empty($this->data['User']['username']))
+            {
+                $this->Session->setFlash(__('Please enter your email address or username', true), 'failure-message');
+            }
+            else
+            {
+                $email=$this->data['User']['username'];
+                $fu=$this->User->find('first',array('conditions'=>array('User.username'=>$email)));
+                if($fu)
+                {
+                    //debug($fu);
+                    if($fu['User']['flag_active'] == 'active')
+                    {
+                        if($fu['User']['role'] == 'client')
+                        {
+                        $key = Security::hash(String::uuid(),'sha512',true);
+                        $hash=sha1($fu['User']['username'].rand(0,100));
+                        $url = Router::url( array('controller'=>'users','action'=>'reset'), true ).'/'.$key.'#'.$hash;
+                        $ms=$url;
+                        $ms=wordwrap($ms,1000);
+                        //debug($url);
+                        $fu['User']['tokenhash']=$key;
+                        $this->User->id=$fu['User']['id'];
+                        if($this->User->saveField('tokenhash',$fu['User']['tokenhash'])){
+ 
+                                $email = new CakeEmail();
+                                $email->config('default');
+                                $email->viewVars(array('ms' => $ms));
+                                $email->template('resetpw') 
+                                        ->emailFormat('html')
+                                        ->from(array('lifestylebreakthroughtest@gmail.com' => 'Lifestyle Breakthrough'))
+                                        ->to($fu['User']['username'])
+                                        ->subject('Password Reset')
+                                        ->send();
+           
+   
+                                $this->Session->setFlash(__('Email has been sent! Please check your email inbox for instructions on how to reset your password', true), 'success-message');
+                            
+                        }
+                        else{
+                            $this->Session->setFlash("Error Generating Reset link");
+                        }
+                        
+                        }
+                        
+                        if($fu['User']['role'] == 'admin' || $fu['User']['role'] == 'superadmin')
+                        {
+                          $key = Security::hash(String::uuid(),'sha512',true);
+                        $hash=sha1($fu['User']['username'].rand(0,100));
+                        $url = Router::url( array('controller'=>'users','action'=>'reset'), true ).'/'.$key.'#'.$hash;
+                        $ms=$url;
+                        $ms=wordwrap($ms,1000);
+                        //debug($url);
+                        $fu['User']['tokenhash']=$key;
+                        $this->User->id=$fu['User']['id'];
+                        if($this->User->saveField('tokenhash',$fu['User']['tokenhash'])){
+ 
+                                $email = new CakeEmail();
+                                $email->config('default');
+                                $email->viewVars(array('ms' => $ms));
+                                $email->template('resetpw') 
+                                        ->emailFormat('html')
+                                        ->from(array('lifestylebreakthroughtest@gmail.com' => 'Lifestyle Breakthrough'))
+                                        ->to('lifestylebreakthroughtest@gmail.com')
+                                        ->subject('Password Reset for: '. $fu['User']['username'])
+                                        ->send();
+           
+   
+                                $this->Session->setFlash(__('Email sent! Please check the default admin email inbox', true), 'success-message');
+                            
+                        }
+                        else{
+                            $this->Session->setFlash(__('Error generating reset link', true), 'failure-message');
+                        }  
+                        }
+                        
+                    }
+                    else
+                    {
+                        $this->Session->setFlash(__('This account is not active', true), 'failure-message');
+                    }
+                }
+                else
+                {
+                    $this->Session->setFlash(__('Email or user does not exist', true), 'failure-message');
+                }
+            }
+        }
+    }
+    
+    function reset($token=null){
+        //$this->layout="Login";
+          $this->layout = 'forgotpassworddefault'; 
+        $this->User->recursive=-1;
+        if(!empty($token)){
+            $u=$this->User->findBytokenhash($token);
+            if($u){
+                $this->User->id=$u['User']['id'];
+                if(!empty($this->data)){
+                    
+                    if (AuthComponent::password($this->request->data('User.password')) == AuthComponent::password($this->request->data('User.new_password_confirm'))) {
+                    $this->User->data=$this->data;
+                    $this->User->data['User']['username']=$u['User']['username'];
+                    $new_hash=sha1($u['User']['username'].rand(0,100));//created token
+                    $this->User->data['User']['tokenhash']=$new_hash;
+                    if($this->User->validates(array('fieldList'=>array('password','new_password_confirm')))){
+                        if($this->User->save($this->User->data))
+                        {
+                            $this->Session->setFlash(__('Password has been reset!', true), 'success-message');
+                            $this->redirect(array('action'=>'login'));
+                        }
+ 
+                    }
+                    else{
+ 
+                        $this->set('errors',$this->User->invalidFields());
+                    }
+                } else {
+                     $this->Session->setFlash(__('Password do not match, please try again.', true), 'failure-message');
+                }
+                }
+            }
+            
+            else
+            {
+                $this->Session->setFlash(__('An error has occured. Please redo forgot password.', true), 'failure-message');
+                $this->redirect(array('action'=>'login'));
+            }
+        }
+ 
+        else{
+            $this->redirect('/');
+        }
     }
 
 }
