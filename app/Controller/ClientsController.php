@@ -81,7 +81,7 @@ class ClientsController extends AppController {
                                 'flag_active' => 'active'
                     ))
                     &&
-                    $this->User->save(1
+                    $this->User->save(
                             array(
                                 'username' => $this->request->data('Client.email'),
                                 'password' => implode($this->request->data('Client.dob')),
