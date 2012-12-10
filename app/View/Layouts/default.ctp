@@ -136,7 +136,12 @@ $homedir = __d('cake_dev', 'CakePHP: the rapid development php framework :D');
                                 <li><?php echo $this->Html->link(__('Exercises'), array('controller' => 'exercises', 'action' => 'index'), array('class'=>'navigation')); ?>
                                     <ul>
                                         <li><?php
-                                            echo $this->Html->link(__('New Exercise'), array('controller' => 'Exercises', 'action' => 'add'), array('class'=>'navigation'));
+                                            echo $this->Html->link(__('New Exercise'), array('controller' => 'Exercises', 'action' => 'add'), array('class'=>'navigation')); ?>
+                                        </li>
+                                         <li><?php
+                                            if (AuthComponent::user('role') === 'superadmin') {
+                                                echo $this->Html->link(__('Archived Exercises'), array('controller' => 'Exercises', 'action' => 'archive'), array('class'=>'navigation'));
+                                            }
                             ?>
                                         </li>
                                     </ul>
