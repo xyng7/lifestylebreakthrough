@@ -1,1 +1,1 @@
-<div class="success success-message"><?php echo $message; ?></div>
+<div class="success success-message" style="font-size: 15pt;"><?php echo $message; ?></div>

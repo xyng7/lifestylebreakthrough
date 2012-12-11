@@ -19,16 +19,16 @@ echo $this->Html->CSS(array('datepicker/jquery-ui','datepicker/jquery-ui-1.8.23.
     <script>
     $(document).ready(function() {
         $("#datepicker").datepicker({
-            dateFormat : 'yy-mm-dd', altFormat : 'yy-mm-dd'
+            dateFormat : 'dd-mm-yy', altFormat : 'yy-mm-dd'
         });
         $("#datepicker2").datepicker({
-            dateFormat : 'yy-mm-dd', altFormat : 'yy-mm-dd'
+            dateFormat : 'dd-mm-yy', altFormat : 'yy-mm-dd'
         });
     });
     
 </script>                
-                <th> <?php echo $this->Form->input('start_date', array('id' => 'datepicker', 'class' => 'datepicker', 'type' => 'text', 'label' => array('text' => '<p align="left">Start Date</p>', 'style' => 'align:left'))); ?>
-                <th> <?php echo $this->Form->input('end_date', array('id' => 'datepicker2', 'class' => 'datepicker2', 'type' => 'text', 'label' => array('text' => '<p align="left">End Date</p>', 'style' => 'align:left'))); ?>
+                <th> <?php echo $this->Form->input('start_date', array('id' => 'datepicker', 'class' => 'datepicker', 'type' => 'text', 'label' => array('text' => 'Start Date', 'style' => 'align:left'))); ?>
+                <th> <?php echo $this->Form->input('end_date', array('id' => 'datepicker2', 'class' => 'datepicker2', 'type' => 'text', 'label' => array('text' => 'End Date', 'style' => 'align:left'))); ?>
             </tr>
         </table>
 

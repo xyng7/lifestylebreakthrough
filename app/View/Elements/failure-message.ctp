@@ -1,1 +1,5 @@
-<div class="error-message failure-message"><?php echo $message; ?></div>
+
+<div class="error-message failure-message" style="font-size: 15pt;">
+    
+    <?php echo $message; ?>
+</div>
