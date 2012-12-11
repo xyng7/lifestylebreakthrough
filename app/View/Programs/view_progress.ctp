@@ -59,14 +59,37 @@
 			</td>
                         
 		</tr>
+                <?php 
+                $act_sets ="N/A"; 
+                $act_reps ="N/A";
+                $act_res ="N/A";
+                $act_load ="N/A";
+                $act_date ="N/A";
+                if ($exercise['ExercisesProgram']['act_sets'] != null) {
+                    $act_sets = $exercise['ExercisesProgram']['act_sets'];
+                } 
+                if ($exercise['ExercisesProgram']['act_reps'] != null) {
+                    $act_reps = $exercise['ExercisesProgram']['act_reps'];
+                }
+                if ($exercise['ExercisesProgram']['act_res'] != null) {
+                    $act_res = $exercise['ExercisesProgram']['act_res'];
+                }
+                if ($exercise['ExercisesProgram']['act_load'] != null) {
+                    $act_load = $exercise['ExercisesProgram']['act_load'];
+                }
+                if ($exercise['ExercisesProgram']['date'] != null) {
+                    $act_date = $exercise['ExercisesProgram']['date'];
+                }
+                
+                ?>
                 <tr style="background-color: #0F67A1;">
                     <td></td>
                     <td style="color: white;">Progress</td>
-                    <td style="color: white;"><?php echo $exercise['ExercisesProgram']['act_sets']; ?></td>
-                    <td style="color: white;"><?php echo $exercise['ExercisesProgram']['act_reps']; ?></td>
-                    <td style="color: white;"><?php echo $exercise['ExercisesProgram']['act_res']; ?></td>
-                    <td style="color: white;"><?php echo $exercise['ExercisesProgram']['act_load']; ?></td>
-                    <td style="color: white;"><?php echo $exercise['ExercisesProgram']['date']; ?></td>
+                    <td style="color: white;"><?php echo $act_sets; ?></td>
+                    <td style="color: white;"><?php echo $act_reps; ?></td>
+                    <td style="color: white;"><?php echo $act_res; ?></td>
+                    <td style="color: white;"><?php echo $act_load; ?></td>
+                    <td style="color: white;"><?php echo $act_date; ?></td>
                 
                 </tr>
                 <?php $i++; ?>
