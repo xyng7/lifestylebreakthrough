@@ -76,10 +76,10 @@
 
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit Client'), array('action' => 'edit', $client['Client']['id'])); ?> </li>
+		<li><?php //echo $this->Html->link(__('Edit Client'), array('action' => 'edit', $client['Client']['id'])); ?> </li>
                 <li><?php echo $this->Html->link(__('Resend Email'), array('action' => 'resendwelcome', $client['Client']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('List Clients'), array('action' => 'index')); ?> </li>
-		<li><?php if (AuthComponent::user('role') === 'superadmin') {
-                    echo $this->Html->link(__('New Client'), array('action' => 'add')); }?> </li>
+		<li><?php //if (AuthComponent::user('role') === 'superadmin') {
+                    //echo $this->Html->link(__('New Client'), array('action' => 'add')); }?> </li>
 	</ul>
 </div>
