@@ -109,7 +109,7 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
                      
                         
 		</tr>
-                <tr style="background: activeborder;">
+                <tr style="background-color: #0F67A1;">
                     <?php 
                    echo $this->Form->input("Exercise.$i.id", array('type' => 'hidden', 'default' => $exercise['id']));
                    echo $this->Form->input("Exercise.$i.rec_sets", array('type' => 'hidden', 'default' => $exercisesPrograms[$i - 1]['exercises_programs']['rec_sets']));
@@ -120,11 +120,11 @@ echo $this->Html->css('datepicker/jquery-ui-1.8.23.custom');
                     <td></td>
                     <td style="text-align: center; color: white;"><b><?php echo __('Progress'); ?></b></td>
                     
-                    <td><?php echo $this->Form->input("Exercise.$i.actual_sets", array('type' => 'select', 'default' => $setsdef, 'label' => 'Sets', 'options' => array(null,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)));?></td>
-                    <td><?php echo $this->Form->input("Exercise.$i.actual_reps", array('type' => 'select', 'default' => $act_reps, 'label' => 'Reps', 'options' => array(null,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)));?></td>
-                    <td><?php echo $this->Form->input("Exercise.$i.actual_res", array('type' => 'select', 'default' => $act_res, 'label' => 'Rest(sec)', 'options' => array(null,'5' => '5', '10' => '10', '15' => '15', '20' => '20', '25' => '25', '30' => '30', '35' => '35', '40' => '40', '45' => '45', '50' => '50', '55' => '55', '60' => '60', '65' => '65', '70' => '70', '75' => '75', '80' => '80', '85' => '85', '90' => '90')));?></td>
-                    <td><?php echo $this->Form->input("Exercise.$i.actual_load", array('type' => 'select', 'default' => $act_load, 'label' => 'Load(kg)', 'options' => array(null,'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25')));?></td>
-                    <td><?php echo $this->Form->input("Exercise.$i.actual_date", array('type' => 'text', 'default' => $date, 'label' => 'Date Completed', 'class' => 'datepicker')); ?></td>
+                    <td><?php echo $this->Form->input("Exercise.$i.actual_sets", array('type' => 'select', 'default' => $setsdef, 'label' => '<div style="color:white;">Sets</div>', 'options' => array(null,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)));?></td>
+                    <td><?php echo $this->Form->input("Exercise.$i.actual_reps", array('type' => 'select', 'default' => $act_reps, 'label' => '<div style="color:white;">Reps</div>', 'options' => array(null,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)));?></td>
+                    <td><?php echo $this->Form->input("Exercise.$i.actual_res", array('type' => 'select', 'default' => $act_res, 'label' => '<div style="color:white;">Rest(sec)</div>', 'options' => array(null,'5' => '5', '10' => '10', '15' => '15', '20' => '20', '25' => '25', '30' => '30', '35' => '35', '40' => '40', '45' => '45', '50' => '50', '55' => '55', '60' => '60', '65' => '65', '70' => '70', '75' => '75', '80' => '80', '85' => '85', '90' => '90')));?></td>
+                    <td><?php echo $this->Form->input("Exercise.$i.actual_load", array('type' => 'select', 'default' => $act_load, 'label' => '<div style="color:white;">Load(kg)</div>', 'options' => array(null,'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25')));?></td>
+                    <td><?php echo $this->Form->input("Exercise.$i.actual_date", array('type' => 'text', 'default' => $date, 'label' => '<div style="color:white;">Date Completed</div>', 'class' => 'datepicker')); ?></td>
                     
                 </tr>
                 <?php $i++; ?>

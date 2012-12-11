@@ -77,7 +77,7 @@ echo $this->Html->CSS(array('datepicker/jquery-ui','datepicker/jquery-ui-1.8.23.
                     $i = 0;
                     //for loop for body parts
                     foreach ($exercises as $eb){
-                        if ($usetemp == true) {
+                        if ($usetemp == true && !empty($template['Exercise'])) {
                             //  debug($template);                          
                             foreach ($template['Exercise'] as $templates) {
                                 if ($eb['Exercise']['id'] === $templates['id']) {

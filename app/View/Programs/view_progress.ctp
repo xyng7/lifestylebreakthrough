@@ -61,12 +61,12 @@
 		</tr>
                 <tr style="background-color: #0F67A1;">
                     <td></td>
-                    <td>Progress</td>
-                    <td><?php echo $exercise['ExercisesProgram']['act_sets']; ?></td>
-                    <td><?php echo $exercise['ExercisesProgram']['act_reps']; ?></td>
-                    <td><?php echo $exercise['ExercisesProgram']['act_res']; ?></td>
-                    <td><?php echo $exercise['ExercisesProgram']['act_load']; ?></td>
-                    <td><?php echo $exercise['ExercisesProgram']['date']; ?></td>
+                    <td style="color: white;">Progress</td>
+                    <td style="color: white;"><?php echo $exercise['ExercisesProgram']['act_sets']; ?></td>
+                    <td style="color: white;"><?php echo $exercise['ExercisesProgram']['act_reps']; ?></td>
+                    <td style="color: white;"><?php echo $exercise['ExercisesProgram']['act_res']; ?></td>
+                    <td style="color: white;"><?php echo $exercise['ExercisesProgram']['act_load']; ?></td>
+                    <td style="color: white;"><?php echo $exercise['ExercisesProgram']['date']; ?></td>
                 
                 </tr>
                 <?php $i++; ?>

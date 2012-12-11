@@ -28,8 +28,8 @@
                         <td><?php echo $i; ?></td>
                         <td><?php echo $programs['name']; ?></td>
                         <td>
-                        <?php echo $this->Html->link(__('View'), array('action' => 'viewProgram', $programs['id'])); ?>
-                        <?php echo $this->Html->link(__('Update Progress'), array('action' => 'progress', $programs['id'])); ?>
+                        <u><?php echo $this->Html->link(__('View'. "\n". 'Program'), array('action' => 'viewProgram', $programs['id'])); ?></u><br>
+                        <u><?php echo $this->Html->link(__('Update Progress'), array('action' => 'progress', $programs['id'])); ?></u>
 
                         </td>
                     </tr>
