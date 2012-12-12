@@ -142,7 +142,9 @@ class NewslettersController extends AppController {
             $email->subject($newsletter_title);
             $email->send($newsletter_content);
         }
+        $this->Session->setFlash(__('Newsletter has been sent', true), 'success-message');
         $this->redirect(array('action' => 'index'));
+        
     }
 
 }

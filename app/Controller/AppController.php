@@ -145,7 +145,9 @@ class AppController extends Controller {
     }
     
    function sendEmailConfirmation($first_name, $last_name, $emailaddress, $dob) {
-        
+            
+            $url = Router::url( array('controller'=>'users','action'=>'login'), true );
+            
             $email = new CakeEmail();
             $email->config('default');
             $email->from(array('lifestylebreakthroughtest@gmail.com' => 'Lifestyle Breakthrough'))
@@ -156,7 +158,7 @@ class AppController extends Controller {
                         Welcome to Lifestyle Breakthough!
                         To access your account, please follow the link:
                         
-                        http://ie.infotech.monash.edu.au/project33/review/cakephp/
+                        $url
                         Username:  $emailaddress
                         Password:  $dob (Your date of birth in 8 digits)
                         Regards,
