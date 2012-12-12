@@ -18,7 +18,7 @@
                     <td><?php
             if ($exercise['Exercise']['start_pic'] != null) {
                 //echo $instruction['image']."<br /><br />"; 
-                echo $this->Html->image('../imgfiles/' . $exercise['Exercise']['start_pic'], array('width' => 50, 'height' => 50));
+                echo $this->Html->image('files/' . $exercise['Exercise']['start_pic'], array('width' => 50, 'height' => 50));
             } else {
                 echo "no image available";
             }
@@ -26,7 +26,7 @@
                     <td><?php
                     if ($exercise['Exercise']['end_pic'] != null) {
                         //echo $instruction['image']."<br /><br />"; 
-                        echo $this->Html->image('../imgfiles/' . $exercise['Exercise']['end_pic'], array('width' => 50, 'height' => 50));
+                        echo $this->Html->image('files/' . $exercise['Exercise']['end_pic'], array('width' => 50, 'height' => 50));
                     } else {
                         echo "no image available";
                     }

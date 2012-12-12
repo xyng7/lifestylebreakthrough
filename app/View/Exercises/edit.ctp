@@ -30,7 +30,7 @@
                 <?php
                 if($exercise['Exercise']['start_pic'] != null) 
                     { 
-                        echo $this->Html->image('../imgfiles/'.$exercise['Exercise']['start_pic'], array('width' => 200, 'height' => 200));
+                        echo $this->Html->image('files/'.$exercise['Exercise']['start_pic'], array('width' => 200, 'height' => 200));
                         //echo $this->Html->link(__('Delete Image'), array('action' => 'deleteImage', $exercise['Exercise']['id'], 'start_pic'));
                         echo $this->Form->submit(__('Delete Image', true), array('name' => 'delimg1','div' => false)); 
                         //echo $this->Html->image('files/'.$instruction['Instruction']['image']); 
@@ -46,7 +46,7 @@
                 <?php
                 if($exercise['Exercise']['end_pic'] != null) 
                     { 
-                        echo $this->Html->image('../imgfiles/'.$exercise['Exercise']['end_pic'], array('width' => 200, 'height' => 200));
+                        echo $this->Html->image('files/'.$exercise['Exercise']['end_pic'], array('width' => 200, 'height' => 200));
                         //echo $this->Html->link(__('Delete Image'), array('action' => 'deleteImage', $exercise['Exercise']['id'], 'end_pic'));
                         echo $this->Form->submit(__('Delete Image', true), array('name' => 'delimg2','div' => false)); 
                         //echo $this->Html->image('files/'.$instruction['Instruction']['image']); 
