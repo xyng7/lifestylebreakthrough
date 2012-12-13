@@ -275,6 +275,7 @@ class ProgramsController extends AppController {
     
         public function archive() {
         $this->Program->recursive = 0;
+        debug(Router::url( array('controller'=>'users','action'=>'login'), true ));
         $this->set('programs', $this->Program->find('all', array('conditions' => array('Program.flag_active' => 'deactivate'))));
     }
 

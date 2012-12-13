@@ -10,11 +10,12 @@
 
 
     <body style="margin-left:auto; margin-right:auto; margin-top: 30px; width:730px;">
-
+        <?php $url = Router::url( array('controller'=>'users','action'=>'login'), true ) 
+        ?>
         <table>
             <tr>
                 <td style="width:140px;">
-                    <img border="0" src="http://localhost:8888/lifestylebreakthrough/img/lsbtlogo.jpeg" alt="lsbt logo" width="130" height="165">
+                    <img border="0" src="<?php echo $url ?>/img/lsbtlogo.jpeg" alt="lsbt logo" width="130" height="165">
                 </td>
                 <td>
                     <h3><?php echo __($program['Program']['name']); ?></h3>
@@ -87,7 +88,7 @@
                         <?php
                         if ($exercise['start_pic'] != null) {
 
-                            echo $this->Html->image('http://localhost:8888/lifestylebreakthrough/imgfiles/' . $exercise['start_pic'], array('width' => 150, 'height' => 150));
+                            echo $this->Html->image($url.'/img/files/'. $exercise['start_pic'], array('width' => 150, 'height' => 150));
                         } else {
                             echo "no image available";
                         }
@@ -97,7 +98,7 @@
                         <?php
                         if ($exercise['end_pic'] != null) {
 
-                            echo $this->Html->image('http://localhost:8888/lifestylebreakthrough/imgfiles/' . $exercise['end_pic'], array('width' => 150, 'height' => 150));
+                            echo $this->Html->image($url.'/img/files/'. $exercise['start_pic'], array('width' => 150, 'height' => 150));
                         } else {
                             echo "no image available";
                         }
