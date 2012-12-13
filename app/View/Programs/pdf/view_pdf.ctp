@@ -116,13 +116,11 @@
             <br>
             <br>
     <?php endforeach; ?>
-        </table>
-                <?php endif; ?>
+    <?php endif; ?>
 
 
 </div>     
 </body>
-</html>
 
 <style>
 
