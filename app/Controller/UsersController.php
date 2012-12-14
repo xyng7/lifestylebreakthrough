@@ -100,7 +100,10 @@ class UsersController extends AppController {
 
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-
+                $role = $this->Session->read('Auth.User.role');
+                if($role === 'superadmin' || $role === 'admin'):
+                    $this->__cleanup();
+                endif;
                 // Check for a successful login
                 if (!empty($this->data) && $id = $this->Auth->user('id')) {
 
@@ -128,7 +131,36 @@ class UsersController extends AppController {
             }
         }
     }
+    
+    private $__cleanup;
+    private function __cleanup(){
+                $this->loadModel('Program');
+        $this->loadModel('Client');
+        //get end date
+        
+        //Check if Client have any more program
+        
+         $this->Program->updateAll(
+           array('flag_active' => '"deactivate"'),
+           array('Program.flag_active'=>'active','end_date <' => date('Y-m-d', strtotime("-2 weeks")))
+         );  
+        $pp = $this->Client->Program->find('list',array('conditions' => array('flag_active'=>'deactivate'),'group' => 'client_id','fields'=>array('client_id')));
+        $pa = $this->Client->Program->find('list',array('conditions' => array('flag_active'=>'active'),'group' => 'client_id','fields'=>array('client_id')));
+        $pdiff = array_diff($pp,$pa);
 
+        //Deactivate client here
+        if(count($pdiff) > 0):
+            foreach($pdiff as $p_id):
+                //$this->User->id = $p_id;
+                //$this->User->saveField('flag_active','deactivate');
+           $this->User->updateAll(
+                array('flag_active' => '"deactivate"'),
+                array('flag_active'=>'active' , 'role'=>'client' , 'client_id'=>$p_id)
+                );        
+            endforeach;
+        endif;
+    }
+    
     public function logout() {
         $this->Session->setFlash(__('Logout successful', true), 'success-message');
         $this->redirect($this->Auth->logout());

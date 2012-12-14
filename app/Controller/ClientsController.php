@@ -146,6 +146,13 @@ class ClientsController extends AppController {
         //set client.user_id into user.user_id
         $this->User->id = $user_id[$id];
         
+        //archive client 2wks after program ends
+        $this->loadModel('Program');
+        $this->Program->id = $id;
+        
+        //get user id
+        //$client_id = $this->Client->find('list', array('fields' => array('Client.id')))
+      
         if (!$this->Client->exists()) {
             throw new NotFoundException(__('Invalid client', true), 'failure-message');
         }
