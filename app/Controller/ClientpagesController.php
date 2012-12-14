@@ -119,21 +119,26 @@ class ClientpagesController extends AppController {
 
     public function reqappointment() {
         $this->clientdetails();
+        $this->loadModel('Venueformdatum');
         $client = $this->Client->read(null, AuthComponent::user('client_id'));
+        $venues = $this->Venueformdatum->find('list');
         
         $firstname = $client['Client']["first_name"];
         $lastname = $client['Client']["last_name"];
-        $this->set(compact('firstname', 'lastname'));
+        $this->set(compact('firstname', 'lastname', 'venues'));
 
         if ($this->request->is('post')) {
 
            $postdata = $this->request->data;
-
+        
+          
             $prefcontact = $postdata['reqappointment']['prefcontact'];
             $prefdate = $postdata['reqappointment']['prefdate'];
-            $prefvenue = $postdata['reqappointment']['prefvenue'];
-            $prefstaff = $postdata['reqappointment']['prefstaff'];
-
+            $comment = $postdata['reqappointment']['comment'];
+            $venueid = $postdata['reqappointment']['prefvenue'];
+            $venue = $this->Venueformdatum->read(null, $venueid);
+            $prefvenue = $venue['Venueformdatum']['venue'];
+            
             if ($postdata['reqappointment']['preftime'] != null) {
                 $preftime = implode(", ", $postdata['reqappointment']['preftime']);
             } else {
@@ -150,8 +155,8 @@ class ClientpagesController extends AppController {
                            Prefered contact: $prefcontact
                            Prefered date: $prefdate
                            Prefered venue: $prefvenue
-                           Prefered staff: $prefstaff
-                          Prefered time: $preftime"
+                           Comment: $comment
+                           Prefered time: $preftime"
             ); 
             $this->Session->setFlash(__('Request for appointment has been sent!', true), 'success-message');
             $this->redirect(array('action' => 'index'));
