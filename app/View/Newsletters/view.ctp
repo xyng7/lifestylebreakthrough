@@ -8,7 +8,11 @@
 		</dd>
 		<dt><?php echo __('Content'); ?></dt>
 		<dd>
-			<?php echo ($newsletter['Newsletter']['content']); ?>
+			<?php 
+                            //echo ($newsletter['Newsletter']['content']); 
+                            echo $this->Html->script('ckeditor/ckeditor');
+                            echo $this->Form->input('content', array('id' => 'content', 'value' => $msg, 'escape' => false,'rows' => '500', 'cols' => '10000', 'label'=>'','class'=>'ckeditor'));
+                        ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>

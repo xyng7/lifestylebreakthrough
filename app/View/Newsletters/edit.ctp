@@ -8,7 +8,10 @@
         <?php echo $this->Html->script('ckeditor/ckeditor'); ?>
         <legend><?php echo __('Edit Newsletter'); ?></legend>
         <?php echo $this->Form->input('title', array('default' => $newsinfo[0]['Newsletter']['title'])); ?>
-        <?php echo $this->Form->input('content', array('id' => 'content', 'value' => $newsinfo[0]['Newsletter']['content'], 'escape' => false,'rows' => '500', 'cols' => '900', 'label'=>'','class'=>'ckeditor')); ?>       
+        <?php 
+              echo $this->Form->input('content', array('id' => 'content', 'value' => $msg, 'escape' => false,'rows' => '500', 'cols' => '900', 'label'=>'Content','class'=>'ckeditor')); 
+              echo $this->Form->input('file', array('label' =>'','value'=>$mfile,'type'=>'hidden'));
+        ?>       
     </fieldset>
     <?php echo $this->Form->end(__('Submit')); ?>
 </div>

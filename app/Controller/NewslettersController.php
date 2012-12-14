@@ -2,6 +2,8 @@
 
 App::uses('AppController', 'Controller');
 App::uses('CakeEmail', 'Network/Email');
+App::uses('Folder', 'Utility');
+App::uses('File', 'Utility');
 
 /**
  * Newsletters Controller
@@ -30,6 +32,11 @@ class NewslettersController extends AppController {
      */
     public function view($id = null) {
         $this->Newsletter->id = $id;
+        
+        $template = new File(WWW_ROOT.'files'.DS.'templates'.DS.$id.'.html');	
+        $msg = $template->read();
+        $this->set('msg', $msg);
+        
         if (!$this->Newsletter->exists()) {
             throw new NotFoundException(__('Invalid newsletter'));
         }
@@ -78,9 +85,19 @@ class NewslettersController extends AppController {
             throw new NotFoundException(__('Invalid newsletter'));
         }
         $this->set('newsinfo', $this->Newsletter->find('all', array('conditions' => array('Newsletter.id' => $id))) );
+        
+        $template = new File(WWW_ROOT.'files'.DS.'templates'.DS.$id.'.html');	
+        $msg = $template->read();
+        $this->set('mfile',$id);
+        $this->set('msg', $msg);
 
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Newsletter->save($this->request->data)) {
+                
+			$template = new File(WWW_ROOT.'files'.DS.'templates'.DS.$this->data['Newsletter']['file'].'.html');
+			$template->write($this->data['Newsletter']['content']);
+			$template->close();                
+                
                 $this->Session->setFlash(__('The newsletter has been saved', true), 'success-message');
                 $this->redirect(array('action' => 'index'));
             } else {
@@ -142,7 +159,7 @@ class NewslettersController extends AppController {
             $email->subject($newsletter_title);
             $email->send($newsletter_content);
         }
-        $this->Session->setFlash(__('Newsletter has been sent', true), 'success-message');
+        $this->Session->setFlash(__('Newsletter sent', true), 'success-message');
         $this->redirect(array('action' => 'index'));
         
     }
