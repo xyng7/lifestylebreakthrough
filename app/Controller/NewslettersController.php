@@ -155,7 +155,14 @@ class NewslettersController extends AppController {
             $email->subject('Monthly Newsletter');
             $email->to("$client_email");
             $newsletter_title = $news['Newsletter']['title'];
-            $newsletter_content = $news['Newsletter']['content'];
+            //$newsletter_content = $news['Newsletter']['content'];
+            
+            $template = new File(WWW_ROOT.'files'.DS.'templates'.DS.$id.'.html');	
+            $msg = $template->read();
+            $msg = str_replace("{username}", ucwords($s['Client']['first_name']) . " " . ucwords($s['Client']['last_name']), $msg);
+            $newsletter_content = $msg;
+            $template->close();
+            
             $email->subject($newsletter_title);
             $email->send($newsletter_content);
         }

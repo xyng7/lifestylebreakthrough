@@ -69,5 +69,15 @@ class User extends AppModel {
         }
         return true;
     }
+    
+    	public $belongsTo = array(
+		'Client' => array(
+			'className' => 'Client',
+			'foreignKey' => 'client_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
 
 }
