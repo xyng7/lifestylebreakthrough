@@ -8,7 +8,7 @@ class UsersController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('logout', 'forgotpassword', 'reset'); //logout??
+        $this->Auth->allow('logout', 'forgotpassword', 'reset', 'unsub'); //logout??
     }
 
     public function isAuthorized($user) {
@@ -207,7 +207,7 @@ class UsersController extends AppController {
         $this->set('users', $this->User->find('all', array('conditions' =>
                     array('flag_active' => 'deactivate'))));
     }
-
+    
     public function activate($id = null) {
         //activate archive admin
         if (!$this->request->is('post')) {
@@ -226,6 +226,26 @@ class UsersController extends AppController {
         $this->redirect(array('action' => 'index'));
     }
     
+     public function unsub() {
+        $this->layout = 'unsubnewsdefault';
+        $this->loadModel('Client');
+
+        if (!empty($this->request->data['User']['address'])) {
+            $ee = $this->request->data['User']['address'];
+            $ec = $this->Client->find('list', array('conditions' => array('email' => $ee)));
+
+            if (!empty($ec)) {
+
+                $this->Client->updateAll(
+                        array('subscription' => '"F"'), array('email' => $ee)
+                );
+                $this->Session->setFlash(__('You have successfully unsubscribe from Lifestyle Breakthrough newsletter', true), 'success-message');
+            }else{
+                $this->Session->setFlash(__('Invalid Email', true), 'failure-message');
+            }
+        }
+    }
+
     //reset pw function
     
     function forgotpassword(){
@@ -368,5 +388,4 @@ class UsersController extends AppController {
             $this->redirect('/');
         }
     }
-
 }

@@ -142,7 +142,7 @@ class NewslettersController extends AppController {
         $this->loadModel('User');
         $this->Newsletter->id = $id;
         $news = $this->Newsletter->read(null, $id);
-        $r = $this->User->find('all', array('conditions' => array('User.role' => 'client', 'User.flag_active' => 'active')));
+        $r = $this->User->find('all', array('conditions' => array('User.role' => 'client', 'User.flag_active' => 'active', 'Client.Subscription' => 'T')));
 
         foreach ($r as $s) {
             //debug($s);
@@ -160,6 +160,7 @@ class NewslettersController extends AppController {
             $template = new File(WWW_ROOT.'files'.DS.'templates'.DS.$id.'.html');	
             $msg = $template->read();
             $msg = str_replace("{username}", ucwords($s['Client']['first_name']) . " " . ucwords($s['Client']['last_name']), $msg);
+            $msg = str_replace("{link}", Router::url( array('controller'=>'users','action'=>'unsub'), true ), $msg);
             $newsletter_content = $msg;
             $template->close();
             
@@ -168,10 +169,6 @@ class NewslettersController extends AppController {
         }
         $this->Session->setFlash(__('Newsletter sent', true), 'success-message');
         $this->redirect(array('action' => 'index'));
-        
-    }
-    
-    public function unsubscribe($id = null){
         
     }
 

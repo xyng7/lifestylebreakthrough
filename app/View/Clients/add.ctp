@@ -55,7 +55,8 @@
         } else{
             areaval = $('#ClientSuburb').val();
         }
-        $.get('http://localhost:8888/lifestylebreakthrough/postcodes/search/'+type+'/'+ areaval,
+        $.get(location+'../../../postcodes/search/'+type+'/'+ areaval,
+        //$url = Router::url( array('controller'=>'postcodes','action'=>'search'), true ).'/'.$key.'#'.$hash;
         //$.get('http://ie.infotech.monash.edu.au/project33/review/cakephp/postcodes/search/'+type+'/'+ areaval,
         function(data){
             console.log(data);

@@ -15,7 +15,7 @@
                 <tr>    
                     <th><?php echo __('Number'); ?></th>
                     <th><?php echo __('Name'); ?></th>
-                    <th class="actions"><?php echo __('Actions'); ?></th>
+                    <th class="actions"><?php echo __('Actions'); ?></th>                  
                 </tr>
                 
               <?php  foreach ($client['Program'] as $programs):
