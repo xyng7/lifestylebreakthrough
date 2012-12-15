@@ -115,6 +115,12 @@ $homedir = __d('cake_dev', 'CakePHP: the rapid development php framework :D');
                                             }
                             ?>
                                         </li>
+                                                   <li><?php
+                                            if (AuthComponent::user('role') === 'superadmin') {
+                                                echo $this->Html->link(__('Change venues'), array('controller' => 'Venueformdata', 'action' => 'index'), array('class'=>'navigation'));
+                                            }
+                            ?>
+                                        </li>
                                     </ul>
                                 </li>
 
@@ -178,6 +184,8 @@ $homedir = __d('cake_dev', 'CakePHP: the rapid development php framework :D');
                                         </li>
                                     </ul>
                                 </li>
+                                
+                                
                             </ul>
                             <div style="clear: both"></div>
 

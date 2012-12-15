@@ -91,7 +91,7 @@ class TemplatesController extends AppController {
             }
         }
       
-        $exercises = $this->Template->Exercise->find('all');
+        $exercises = $this->Template->Exercise->find('all', array('conditions' => array('Exercise.flag_active' => 'active')));
         $this->set(compact('exercises'));
     }
 
@@ -156,7 +156,7 @@ class TemplatesController extends AppController {
 		} else {
 			$this->request->data = $this->Template->read(null, $id);
 		}
-		$exercises = $this->Template->Exercise->find('all');
+		$exercises = $this->Template->Exercise->find('all', array('conditions' => array('Exercise.flag_active' => 'active')));
                 $template = $this->Template->read(null, $id);
              
 		$this->set(compact('exercises', 'template'));

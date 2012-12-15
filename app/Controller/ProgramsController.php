@@ -118,7 +118,7 @@ class ProgramsController extends AppController {
         }
          
         $clients = $this->Program->Client->find('list');
-        $exercises = $this->Program->Exercise->find('all');
+        $exercises = $this->Program->Exercise->find('all', array('conditions' => array('Exercise.flag_active' => 'active')));
          $xyz = $this->Template->find('list');
       
         $this->set(compact('clients', 'exercises', 'xyz', 'usetemp'));
@@ -224,7 +224,7 @@ class ProgramsController extends AppController {
             $this->request->data = $this->Program->read(null, $id);
         }
         $clients = $this->Program->Client->find('list');
-        $exercises = $this->Program->Exercise->find('all');
+        $exercises = $this->Program->Exercise->find('all', array('conditions' => array('Exercise.flag_active' => 'active')));
         $program = $this->Program->read(null, $id);
         $this->set(compact('clients', 'exercises', 'program'));
     }
