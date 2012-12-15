@@ -13,9 +13,8 @@
 	<tr>
 		<td><?php echo h($venueformdatum['Venueformdatum']['venue']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $venueformdatum['Venueformdatum']['id'])); ?><br>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $venueformdatum['Venueformdatum']['id'])); ?><br>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $venueformdatum['Venueformdatum']['id']), null, __('Are you sure you want to delete # %s?', $venueformdatum['Venueformdatum']['id'])); ?>
+                        <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $venueformdatum['Venueformdatum']['id'])); ?><br>
+			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $venueformdatum['Venueformdatum']['id']), null, __('Are you sure you want to delete # %s?', $venueformdatum['Venueformdatum']['venue'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

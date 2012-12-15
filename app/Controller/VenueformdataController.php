@@ -13,10 +13,10 @@ class VenueformdataController extends AppController {
 			$this->Venueformdatum->create();
 			if ($this->Venueformdatum->save($this->request->data)) {
                             
-				$this->Session->setFlash(__('The venueformdatum has been saved', true), 'success-message');
+				$this->Session->setFlash(__('The venue has been saved', true), 'success-message');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The venueformdatum could not be saved. Please, try again.', true), 'failure-message');
+				$this->Session->setFlash(__('The venue could not be saved. Please, try again.', true), 'failure-message');
 			}
 		}
 	}
@@ -35,10 +35,10 @@ class VenueformdataController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Venueformdatum->save($this->request->data)) {
-				$this->Session->setFlash(__('The venueformdatum has been saved', true), 'success-message');
+				$this->Session->setFlash(__('The venue has been saved', true), 'success-message');
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The venueformdatum could not be saved. Please, try again.', true), 'failure-message');
+				$this->Session->setFlash(__('The venue could not be saved. Please, try again.', true), 'failure-message');
 			}
 		} else {
 			$this->request->data = $this->Venueformdatum->read(null, $id);
@@ -62,10 +62,10 @@ class VenueformdataController extends AppController {
 			throw new NotFoundException(__('Invalid venueformdatum'));
 		}
 		if ($this->Venueformdatum->delete()) {
-			$this->Session->setFlash(__('Venueformdatum deleted', true), 'success-message');
+			$this->Session->setFlash(__('Venue deleted', true), 'success-message');
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Venueformdatum was not deleted', true), 'failure-message');
+		$this->Session->setFlash(__('Venue was not deleted', true), 'failure-message');
 		$this->redirect(array('action' => 'index'));
 	}
 

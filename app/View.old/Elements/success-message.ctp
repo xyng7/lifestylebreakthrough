@@ -1,1 +1,0 @@
-<div class="success success-message"><?php echo $message; ?></div>

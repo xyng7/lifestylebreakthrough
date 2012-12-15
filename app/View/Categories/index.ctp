@@ -1,5 +1,5 @@
 <div class="categories index">
-    <h2><?php echo __('Categories'); ?></h2>
+    <h4><?php echo __('Categories'); ?></h4>
 
     <table id="js-datatable" cellpadding="0" cellspacing="0">
         <thead>

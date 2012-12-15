@@ -12,14 +12,15 @@
             $('#search_input').fastLiveFilter('#search_list');
         });
     </script>
-
+    <?php echo $this->Html->script('ckeditor/ckeditor'); ?>
     <?php echo $this->Form->create('Exercise', array('enctype' => 'multipart/form-data')); ?>
     <fieldset>
         <legend><?php echo __('Edit Exercise'); ?></legend>
         <?php
         echo $this->Form->input('id');
-        echo $this->Form->input('name'); 
-        echo $this->Form->input('instructions'); ?>
+        echo $this->Form->input('name');
+        echo $this->Form->input('instructions', array('id' => 'instructions', 'class' => 'ckeditor')); 
+       // echo $this->Form->input('instructions'); ?>
         <table>
             <tr>
                 <th><?php echo __('Start Picture'); ?> </th>

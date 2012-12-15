@@ -1,5 +1,5 @@
 <div class="programs index">
-    <h3><?php echo __('Programs'); ?></h3>
+    <h4><?php echo __('Programs'); ?></h4>
 
     <table id="js-datatable" cellpadding="0" cellspacing="0">
         <thead>

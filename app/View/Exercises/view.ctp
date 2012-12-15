@@ -1,7 +1,7 @@
 <div class="exercises view">
-<h3><?php echo __('Exercise: '); echo h($exercise['Exercise']['name']); ?></h3>
+<h4><?php echo __('Exercise: '); echo h($exercise['Exercise']['name']); ?></h4>
 <br>
-        <dl>
+       
 		<dt><?php echo __('Instructions'); ?></dt>
                 <?php echo $exercise['Exercise']['instructions']; ?>
                 <br>
@@ -60,7 +60,7 @@
                 </tr>
                 </table>
                 
-	</dl>
+	
 <br>
 
 <div class="related">

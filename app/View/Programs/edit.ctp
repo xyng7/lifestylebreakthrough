@@ -18,7 +18,7 @@ echo $this->Html->CSS(array('datepicker/jquery-ui', 'datepicker/jquery-ui-1.8.23
 <div class="programs index">
     <?php echo $this->Form->create('Program'); ?>
     <fieldset>
-        <legend><?php echo __('Add Program'); ?></legend>
+        <legend><?php echo __('Edit Program'); ?></legend>
 
         <table cellpadding = "0" cellspacing = "0">          
             <tr>
@@ -55,8 +55,8 @@ echo $this->Html->CSS(array('datepicker/jquery-ui', 'datepicker/jquery-ui-1.8.23
                 <tr> 
                     <th><?php echo h('Exercise'); ?></th>
                     <th><?php echo h('Image'); ?></th>
-                    <th><?php echo h('Sets'); ?></th>
-                    <th><?php echo h('Reps'); ?></th>
+                    <th><?php echo h('Sets(range)'); ?></th>
+                    <th><?php echo h('Reps(range)'); ?></th>
                     <th><?php echo h('Rest(Sec)'); ?></th>
                     <th><?php echo h('Load(Kg)'); ?></th>
                     <th></th>
@@ -106,7 +106,7 @@ echo $this->Html->CSS(array('datepicker/jquery-ui', 'datepicker/jquery-ui-1.8.23
     <?php
     if ($eb['Exercise']['start_pic'] != null) {
         //echo $instruction['image']."<br /><br />"; 
-        echo $this->Html->image('../imgfiles/' . $eb['Exercise']['start_pic'], array('width' => 50, 'height' => 50));
+        echo $this->Html->image('files/'  . $eb['Exercise']['start_pic'], array('width' => 50, 'height' => 50));
     } else {
         echo "no image available";
     }
@@ -154,9 +154,9 @@ echo $this->Html->CSS(array('datepicker/jquery-ui', 'datepicker/jquery-ui-1.8.23
                         </td>
                         <td> <?php
                         echo $this->Form->input("Exercise.Exercise.$i.program.", array(
-                            'type' => 'select',
+                            'type' => 'text',
                             'label' => 'Load:',
-                            'options' => array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25'),
+                            //'options' => array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25'),
                             'default' => $resload,
                             //'before' => '<li>',
                             //'after' => '</li>',

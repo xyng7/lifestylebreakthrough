@@ -31,10 +31,8 @@
 
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-                            <li><?php echo $this->Html->link(__('List Newsletters'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Newsletter'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('Edit Newsletter'), array('action' => 'edit', $newsletter['Newsletter']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Newsletter'), array('action' => 'delete', $newsletter['Newsletter']['id']), null, __('Are you sure you want to delete # %s?', $newsletter['Newsletter']['id'])); ?> </li>
+               <li><?php echo $this->Html->link(__('List Newsletters'), array('action' => 'index')); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Delete Newsletter'), array('action' => 'delete', $newsletter['Newsletter']['id']), null, __('Are you sure you want to delete # %s?', $newsletter['Newsletter']['title'])); ?> </li>
 		
 	</ul>
 </div>

@@ -1,5 +1,5 @@
 <div class="exercise form">	
-    <h4><?php echo __('Exercise'); ?></h4>
+    <h4><?php echo __('Exercises'); ?></h4>
 
 <table id="js-datatable" cellpadding="0" cellspacing="0">
     <thead>
@@ -54,7 +54,7 @@
             <li><?php echo $this->Html->link(__('New Exercise'), array('action' => 'add')); ?></li>
         </ul>-->
                 <?php if (AuthComponent::user('role') === 'superadmin') { ?>
-        <h4><?php echo __('Actions'); ?></h4>
+        <h3><?php echo __('Actions'); ?></h3>
             <ul>
 <!--            <li><?php echo $this->Html->link(__('Archived Exercise'), array('action' => 'archive')); ?></li>-->
             <li><?php echo $this->Html->link(__('Manage Body Parts'), array('controller' => 'body_parts', 'action' => 'index')); ?>

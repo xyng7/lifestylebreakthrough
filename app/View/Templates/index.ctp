@@ -1,5 +1,5 @@
 <div class="templates index">
-    <h3><?php echo __('Templates'); ?></h3>
+    <h4><?php echo __('Templates'); ?></h4>
     <table id="js-datatable" cellpadding="0" cellspacing="0">
         <thead>
             <tr>

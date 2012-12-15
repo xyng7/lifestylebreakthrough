@@ -69,7 +69,7 @@ class ProgramsController extends AppController {
             
         if ($this->request->is('post')) {
            
-            
+           // debug($this->request->data);
             $this->Program->create();
           
             if ($this->Program->save($this->request->data)) {

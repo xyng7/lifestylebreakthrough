@@ -317,7 +317,8 @@ class UsersController extends AppController {
                                 $email->template('resetpw') 
                                         ->emailFormat('html')
                                         ->from(array('lifestylebreakthroughtest@gmail.com' => 'Lifestyle Breakthrough'))
-                                        ->to('<nathang@lifestylebreakthrough.com.au')
+                                        //->to('nathang@lifestylebreakthrough.com.au')  uncomment when ready for live
+                                        ->to('lifestylebreakthroughtest@gmail.com')
                                         ->subject('Password Reset for: '. $fu['User']['username'])
                                         ->send();
            
