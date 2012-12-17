@@ -41,8 +41,18 @@
  *
  */
 class EmailConfig {
-
-	public $default = array(
+        
+      
+        public $default = array(
+        'host' => 'ssl://smtp.gmail.com',
+        'port' => 465,
+        'username' => 'lifestylebreakthroughtest@gmail.com',
+        'password' => 'netbeans',
+        'transport' => 'Smtp'
+        );
+//        
+        
+	public $defaultold = array(
 		'transport' => 'Mail',
 		'from' => 'you@localhost',
 		//'charset' => 'utf-8',

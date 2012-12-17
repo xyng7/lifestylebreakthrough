@@ -149,7 +149,7 @@ class NewslettersController extends AppController {
             $email = new CakeEmail();
             $email->config('default');
             $email->emailFormat('html');
-            $email->from(array('lifestylebreakthroughtest@gmail.com' => 'Lifestyle Breakthrough'));
+            $email->from(array('enquiries@lifestylebreakthrough.com.au' => 'Lifestyle Breakthrough'));
             $client_email = $s['User']['username'];
 
             $email->subject('Monthly Newsletter');

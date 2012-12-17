@@ -147,8 +147,8 @@ class ClientpagesController extends AppController {
 
             $email = new CakeEmail();
             $email->config('default');
-            $email->from(array('lifestylebreakthroughtest@gmail.com' => 'Lifestyle Breakthrough'))
-                    ->to('lifestylebreakthroughtest@gmail.com')
+            $email->from(array('enquiries@lifestylebreakthrough.com.au' => 'Lifestyle Breakthrough'))
+                    ->to('enquiries@lifestylebreakthrough.com.au')
                     ->subject("New request for appointment")
                     ->send("Appointment request from client: $firstname $lastname
                        

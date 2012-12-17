@@ -5,7 +5,7 @@ App::uses('AuthComponent', 'Controller/Component');
 class User extends AppModel {
 
     public $name = 'User';
-    var $displayField = 'username';
+   
     public $validate = array(
         'username' => array(
             'required' => array(

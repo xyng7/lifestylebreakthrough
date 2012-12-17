@@ -150,7 +150,7 @@ class AppController extends Controller {
             
             $email = new CakeEmail();
             $email->config('default');
-            $email->from(array('lifestylebreakthroughtest@gmail.com' => 'Lifestyle Breakthrough'))
+            $email->from(array('enquiries@lifestylebreakthrough.com.au' => 'Lifestyle Breakthrough'))
                     ->to($emailaddress)
                     ->subject('Welcome to Lifestyle Breakthrough!')
                     ->send("Dear $first_name $last_name,

@@ -46,8 +46,8 @@ class EmailConfig {
         public $default = array(
         'host' => 'ssl://smtp.gmail.com',
         'port' => 465,
-        'username' => 'lifestylebreakthroughtest@gmail.com',
-        'password' => 'netbeans',
+        'username' => 'enquiries@lifestylebreakthrough.com.au',
+        'password' => 'Yourpas1!',
         'transport' => 'Smtp'
         );
 //        
