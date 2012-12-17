@@ -23,7 +23,7 @@ echo $this->Html->CSS(array('datepicker/jquery-ui', 'datepicker/jquery-ui-1.8.23
         <table cellpadding = "0" cellspacing = "0">          
             <tr>
                 <th> <?php echo $this->Form->input('client_id', array('type' => 'select', 'options' => $clients)); ?> </th>
-                <th> <?php echo $this->Form->input('name'); ?> </th> 
+                <th> <?php echo $this->Form->input('name', array('label' => 'Program Name')); ?> </th> 
             </tr>
         </table>
 
