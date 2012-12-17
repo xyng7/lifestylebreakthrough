@@ -310,7 +310,21 @@ class ProgramsController extends AppController {
     $exercisesProgram = $this->ExercisesProgram->query("SELECT exercises_programs.rec_sets, exercises_programs.rec_reps, exercises_programs.rec_res, exercises_programs.rec_load FROM exercises_programs WHERE exercises_programs.program_id = $id");
         $this->set('exercisesPrograms', $exercisesProgram);
     }
+    
     public function view2_pdf($id = null) {
+    $this->Program->id = $id;
+    $this->loadModel('ExercisesProgram');
+    if (!$this->Program->exists()) {
+        throw new NotFoundException(__('Invalid post'));
+    }
+    // increase memory limit in PHP 
+    ini_set('memory_limit', '512M');
+    $this->set('program', $this->Program->read(null, $id));
+    $exercisesProgram = $this->ExercisesProgram->query("SELECT exercises_programs.rec_sets, exercises_programs.rec_reps, exercises_programs.rec_res, exercises_programs.rec_load FROM exercises_programs WHERE exercises_programs.program_id = $id");
+        $this->set('exercisesPrograms', $exercisesProgram);
+    }
+    
+    public function view3_pdf($id = null) {
     $this->Program->id = $id;
     $this->loadModel('ExercisesProgram');
     if (!$this->Program->exists()) {

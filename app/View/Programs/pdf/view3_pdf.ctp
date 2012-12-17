@@ -54,8 +54,7 @@
 </td>
 </tr>
 </table> 
-<br>
-<br>
+        <br>
 <div>
     <h3><?php echo __('Exercises'); ?></h3>
     <br>
@@ -67,55 +66,14 @@
         foreach ($program['Exercise'] as $exercise):
             ?>
 
-            <table style="width:730px;">
-                <tr>    
-                    <td colspan="4" style="line-height:20px; border-bottom:2px solid #666;">
-                        <b><?php echo $exercise['name']; ?></b>
+                        <b><?php echo $exercise['name']; ?></b><br>
                         
-                    </td>
-                </tr>
-
-                <tr>
-                    <td id="container" style="width:300px; float:left;">
-                        <?php echo $exercise['instructions']; ?>
-                      
-                    </td>
-                    <td style="width:100px;">
-                        
-                    </td>
-
-                    <td style="text-align: right;">
-                        <?php
-                        if ($exercise['start_pic'] != null) {
-
-                            echo $this->Html->image($url.'/img/files/'. $exercise['start_pic'], array('width' => 150, 'height' => 150));
-                        } else {
-                            echo "no image available";
-                        }
-                        ?>&nbsp;</td>
-
-                    <td style="text-align: right;">
-                        <?php
-                        if ($exercise['end_pic'] != null) {
-
-                            echo $this->Html->image($url.'/img/files/'. $exercise['start_pic'], array('width' => 150, 'height' => 150));
-                        } else {
-                            echo "no image available";
-                        }
-                        ?>&nbsp;</td>
-
-                </tr>
-
-                <tr>
-                    <td colspan="4">
+               
+                        <?php echo __("Complete " . $exercisesPrograms[$i - 1]['exercises_programs']['rec_sets'] . " sets of " . $exercisesPrograms[$i - 1]['exercises_programs']['rec_reps'] . " repetitions. Rest " . $exercisesPrograms[$i - 1]['exercises_programs']['rec_res'] . " secs between sets. Recommended load: " .  $exercisesPrograms[$i - 1]['exercises_programs']['rec_res'] . "Kgs."); ?><br>
                         <br>
-                        <?php echo __("Complete " . $exercisesPrograms[$i - 1]['exercises_programs']['rec_sets'] . " sets of " . $exercisesPrograms[$i - 1]['exercises_programs']['rec_reps'] . " repetitions. Rest " . $exercisesPrograms[$i - 1]['exercises_programs']['rec_res'] . " secs between sets. Recommended load: " .  $exercisesPrograms[$i - 1]['exercises_programs']['rec_res'] . "Kgs."); ?>
-                    </td>
-                </tr>
-            </table>
+             
         <?php $i++; ?>
-            <br>
-            <br>
+            
     <?php endforeach; ?>
     <?php endif; ?>
 

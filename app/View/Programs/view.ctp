@@ -91,6 +91,7 @@
     <ul>
         <li><?php echo $this->Html->link(__('List Programs'), array('action' => 'index')); ?> </li>	            
         <li><?php echo $this->Html->link(__('PDF - 4 weeks'), array('action' => 'view2_pdf', 'ext' => 'pdf', $program['Program']['id']), array('target' => '_blank')); ?></li>
-        <li><?php echo $this->Html->link(__('PDF - Descriptions'), array('action' => 'view_pdf', 'ext' => 'pdf', $program['Program']['id']), array('target' => '_blank')); ?></li>		
+        <li><?php echo $this->Html->link(__('PDF - Descriptions'), array('action' => 'view_pdf', 'ext' => 'pdf', $program['Program']['id']), array('target' => '_blank')); ?></li>
+        <li><?php echo $this->Html->link(__('PDF - Text Only'), array('action' => 'view3_pdf', 'ext' => 'pdf', $program['Program']['id']), array('target' => '_blank')); ?></li>
     </ul>
 </div>
