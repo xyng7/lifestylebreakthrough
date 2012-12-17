@@ -117,7 +117,9 @@ class ProgramsController extends AppController {
             }
         }
          
-        $clients = $this->Program->Client->find('list');
+        $clients = $this->Program->Client->find('list', array('conditions' =>
+                    array('User.role' => 'client', 'User.flag_active' => 'active'),
+           'recursive' => 0));
         $exercises = $this->Program->Exercise->find('all', array('conditions' => array('Exercise.flag_active' => 'active')));
          $xyz = $this->Template->find('list');
       

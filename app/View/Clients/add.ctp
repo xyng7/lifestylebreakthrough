@@ -41,7 +41,7 @@
     </fieldset>
 
     <h6>
-        <?php echo __('Adding a client will automatically generate client username (from email) and password (from date)'); ?>
+        <?php echo __('Adding a client will automatically generate client username (from email) and password (from date of birth)'); ?>
     </h6>
     <?php echo $this->Form->end(__('Add Client', array('onSubmit' => 'validate()'))); ?>
 </div>

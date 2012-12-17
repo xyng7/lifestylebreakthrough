@@ -71,6 +71,7 @@ echo $this->Html->CSS(array('datepicker/jquery-ui', 'datepicker/jquery-ui-1.8.23
                     //for loop for body parts
                     foreach ($exercises as $eb) {
 
+                        if (!empty($program['Exercise'])) {
                         foreach ($program['Exercise'] as $existex) {
                             if ($eb['Exercise']['id'] === $existex['id']) {
                                 // debug($existex);
@@ -87,6 +88,14 @@ echo $this->Html->CSS(array('datepicker/jquery-ui', 'datepicker/jquery-ui-1.8.23
                                 $resdef = 30;
                                 $resload = 5;
                             }
+                        }
+                        }
+                        else {
+                            $checked = false;
+                                $setsdef = '4-5';
+                                $repsdef = '12-14';
+                                $resdef = 30;
+                                $resload = 5;
                         }
                         ?> 
 
