@@ -143,6 +143,7 @@ class ProgramsController extends AppController {
     public function edit($id = null) {
         $this->loadModel('ExercisesProgram');
         $this->loadModel('Exercise');
+        $this->loadModel('Program');
         // $this->ExercisesProgram->id = 132;
 
         $this->Program->id = $id;
@@ -227,7 +228,8 @@ class ProgramsController extends AppController {
         }
         $clients = $this->Program->Client->find('list');
         $exercises = $this->Program->Exercise->find('all', array('conditions' => array('Exercise.flag_active' => 'active')));
-        $program = $this->Program->read(null, $id);
+        //$program = $this->Program->read(null, $id);
+        $program = $this->Program->find('first', array('conditions' => array ('Program.id' => $id)));
         $this->set(compact('clients', 'exercises', 'program'));
     }
 
